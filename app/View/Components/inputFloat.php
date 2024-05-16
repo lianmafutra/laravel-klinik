@@ -2,24 +2,26 @@
 
 namespace App\View\Components;
 
+
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class InputPassword extends Component
+class inputFloat extends Component
 {
    public function __construct(
       public string $id,
       public string $info = '',
       public string $label,
       public string $name = '',
-   ) {
-   }
+  ) {
+  }
 
-   public function render()
-   {
+  public function render()
+  {
       if ($this->name == '') {
-         $this->name = $this->id;
+          $this->name = $this->id;
       }
 
-      return view('components.input-password');
-   }
+      return view('components.input-float');
+  }
 }

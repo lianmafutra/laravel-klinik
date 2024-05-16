@@ -68,6 +68,74 @@ class MenuSidebar
             'type' => 'header',
             'title' => 'Data Master',
          ],
+        
+         [
+            'type' => 'menu',
+            'title' => 'Master Obat',
+            'url' => route('master-data.obat.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['master-data/obat*'],
+         ],
+         [
+            'type' => 'menu',
+            'title' => 'Master Tindakan',
+            'url' => route('settings.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['admin/settings'],
+            'permission' => ['settings'],
+         ],
+         [
+            'type' => 'menu',
+            'title' => 'Master Anggota',
+            'url' => route('master-data.user.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['master-data/user*'],
+           
+         ],
+         [
+            'type' => 'menu',
+            'title' => 'Master Dokter',
+            'url' => route('master-data.dokter.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['master-data/dokter*'],
+          
+         ],
+         [
+            'type' => 'header',
+            'title' => 'Menu',
+         ],
+         [
+            'type' => 'menu',
+            'title' => 'Dashboard',
+            'url' => route('klinik.dashboard.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['dashboard*'],
+          
+         ],
+         // [
+         //    'type' => 'menu',
+         //    'title' => ' Rekam Medis',
+         //    'url' => route('settings.index'),
+         //    'icon' => 'fas fa-angle-right',
+         //    'active' => ['admin/settings'],
+         //    'permission' => ['settings'],
+         // ],
+         [
+            'type' => 'menu',
+            'title' => 'Pemeriksaan',
+            'url' => route('pemeriksaan.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['pemeriksaan*'],
+            
+         ],
+         [
+            'type' => 'menu',
+            'title' => 'Laporan',
+            'url' => route('settings.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['admin/settings'],
+            'permission' => ['settings'],
+         ],
          [
             'type' => 'header',
             'title' => 'Menu App',
@@ -79,38 +147,38 @@ class MenuSidebar
             'icon' => 'fas fa-home',
             'active' => ['beranda*'],
          ],
-         [
-            'type'   => 'tree',
-            'title'  => 'Sample Data',
-            'url'    => '#',
-            'icon'   => 'fas fa-folder-open',
-            'active' => ['sample-crud*'],
-            'permission' => 'sample_data',
-            'items' => [
-               [
-                  'type'   => 'menu',
-                  'title'  => 'Form Component',
-                  'url'    => route('sample-crud.create'),
-                  'icon'   => 'fas fa-folder-open',
-                  'active' => ['sample-crud/create']
-               ],
-               [
-                  'type'   => 'menu',
-                  'title'  => 'Datatable',
-                  'url'    => route('sample-crud.index'),
-                  'icon'   => 'fas fa-table',
-                  'active' => ['sample-crud']
-               ],
-            ],
-         ],
-         [
-            'type' => 'menu',
-            'title' => 'Data User',
-            'url' => route('data-user.index'),
-            'icon' => 'fas fa-users',
-            'active' => ['data-user*'],
-            'permission' => ['master-user-list'],
-         ],
+         // [
+         //    'type'   => 'tree',
+         //    'title'  => 'Sample Data',
+         //    'url'    => '#',
+         //    'icon'   => 'fas fa-folder-open',
+         //    'active' => ['sample-crud*'],
+         //    'permission' => 'sample_data',
+         //    'items' => [
+         //       [
+         //          'type'   => 'menu',
+         //          'title'  => 'Form Component',
+         //          'url'    => route('sample-crud.create'),
+         //          'icon'   => 'fas fa-folder-open',
+         //          'active' => ['sample-crud/create']
+         //       ],
+         //       [
+         //          'type'   => 'menu',
+         //          'title'  => 'Datatable',
+         //          'url'    => route('sample-crud.index'),
+         //          'icon'   => 'fas fa-table',
+         //          'active' => ['sample-crud']
+         //       ],
+         //    ],
+         // ],
+         // [
+         //    'type' => 'menu',
+         //    'title' => 'Data User',
+         //    'url' => route('data-user.index'),
+         //    'icon' => 'fas fa-users',
+         //    'active' => ['data-user*'],
+         //    'permission' => ['master-user-list'],
+         // ],
          [
             'type' => 'menu',
             'title' => 'Profile',

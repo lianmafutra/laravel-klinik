@@ -7,18 +7,18 @@
 
 </style>
 @section('header')
-    <x-header title="Data Tinjuk CHR"></x-header>
+    <x-header title="Data Master Obat"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('tinjuk-chr.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('master-data.obat.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Deskripsi', 'File', 'Tgl Input', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Kode','Nama','Harga' ,'Stok', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -36,32 +36,41 @@
             info: true,
             ordering: true,
             aaSorting: [],
-            order: [3, 'desc'],
+            // order: [3, 'desc'],
             scrollX: true,
          
-            ajax: route('tinjuk-chr.index'),
+            ajax: route('master-data.obat.index'),
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
                     searchable: false,
                     width: '1%'
                 },
-               
                 {
-                    data: 'deskripsi',
+                    data: 'kode_obat',
+                    name: 'kode_obat',
                     orderable: true,
                     searchable: true
                 },
                 {
-                    data: 'file_laporan',
-                    name: 'file_r.name_origin',
-                    searchable: true,
+                    data: 'nama',
+                    name: 'nama',
+                    orderable: true,
+                    searchable: true
                 },
                 {
-                    data: 'created_at',
+                    data: 'harga',
+                    name: 'harga',
                     orderable: true,
-                    searchable: false,
+                    searchable: true
                 },
+                {
+                    data: 'stok',
+                    name: 'stok',
+                    orderable: true,
+                    searchable: true
+                },
+               
                 {
                     data: "action",
                     width: '15%',

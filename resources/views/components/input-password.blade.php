@@ -12,6 +12,8 @@
                     style="color: inherit"><i class="trigger fa fa-eye-slash" aria-hidden="true"></i></a></span>
         </div>
       
+      
     </div>
+     <small style="font-style: italic; margin-bottom: 10px">{{ $info ?? "" }}</small>
     <span class="text-danger error error-text {{ $id }}_err"></span>
 </div>

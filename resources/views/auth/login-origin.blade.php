@@ -22,16 +22,10 @@
             <div class="wrap-login100 p-t-85 p-b-20">
                 <form autocomplete="false" method="POST" id="#recaptcha-form" action="{{ route('login') }}">
                     @csrf
-                    <div class=""style="margin-bottom: 70px">
-                     <span class="login100-form-title " style="margin-bottom: 10px">
-                        SI-RELAKU </span>
-                       
-                        <span class="m-t-20">
-                           <center>( SISTEM INFORMASI REVIU LAPORAN KEUANGAN )</center>
-                         </span>
-                    </div>
-                   
-                    <span class="login100-form-avatar ">
+                    <span class="login100-form-title p-b-70">
+                        Welcome
+                    </span>
+                    <span class="login100-form-avatar">
                         <img src="{{ asset('img/logo_laravel.jpeg') }}" alt="AVATAR">
                     </span>
                     <div id="error_layout" style="display: none" class="alert alert-danger m-t-20 " role="alert">

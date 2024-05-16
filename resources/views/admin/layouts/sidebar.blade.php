@@ -2,7 +2,11 @@
     <a href="" class="brand-link">
         <img src="{{ asset('img/' . Cache::store('styles')->get('header_logo', 'img/logo_laravel.jpeg')) }}"
             alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ Cache::store('styles')->get('app_name', 'starter_app') }}</span>
+          
+        <span class="brand-text font-weight-light">{{ Cache::store('styles')->get('app_name', 'starter_app') }}
+      
+      </span>
+       
     </a>
     <div class="sidebar">
         <nav class="mt-2">

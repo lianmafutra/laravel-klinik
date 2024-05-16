@@ -72,7 +72,7 @@ class LoginController extends Controller
             }
         }
         throw ValidationException::withMessages([
-            $this->username() => [trans('Username / password do not match')],
+            $this->username() => [trans('Username atau Password Salah, Silahkan Coba Lagi')],
         ]);
     }
 }

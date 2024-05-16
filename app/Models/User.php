@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Utils\LmFileTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     use HasRoles;
     use LmFileTrait;
+    protected $with = ['user_detail'];
+    
    //  use \OwenIt\Auditing\Auditable;
   
     protected $guarded = [];
@@ -95,5 +98,20 @@ class User extends Authenticatable
         } else {
             return asset('img/avatar2.png');
         }
+    }
+
+    /**
+     * Get the userDetail associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user_detail(): HasOne
+    {
+        return $this->hasOne(userDetail::class);
+    }
+
+    public function dokter(): HasOne
+    {
+        return $this->hasOne(Dokter::class);
     }
 }

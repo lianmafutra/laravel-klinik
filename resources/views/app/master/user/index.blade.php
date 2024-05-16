@@ -7,18 +7,18 @@
 
 </style>
 @section('header')
-    <x-header title="Data Tinjuk CHR"></x-header>
+    <x-header title="Data Master User"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('tinjuk-chr.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('master-data.user.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Deskripsi', 'File', 'Tgl Input', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'Jenis', 'NIK','NRP','Pangkat/Jabatan', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             order: [3, 'desc'],
             scrollX: true,
          
-            ajax: route('tinjuk-chr.index'),
+            ajax: route('master-data.user.index'),
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
@@ -48,17 +48,31 @@
                 },
                
                 {
-                    data: 'deskripsi',
+                    data: 'name',
+                    name: 'name',
                     orderable: true,
                     searchable: true
                 },
                 {
-                    data: 'file_laporan',
-                    name: 'file_r.name_origin',
+                    data: 'jenis_user',
+                    name: 'user_detail.jenis_user',
+                    orderable: true, searchable: true
+                },
+                {
+                    data: 'nik',
+                    data: 'user_detail.nik',
+                    orderable: true,
                     searchable: true,
                 },
                 {
-                    data: 'created_at',
+                    data: 'nrp',
+                    name: 'user_detail.nrp',
+                    orderable: true,
+                    searchable: false,
+                },
+                {
+                    data: 'pangkat_jabatan',
+                    name: 'user_detail.pangkat',
                     orderable: true,
                     searchable: false,
                 },

@@ -7,18 +7,18 @@
 
 </style>
 @section('header')
-    <x-header title="Data Tinjuk CHR"></x-header>
+    <x-header title="Data Master Dokter"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('tinjuk-chr.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('master-data.dokter.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Deskripsi', 'File', 'Tgl Input', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama','NIK' ,'Jenis Kelamin','Spesialis','No Hp','alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -36,32 +36,53 @@
             info: true,
             ordering: true,
             aaSorting: [],
-            order: [3, 'desc'],
+            // order: [3, 'desc'],
             scrollX: true,
          
-            ajax: route('tinjuk-chr.index'),
+            ajax: route('master-data.dokter.index'),
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
                     searchable: false,
                     width: '1%'
                 },
-               
                 {
-                    data: 'deskripsi',
+                    data: 'user.name',
+                    name: 'user.name',
                     orderable: true,
                     searchable: true
                 },
                 {
-                    data: 'file_laporan',
-                    name: 'file_r.name_origin',
-                    searchable: true,
+                    data: 'nik',
+                    name: 'nik',
+                    orderable: true,
+                    searchable: true
                 },
                 {
-                    data: 'created_at',
+                    data: 'jenis_kelamin',
+                    name: 'jenis_kelamin',
                     orderable: true,
-                    searchable: false,
+                    searchable: true
                 },
+                {
+                    data: 'spesialis',
+                    name: 'spesialis',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'no_hp',
+                    name: 'no_hp',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'alamat',
+                    name: 'alamat',
+                    orderable: true,
+                    searchable: true
+                },
+
                 {
                     data: "action",
                     width: '15%',

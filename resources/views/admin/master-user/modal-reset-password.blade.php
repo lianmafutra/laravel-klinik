@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <input autocomplete="off" hidden  name="user_id"></input>
 
-                        <x-input-password id="password" placeholder="Password Baru" label="Password" value="123456" />
+                        <x-input-password id="password" placeholder="Password Baru" label="Password" value="123456"  info=""/>
 
 
                       

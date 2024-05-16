@@ -1,92 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Login</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon"
-    href="{{ asset('img/' . Cache::store('styles')->get('fav_icon', 'img/logo_laravel.jpeg')) }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/material-design-iconic-font.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/hamburgers.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/animsition.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/utils.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('template/login2/css/main.css') }}">
-    <script src="{{ asset('template/login2/js/jquery-3.2.1.js') }}"></script>
+    <title>Login - SAMPEYAN</title>
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
+    <link rel="stylesheet" href="{{ asset('template/admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/admin/dist/css/adminlte.min.css') }}">
+    <style>
+        .login-box,
+        .register-box {
+            width: 500px;
+        }
+
+        body {
+            /* background-image: url({{ asset('img/bg_glass.webp') }});
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; */
+        }
+
+        .card-header {
+            background-color: #c0d6ff;
+        }
+
+
+        @font-face {
+            font-family: "my-font";
+            src: url({{ asset('fonts/SHOWG.TTF') }});
+        }
+    </style>
 </head>
-<body>
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-t-85 p-b-20">
-                <form autocomplete="false" method="POST" id="#recaptcha-form" action="{{ route('login') }}">
+
+<body class="hold-transition login-page">
+
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline ">
+            <div class="card-header text-center">
+                <div class="row">
+                    <div class="col-md-2">
+                        {{-- <img class="profile-user-img img-fluid" src="{{ asset('img/logo_polda_jambi.png') }}"> --}}
+                    </div>
+                    <div class="col-md-8">
+                        <a style="font-size: 46px; letter-spacing: 3px" href="{{ route('login') }}"
+                            class="h1"><b>SAMPEYAN</b></a>
+                        {{-- <p>Sirelaku</p> --}}
+                        <p style="font-size: 18px;" class="login-box-msg">Sistem Administrasi Pelayanan Pasien</p>
+                    </div>
+                    <div class="col-md-2">
+                        {{-- <img class="profile-user-img img-fluid" src="{{ asset('img/logo_polda_inspektorat.png') }}"> --}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div id="error_layout" style="color:red; display: none" class="alert  m-t-20 " role="alert">
+                    {!! implode('<br>', $errors->all()) !!}
+                </div>
+                {{-- <p class="login-box-msg">Sign in to start your session</p> --}}
+                <form method="POST" id="#recaptcha-form" action="{{ route('login') }}">
                     @csrf
-                    <span class="login100-form-title p-b-70">
-                        Welcome
-                    </span>
-                    <span class="login100-form-avatar">
-                        <img src="{{ asset('img/logo_laravel.jpeg') }}" alt="AVATAR">
-                    </span>
-                    <div id="error_layout" style="display: none" class="alert alert-danger m-t-20 " role="alert">
-                        {!! implode('<br>', $errors->all()) !!}
+                    <div class="input-group mb-3">
+                        <input spellcheck="false" id="username" type="text"
+                            class="form-control @error('username') is-invalid @enderror" name="username"
+                            value="{{ old('username') }}" required autocomplete="username" autofocus
+                            placeholder="username">
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <div class="wrap-input100 validate-input m-t-80 m-b-35" data-validate="Enter username">
-                        <input spellcheck="false" id="username" class="input100" type="text" name="username"
-                            value="{{ old('username') }}" required>
-                        <span class="focus-input100" data-placeholder="Username"></span>
+                    <div class="input-group mb-3">
+                        <input spellcheck="false" id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" name="password" required
+                            autocomplete="current-password" placeholder="Password">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                        <input spellcheck="false" class="input100" type="password" name="password" required>
-                        <span class="focus-input100" data-placeholder="Password"></span>
+                    <div class="form-group mb-3">
+                        <div class="col-md-12">
+                        </div>
                     </div>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <div class="container-login100-form-btn">
-                        <button id="submit" type="submit" class="login100-form-btn">{{ __('Login') }}</button>
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
+                        </div>
+                        <!-- /.col -->
                     </div>
                 </form>
-                <ul class="login-more p-t-190">
-                    <li class="m-b-8">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a href="#" class="txt2">
-                            Username / Password?
-                        </a>
-                    </li>
-                    <li>
-                        <span class="txt1">
-                            Don't have an account?
-                        </span>
-                        <a href="#" class="txt2">
-                            Sign up
-                        </a>
-                    </li>
-                </ul>
             </div>
+            <div class="card-footer text-center">
+                {{-- <h3>Inspektorat Pengawasan Daerah Polda Jambi</h3> --}}
+            </div>
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
-    <script src="{{ asset('template/login2/js/animsition.js') }}"></script>
-    <script src="{{ asset('template/login2/js/popper.js') }}"></script>
-    <script src="{{ asset('template/login2/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('template/login2/js/main.js') }}"></script>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="{{ asset('template/admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('template/admin/dist/js/adminlte.js') }}"></script>
     <script>
         @if (!$errors->isEmpty())
-            var input =  $('#username');
+            var input = $('#username');
             var len = input.val().length;
+
             input[0].focus();
             input[0].setSelectionRange(len, len);
             $('#error_layout').fadeIn(600);
+            // Tunggu selama 5 detik (5000 milidetik)
+            const timer = 5000;
+
+            // Set timer untuk menghilangkan elemen
+            setTimeout(function() {
+
+                $('#error_layout').hide();
+            }, timer);
         @endif
     </script>
 </body>
+
 </html>

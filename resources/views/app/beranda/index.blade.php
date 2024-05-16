@@ -6,9 +6,9 @@
 
 <div class="card-body">
    <div class="callout callout-info">
-     <h5>Selamat Datang, <span style="color:#4543a0">{{ auth()->user()->nama_lengkap }}</span> </h5>
+     <h5>Selamat Datang, <span style="color:#4543a0">User</span> </h5>
      <p>
-      -- BisaASN ---
+     SAMPEYAN - Sistem Administrasi Pelayanan Pasien
      </p>
    </div>
  </div>

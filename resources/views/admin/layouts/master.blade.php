@@ -82,10 +82,15 @@
             margin-right: 30px !important;
             padding-right: 40px !important;
         }
+
+        table.dataTable  {
+            font-size: 0.875rem;
+        }
     </style>
 </head>
 {{-- dd --}}
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm ">
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm">
     <div class="wrapper">
         <div class="lds-ellipsis baru">
             <div></div>
@@ -105,7 +110,7 @@
             @yield('header')
             <section class="content">
                 <div class="container-fluid">
-                  @yield('content')
+                    @yield('content')
                 </div>
             </section>
         </div>
@@ -115,7 +120,7 @@
         @include('admin.layouts.footer')
     </div>
 
-  
+
     <script src="{{ asset('template/admin/plugins/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('template/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <script src="{{ asset('template/admin/dist/js/adminlte.min.js') }}"></script>
@@ -174,4 +179,5 @@
         }
     </script>
 </body>
+
 </html>

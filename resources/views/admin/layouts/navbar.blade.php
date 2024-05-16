@@ -5,7 +5,7 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('user.profile') }}" class="nav-link">
-                <span style="font-weight: 900"> {{ auth()->user()->nama_lengkap }} </span>
+                <span style="font-weight: 900"> {{ auth()->user()->name }} </span>
                 <span class="pl-1" style="color: rgb(137, 137, 137)"> </span>
             </a>
         </li>
@@ -33,7 +33,7 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img onerror="this.onerror=null; this.src='{{ asset('img/avatar.png') }}'" style="object-fit: cover"
                     src="{{ $fotoProfil }}" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                {{-- <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> --}}
             </a>
             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
 
