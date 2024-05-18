@@ -65,14 +65,14 @@
                     dataType: "json",
                     success: function(response) {
                         console.log(response)
-                        $("#name").text(response.data.name);
-                        $("#nik").text(response.data.user_detail.nik);
-                        $("#nrp").text(response.data.user_detail.nrp);
-                        $("#alamat").text(response.data.user_detail.alamat);
-                        $("#jenis_kelamin").text(response.data.user_detail.jenis_kelamin);
-                        $("#pangkat_jabatan").text(response.data.user_detail.pangkat);
-                        $("#no_hp").text(response.data.user_detail.no_hp);
-                        $("#no_bpjs").text(response.data.user_detail.no_bpjs);
+                        $("#nama").text(response.data.nama);
+                        $("#nik").text(response.data.nik);
+                        $("#nrp").text(response.data.nrp);
+                        $("#alamat").text(response.data.alamat);
+                        $("#jenis_kelamin").text(response.data.jenis_kelamin);
+                        $("#pangkat_jabatan").text(response.data.pangkat);
+                        $("#no_hp").text(response.data.no_hp);
+                        $("#no_bpjs").text(response.data.no_bpjs);
                     }
                 });
             });
@@ -96,32 +96,32 @@
                     },
                     {
                         data: 'kode_rm',
-                        name: 'kode_rm',
+                        nama: 'kode_rm',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'user.name',
+                        data: 'anggota.nama',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'user.user_detail.jenis_kelamin',
+                        data: 'anggota.jenis_kelamin',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'user.user_detail.tgl_lahir',
+                        data: 'anggota.tgl_lahir',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'user.user_detail.no_hp',
+                        data: 'anggota.no_hp',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'user.user_detail.alamat',
+                        data: 'anggota.alamat',
                         orderable: true,
                         searchable: true
                     },

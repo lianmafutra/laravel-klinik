@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\klinik\Pemeriksaan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use App\Models\Dokter;
 use App\Models\Obat;
+use App\Models\Pasien;
 use App\Models\Pemeriksaan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,15 +18,10 @@ class PemeriksaanController extends Controller
     */
    public function index()
    {
-      $x['users'] =  User::with(['user_detail' => function ($query) {
-         $query->whereIn('jenis_user', ['siswa', 'personil', 'pimpinan']);
-      }])
-         ->has('user_detail')
-
-         ->where('username', '!=', 'superadmin')->select('users.*')->get();
+      $x['anggota'] =  Anggota::get();
 
 
-      $data = Pemeriksaan::with('user');
+      $data = Pasien::with('anggota');
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
@@ -43,7 +40,7 @@ class PemeriksaanController extends Controller
     */
    public function createPemeriksaan($user_id)
    {
-      $x['user'] =   User::where('id', $user_id)->with('pemeriksaan')->first();
+      $x['pasien'] =   Pasien::where('id', $user_id)->with('anggota')->first();
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
     

@@ -15,18 +15,18 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input autocomplete="off" hidden name="user_id"></input>
+                                    <input autocomplete="off" hidden nama="user_id"></input>
                                     <x-select2 id="select_user" label="Pilih Pasien" placeholder="Pilih Pasien">
-                                        @foreach ($users as $item)
-                                            <option value="{{ $item->id }}"> {{ $item->name }} -
-                                                {{ $item->user_detail->nik }} - {{ $item->user_detail->nrp }}</option>
+                                        @foreach ($anggota as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->nama }} -
+                                                {{ $item->nik }} - {{ $item->nrp }}</option>
                                         @endforeach
                                     </x-select2>
 
                                     <table class="table table-bordered display text-xs" style="width:100%">
                                         <tr>
                                             <th>Nama Lengkap:</th>
-                                            <td id="name"></td>
+                                            <td id="nama"></td>
                                         </tr>
                                         <tr>
                                             <th>NIK</th>

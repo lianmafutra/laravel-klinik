@@ -40,40 +40,40 @@
                     <table class="table table-bordered display text-sm" style="width:100%">
                         <tr>
                             <th>No Rekam Medis:</th>
-                            <td id="no_rm">{{ $user?->pemeriksaan->kode_rm }}</td>
+                            <td id="no_rm">{{ $pasien?->kode_rm }}</td>
                         </tr>
                         <tr>
                             <th>Nama Lengkap:</th>
-                            <td id="name">{{ $user?->name }}</td>
+                            <td id="nama">{{ $pasien?->anggota->nama }}</td>
                         </tr>
                         <tr>
                             <th>NIK</th>
-                            <td id="nik">{{ $user?->user_detail->nik }}</td>
+                            <td id="nik">{{ $pasien?->anggota->nik }}</td>
                         </tr>
                         <tr>
                             <th>NRP</th>
-                            <td id="nrp">{{ $user?->user_detail->nrp }}</td>
+                            <td id="nrp">{{ $pasien?->anggota->nrp }}</td>
                         </tr>
                         <tr>
                             <th>Alamat</th>
-                            <td id="alamat">{{ $user?->user_detail->alamat }}</td>
+                            <td id="alamat">{{ $pasien?->anggota->alamat }}</td>
                         </tr>
                         <tr>
                             <th>Jenis Kelamin</th>
-                            <td id="jenis_kelamin">{{ $user?->user_detail->jenis_kelamin }}</td>
+                            <td id="jenis_kelamin">{{ $pasien?->anggota->jenis_kelamin }}</td>
                         </tr>
                         <tr>
                             <th>Pangkat | Jabatan</th>
-                            <td id="pangkat">{{ $user?->user_detail->pangkat }} | {{ $user?->user_detail->jabatan }}
+                            <td id="pangkat">{{ $pasien?->anggota->pangkat }} | {{ $pasien?->anggota->jabatan }}
                             </td>
                         </tr>
                         <tr>
                             <th>No HP</th>
-                            <td id="no_hp">{{ $user?->user_detail->no_hp }}</td>
+                            <td id="no_hp">{{ $pasien?->anggota->no_hp }}</td>
                         </tr>
                         <tr>
                             <th>No BPJS</th>
-                            <td id="no_bpjs">{{ $user?->user_detail->no_bpjs }}</td>
+                            <td id="no_bpjs">{{ $pasien?->anggota->no_bpjs }}</td>
                         </tr>
                     </table>
                 </div>
@@ -88,7 +88,7 @@
                         <div class="col-lg-6 col-sm-6">
                            <x-select2 id="dokter" label="Pilih Dokter" placeholder="Pilih Dokter">
                               @foreach ($dokter as $item)
-                                  <option value="{{ $item->id }}"> {{ $item->user->name }}
+                                  <option value="{{ $item->id }}"> {{ $item->nama }}
                                   </option>
                               @endforeach
                           </x-select2>
@@ -97,7 +97,7 @@
                             
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            <x-input label="Nomor Pemeriksaan" id="name" required />
+                            <x-input label="Nomor Pemeriksaan" id="nama" required />
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                         </div>
                     </div>

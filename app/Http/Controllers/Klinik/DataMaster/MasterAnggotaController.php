@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Klinik\DataMaster;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterAnggotaRequest;
-use App\Http\Requests\MasterDataUserRequest;
 use App\Models\Anggota;
 use App\Models\Jabatan;
 use App\Models\Pangkat;
 
-use App\Models\UserDetail;
 use App\Utils\ApiResponse;
 use Illuminate\Support\Facades\DB;
 

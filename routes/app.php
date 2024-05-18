@@ -40,8 +40,7 @@ Route::middleware(['auth'])->group(function () {
    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
-   // Route::get('user/{user_id}/detail', [MasterUserController::class, 'userDetail'])->name('user.detail');
-   
+  
    Route::resource('pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
    Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
