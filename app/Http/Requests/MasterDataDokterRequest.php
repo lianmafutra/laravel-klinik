@@ -28,7 +28,7 @@ class MasterDataDokterRequest extends FormRequest
    public function rules(): array
    {
       $rules = [
-         'name' => 'required',
+         'nama' => 'required',
          'spesialis' => 'required',
          'jenis_kelamin' => 'required|in:P,L',
          'user_id' => 'nullable|integer',

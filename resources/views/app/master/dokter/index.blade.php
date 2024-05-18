@@ -47,8 +47,8 @@
                     width: '1%'
                 },
                 {
-                    data: 'user.name',
-                    name: 'user.name',
+                    data: 'nama',
+                    name: 'nama',
                     orderable: true,
                     searchable: true
                 },

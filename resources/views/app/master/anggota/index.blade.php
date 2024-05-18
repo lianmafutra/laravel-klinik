@@ -8,7 +8,7 @@
 @endpush
 
 @section('header')
-    <x-header title="Data Master User"></x-header>
+    <x-header title="Data Master Anggota"></x-header>
 @endsection
 @section('content')
 

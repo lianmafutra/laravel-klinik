@@ -18,7 +18,7 @@
          @method('PUT')
             <div class="card">
                 <div class="card-body">
-                    <x-input label="Nama Lengkap" id="name" required />
+                    <x-input label="Nama Lengkap" id="nama" required />
                     <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
                         <option value="L">Laki-Laki</option>
@@ -90,7 +90,7 @@
             })
 
                 // set data 
-                $('#name').val(@json($dokter?->user?->name))
+                $('#nama').val(@json($dokter?->nama))
                 $('#nik').val(@json($dokter->nik))
                 $('#spesialis').val(@json($dokter->spesialis))
                 $('#alamat').val(@json($dokter->alamat))

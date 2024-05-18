@@ -105,10 +105,9 @@ class MenuSidebar
          [
             'type' => 'menu',
             'title' => 'Data Pengguna',
-            'url' => route('master-data.dokter.index'),
+            'url' => route('master-data.pengguna.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/dokter*'],
-
+            'active' => ['master-data/pengguna*'],
          ],
 
          [

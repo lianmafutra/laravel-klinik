@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterUserController;
 use App\Http\Controllers\Admin\SampleCrudController;
 use App\Http\Controllers\Admin\TinyEditorController;
 use App\Http\Controllers\BerandaController;
@@ -55,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
    ]);
 
    Route::resource('master-data/obat', MasterObatController::class, [
+      'as' => 'master-data'
+   ]);
+
+   Route::resource('master-data/pengguna', MasterUserController::class, [
       'as' => 'master-data'
    ]);
 });

@@ -9,7 +9,7 @@
 
 </style>
 @section('header')
-    <x-header title="Data User"></x-header>
+    <x-header title="Master Data User ( Pengguna )"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12">
@@ -23,10 +23,8 @@
                     'No',
                     'Foto',
                     'Username',
-                    'Nama Lengkap',
-                
+                    'Nama',
                     'Kontak',
-                    'email',
                     'Role',
                     'Status',
                     'Last Login',
@@ -79,7 +77,7 @@
                     orderable: false,
                 },
                 {
-                    data: 'nama_lengkap',
+                    data: 'name',
                     orderable: true,
                 },
 
@@ -87,11 +85,7 @@
                     data: 'kontak',
                     orderable: true,
                 },
-                {
-                    data: 'email',
-                    orderable: true,
-                    visible: false
-                },
+               
 
                 {
                     data: 'role',

@@ -17,7 +17,7 @@ class MasterDokterController extends Controller
      */
     public function index()
     {
-      $data = Dokter::with('user');
+      $data = Dokter::query();
        if (request()->ajax()) {
           return datatables()->of($data)
              ->addIndexColumn()
