@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\klinik\Pemeriksaan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dokter;
+use App\Models\Obat;
 use App\Models\Pemeriksaan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,9 +41,13 @@ class PemeriksaanController extends Controller
    /**
     * Show the form for creating a new resource.
     */
-   public function create()
+   public function createPemeriksaan($user_id)
    {
-      return view('app.pemeriksaan.create');
+      $x['user'] =   User::where('id', $user_id)->with('pemeriksaan')->first();
+      $x['obat'] = Obat::get();
+      $x['dokter'] = Dokter::get();
+    
+      return view('app.pemeriksaan.create', $x);
    }
 
    /**

@@ -7,5 +7,17 @@ use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-    //
+   public function pemeriksaan()
+   {
+     
+  
+     return view('app.laporan.pemeriksaan');
+   }
+
+   public function obat()
+   {
+     
+  
+     return view('app.laporan.obat');
+   }
 }

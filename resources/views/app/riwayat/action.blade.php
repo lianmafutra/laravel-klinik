@@ -3,7 +3,7 @@
        <a href="{{ route('pemeriksaan.create.user', $data?->user?->id) }}" data-toggle="tooltip" data-placement="bottom"
            title="Input Pemeriksaan" class="btn btn-xs btn-primary btn-edit mb-2" data-id=""><i class=" fas fa-plus fa-xs"></i>
            Pemeriksaan</a>
-       <a href="{{ route('riwayat.show', $data?->user?->id) }}" data-toggle="tooltip" data-placement="bottom"
+       <a href="{{ route('pemeriksaan.create.user', $data?->user?->id) }}" data-toggle="tooltip" data-placement="bottom"
            title="Riwayat Rekam Medis Pasien" class="btn btn-xs btn-secondary btn-edit" data-id=""><i class="far fa-file fa-sm"></i>
            Riwayat</a>
    </div>

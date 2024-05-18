@@ -3,12 +3,15 @@
 use App\Http\Controllers\Admin\SampleCrudController;
 use App\Http\Controllers\Admin\TinyEditorController;
 use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\DataUserController;
 use App\Http\Controllers\klinik\Dashboard\DashboarddController;
+use App\Http\Controllers\Klinik\DataMaster\MasterAnggotaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
-use App\Http\Controllers\Klinik\DataMaster\MasterUserController;
+
+use App\Http\Controllers\Klinik\Laporan\LaporanController;
+use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
+use App\Http\Controllers\Klinik\Riwayat\RiwayatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,15 +33,25 @@ Route::middleware(['auth'])->group(function () {
 
    // app klinik
    Route::get('dashboard', [DashboarddController::class, 'index'])->name('klinik.dashboard.index');
+   Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+   Route::get('riwayat/user/{user_id}', [RiwayatController::class, 'show'])->name('riwayat.show');
 
-   Route::get('user/{user_id}/detail', [MasterUserController::class, 'userDetail'])->name('user.detail');
+   Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
+   Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
+
+   // Route::get('user/{user_id}/detail', [MasterUserController::class, 'userDetail'])->name('user.detail');
+   
    Route::resource('pemeriksaan', PemeriksaanController::class);
-   Route::resource('master-data/user', MasterUserController::class, [
-      'as' => 'master-data'
-   ]);
+   Route::resource('pasien', PasienController::class);
+   Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
+   
+   Route::resource('master-data/anggota', MasterAnggotaController::class, [
+      'as' => 'master-data',
+   ]) ->parameters(['anggota' => 'anggota']);
 
    Route::resource('master-data/dokter', MasterDokterController::class, [
-      'as' => 'master-data'
+      'as' => 'master-data',
+     
    ]);
 
    Route::resource('master-data/obat', MasterObatController::class, [

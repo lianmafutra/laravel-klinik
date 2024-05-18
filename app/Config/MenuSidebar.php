@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Config;
+
 class MenuSidebar
 {
    public static function render()
@@ -68,17 +70,17 @@ class MenuSidebar
             'type' => 'header',
             'title' => 'Data Master',
          ],
-        
+
          [
             'type' => 'menu',
-            'title' => 'Master Obat',
+            'title' => 'Data Obat',
             'url' => route('master-data.obat.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/obat*'],
          ],
          [
             'type' => 'menu',
-            'title' => 'Master Tindakan',
+            'title' => 'Data Tindakan',
             'url' => route('settings.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['admin/settings'],
@@ -86,20 +88,29 @@ class MenuSidebar
          ],
          [
             'type' => 'menu',
-            'title' => 'Master Anggota',
-            'url' => route('master-data.user.index'),
+            'title' => 'Data Anggota',
+            'url' => route('master-data.anggota.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/user*'],
-           
+            'active' => ['master-data/anggota*'],
+
          ],
          [
             'type' => 'menu',
-            'title' => 'Master Dokter',
+            'title' => 'Data Dokter',
             'url' => route('master-data.dokter.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/dokter*'],
-          
+
          ],
+         [
+            'type' => 'menu',
+            'title' => 'Data Pengguna',
+            'url' => route('master-data.dokter.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['master-data/dokter*'],
+
+         ],
+
          [
             'type' => 'header',
             'title' => 'Menu',
@@ -110,7 +121,7 @@ class MenuSidebar
             'url' => route('klinik.dashboard.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['dashboard*'],
-          
+
          ],
          // [
          //    'type' => 'menu',
@@ -120,21 +131,58 @@ class MenuSidebar
          //    'active' => ['admin/settings'],
          //    'permission' => ['settings'],
          // ],
+
          [
-            'type' => 'menu',
+            'type' => 'tree',
             'title' => 'Pemeriksaan',
-            'url' => route('pemeriksaan.index'),
+            'url' => '#',
             'icon' => 'fas fa-angle-right',
-            'active' => ['pemeriksaan*'],
-            
+            'active' => ['pemeriksaan*', 'riwayat*'],
+
+            'items' => [
+               [
+                  'type' => 'menu',
+                  'title' => 'Pasien',
+                  'url' => route('pemeriksaan.index'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['pemeriksaan*'],
+               ],
+
+               [
+                  'type' => 'menu',
+                  'title' => 'Riwayat ',
+                  'url' => route('riwayat.index'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['riwayat*'],
+               ],
+
+            ],
          ],
          [
-            'type' => 'menu',
+            'type' => 'tree',
             'title' => 'Laporan',
-            'url' => route('settings.index'),
+            'url' => '#',
             'icon' => 'fas fa-angle-right',
-            'active' => ['admin/settings'],
-            'permission' => ['settings'],
+            'active' => ['laporan*'],
+            'items' => [
+               [
+                  'type' => 'menu',
+                  'title' => 'Laporan Data Pemeriksaan',
+                  'url' => route('laporan.pemeriksaan'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['laporan/pemeriksaan'],
+               ],
+
+               [
+                  'type' => 'menu',
+                  'title' => 'Laporan Data Obat',
+                  'url' => route('laporan.obat'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['laporan/obat'],
+               ],
+
+            ],
+
          ],
          [
             'type' => 'header',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Utils\LmFileTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -113,5 +114,11 @@ class User extends Authenticatable
     public function dokter(): HasOne
     {
         return $this->hasOne(Dokter::class);
+    }
+
+    
+    public function pemeriksaan(): HasOne
+    {
+        return $this->hasOne(Pemeriksaan::class,'user_id','id');
     }
 }

@@ -12,6 +12,7 @@ class Dokter extends Model
     use HasFactory;
     protected $table = 'dokter';
     protected $guarded = [];
+    protected $with = ['user'];
 
     public function user(): BelongsTo
     {

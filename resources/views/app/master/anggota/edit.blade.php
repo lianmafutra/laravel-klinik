@@ -18,27 +18,28 @@
             @method('PUT')
             <div class="card">
                 <div class="card-body">
-                    <x-input label="Nama Lengkap" id="name" required />
-                    <x-input label="Tempat Lahir" id="tmpt_lahir" required />
+                  <x-input label="Nama Lengkap" id="nama" required />
+                    <x-input label="Tempat Lahir" id="tempat_lahir" required />
                     <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
                     <x-select2 required id="agama" label="Agama" placeholder="Pilih Agama">
-                        <option value="islam">Islam</option>
-                        <option value="kristen">Kristen</option>
-                        <option value="katolik">Katolik</option>
-                        <option value="hindu">Hindu</option>
-                        <option value="buddha">Buddha</option>
-                        <option value="khonghucu">Khonghucu</option>
+                     <option value="ISLAM">ISLAM</option>
+                     <option value="PROTESTAN">PROTESTAN</option>
+                     <option value="KHATOLIK">KHATOLIK</option>
+                     <option value="HINDU">HINDU</option>
+                     <option value="BUDDHA">BUDDHA</option>
+                     <option value="KHONGHUCU">KHONGHUCU</option>
+                     <option value="KRISTEN">KRISTEN</option>
+                     
                     </x-select2>
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
                         <option value="L">Laki-Laki</option>
                         <option value="P">Perempuan</option>
 
                     </x-select2>
-                    <x-select2 required id="jenis_user" label="Jenis User" placeholder="Pilih Jenis User">
+                    <x-select2 required id="jenis" label="Jenis User" placeholder="Pilih Jenis User">
                         <option value="siswa">Siswa</option>
                         <option value="personil">Personil</option>
-                        <option value="pimpinan">Pimpinan</option>
-                        <option value="admin">Admin</option>
+                    
                     </x-select2>
               
                     <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
@@ -63,7 +64,7 @@
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('master-data.user.store') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('master-data.anggota.store') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -99,7 +100,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('master-data.user.update', @json($user->id)),
+                    url: route('master-data.anggota.update', @json($anggota->id)),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -117,7 +118,7 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                window.location.replace(route('master-data.user.index'))
+                                window.location.replace(route('master-data.anggota.index'))
                             })
                         }
                     },
@@ -129,21 +130,22 @@
 
 
 
-
+          
             // set data 
-            $('#name').val(@json($user->name))
-            $('#tmpt_lahir').val(@json($user->user_detail->tmpt_lahir))
-            tgl_lahir.setDate(@json($user->user_detail->tgl_lahir))
-            $('#agama').val(@json($user->user_detail->agama)).change()
-            $('#jenis_kelamin').val(@json($user->user_detail->jenis_kelamin)).change()
-            $('#jenis_user').val(@json($user->user_detail->jenis_user)).change()
-            $('#nik').val(@json($user->user_detail->nik))
-            $('#nrp').val(@json($user->user_detail->nrp))
-            $('#no_bpjs').val(@json($user->user_detail->no_bpjs))
-            $('#tinggi_badan').val(@json($user->user_detail->tinggi_badan))
-            $('#pangkat').val(@json($user->user_detail->pangkat)).change()
-            $('#jabatan').val(@json($user->user_detail->jabatan)).change()
-            $('#no_hp').val(@json($user->user_detail->no_hp))
+            $('#nama').val(@json($anggota->nama))
+            $('#tempat_lahir').val(@json($anggota->tempat_lahir))
+            tgl_lahir.setDate(@json($anggota->tgl_lahir))
+            $('#agama').val(@json($anggota->agama)).change()
+            $('#jenis_kelamin').val(@json($anggota->jenis_kelamin)).change()
+            $('#jenis').val(@json($anggota->jenis)).change()
+            $('#nik').val(@json($anggota->nik))
+            $('#nrp').val(@json($anggota->nrp))
+            $('#alamat').val(@json($anggota->alamat))
+            $('#no_bpjs').val(@json($anggota->no_bpjs))
+            $('#tinggi_badan').val(@json($anggota->tinggi_badan))
+            $('#pangkat').val(@json($anggota->pangkat)).change()
+            $('#jabatan').val(@json($anggota->jabatan)).change()
+            $('#no_hp').val(@json($anggota->no_hp))
         })
     </script>
 @endpush

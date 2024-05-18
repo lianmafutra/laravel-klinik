@@ -2,23 +2,25 @@
 @push('css')
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@endpush
-<style>
+    <style>
 
-</style>
+    </style>
+@endpush
+
 @section('header')
     <x-header title="Data Master User"></x-header>
 @endsection
 @section('content')
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('master-data.user.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('master-data.anggota.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama', 'Jenis', 'NIK','NRP','Pangkat/Jabatan', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'Jenis', 'NIK','NRP','Pangkat/Jabatan','Tgl Lahir','Alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -32,14 +34,15 @@
             processing: true,
             searching: true,
             lengthChange: true,
+            pageLength: 20,
             paging: true,
             info: true,
             ordering: true,
             aaSorting: [],
-            order: [3, 'desc'],
+            order: [1, 'asc'],
             scrollX: true,
          
-            ajax: route('master-data.user.index'),
+            ajax: route('master-data.anggota.index'),
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
@@ -48,31 +51,43 @@
                 },
                
                 {
-                    data: 'name',
-                    name: 'name',
+                    data: 'nama',
+                    name: 'nama',
                     orderable: true,
                     searchable: true
                 },
                 {
-                    data: 'jenis_user',
-                    name: 'user_detail.jenis_user',
+                    data: 'jenis',
+                    name: 'jenis',
                     orderable: true, searchable: true
                 },
                 {
                     data: 'nik',
-                    data: 'user_detail.nik',
+                    data: 'nik',
                     orderable: true,
                     searchable: true,
                 },
                 {
                     data: 'nrp',
-                    name: 'user_detail.nrp',
+                    name: 'nrp',
                     orderable: true,
                     searchable: false,
                 },
                 {
                     data: 'pangkat_jabatan',
-                    name: 'user_detail.pangkat',
+                    name: 'pangkat_jabatan',
+                    orderable: true,
+                    searchable: false,
+                },
+                {
+                    data: 'tgl_lahir',
+                    name: 'tgl_lahir',
+                    orderable: true,
+                    searchable: false,
+                },
+                {
+                    data: 'alamat',
+                    name: 'alamat',
                     orderable: true,
                     searchable: false,
                 },

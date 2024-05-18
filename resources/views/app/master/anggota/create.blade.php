@@ -17,27 +17,28 @@
             @csrf
             <div class="card">
                 <div class="card-body">
-                    <x-input label="Nama Lengkap" id="name" required />
-                    <x-input label="Tempat Lahir" id="tmpt_lahir" required />
+                    <x-input label="Nama Lengkap" id="nama" required />
+                    <x-input label="Tempat Lahir" id="tempat_lahir" required />
                     <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
                     <x-select2 required id="agama" label="Agama" placeholder="Pilih Agama">
-                        <option value="islam">Islam</option>
-                        <option value="kristen">Kristen</option>
-                        <option value="katolik">Katolik</option>
-                        <option value="hindu">Hindu</option>
-                        <option value="buddha">Buddha</option>
-                        <option value="khonghucu">Khonghucu</option>
+                     <option value="ISLAM">ISLAM</option>
+                     <option value="PROTESTAN">PROTESTAN</option>
+                     <option value="KHATOLIK">KHATOLIK</option>
+                     <option value="HINDU">HINDU</option>
+                     <option value="BUDDHA">BUDDHA</option>
+                     <option value="KHONGHUCU">KHONGHUCU</option>
+                     <option value="KRISTEN">KRISTEN</option>
+                     
                     </x-select2>
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
                      <option value="L">Laki-Laki</option>
                      <option value="P">Perempuan</option>
                
                  </x-select2>
-                    <x-select2 required id="jenis_user" label="Jenis User" placeholder="Pilih Jenis User">
+                    <x-select2 required id="jenis" label="Jenis User" placeholder="Pilih Jenis User">
                      <option value="siswa">Siswa</option>
                      <option value="personil">Personil</option>
-                     <option value="pimpinan">Pimpinan</option>
-                     <option value="admin">Admin</option>
+                   
                     </x-select2>
                 
                    <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
@@ -52,16 +53,16 @@
                     </x-select2>
                     <x-select2  id="jabatan" label="Jabatan" placeholder="Pilih Jabatan">
                         @foreach ($jabatan as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            <option value="{{ $item->nama }}">{{ $item->nama }}</option>
                         @endforeach
                     </x-select2>
 
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
-                    <x-input-password id="password" placeholder="Password" label="Password" value="123456" info="Password Default : 123456"/>
+                  
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('master-data.user.store') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('master-data.anggota.store') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('master-data.user.store'),
+                    url: route('master-data.anggota.store'),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -115,7 +116,7 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                window.location.replace(route('master-data.user.index'))
+                                window.location.replace(route('master-data.anggota.index'))
                             })
                         }
                     },
