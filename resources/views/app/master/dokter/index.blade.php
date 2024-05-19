@@ -18,7 +18,7 @@
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama','NIK' ,'Jenis Kelamin','Spesialis','No Hp','alamat', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama' ,'Jenis Kelamin','Spesialis','No Hp','alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -52,12 +52,7 @@
                     orderable: true,
                     searchable: true
                 },
-                {
-                    data: 'nik',
-                    name: 'nik',
-                    orderable: true,
-                    searchable: true
-                },
+               
                 {
                     data: 'jenis_kelamin',
                     name: 'jenis_kelamin',

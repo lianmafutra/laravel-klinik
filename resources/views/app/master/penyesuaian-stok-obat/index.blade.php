@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.master')
 @push('css')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }} ">
@@ -23,32 +24,45 @@
     </style>
 @endpush
 @section('header')
-    <x-header title="Edit Data Obat" back-button="true"></x-header>
+    <x-header title="Penyesuaian Obat" back-button="true"></x-header>
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <form id="form_sample" method="post">
-                @csrf
-                @method('PUT')
-                <div class="card">
-                    <div class="card-body">
-                        <x-input label="Kode Obat" id="kode_obat" required />
-                        <x-input label="Nama Obat" id="nama" required />
-                        <x-input-rupiah label="Harga" id="harga" />
-                        <x-input-number label="Jumlah Stok" id="stok" />
-                        <x-textarea id="keterangan" label="Keterangan" placeholder="Keterangan" />
-                    </div>
-                    <div class="card-footer">
-                        <div style="gap:8px;" class="d-flex">
-                            <button type="submit" class="btn_submit btn btn-primary">Update Data</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-       
-    </div>
+<div class="col-lg-12 col-sm-12">
+   <form id="form_penyesuaian_stok" method="post">
+       @csrf
+       @method('PUT')
+       <div class="card">
+           <div class="card-header">
+               <i class="fas fa-database mr-2"></i> Penyesuaian Stok Obat
+           </div>
+           <div class="card-body">
+            <x-select2 id="obat" label="Data Obat" placeholder="Pilih Obat">
+               @foreach ($obat as $item)
+                   <option value="{{ $item->id }}">{{ $item->kode_obat }} -
+                       {{ $item->nama }}
+                   </option>
+               @endforeach
+           </x-select2>
+           <x-input-number label="Stok Saat ini" id="stok" />
+               <x-select2 required id="penyesuaian_aksi" label="Pilih Aksi" placeholder="Pilih Aksi Penyesuaian">
+                   <option value="pengurangan">(-) Pengurangan </option>
+                   <option value="Penambahan">(+) Penambahan</option>
+               </x-select2>
+               <x-input-number label="Jumlah Stok" id="penyesuaian_jumlah_stok" />
+               <x-datepicker id="tgl_penyesuaian" label="Tanggal" required />
+              
+               <x-textarea id="penyesuaian_keterangan" label="Keterangan" placeholder="Keterangan" />
+          
+            </div>
+           <div class="card-footer">
+               <div style="gap:8px;" class="d-flex">
+                   <button type="submit" class="btn_submit_penyesuaian btn btn-primary">Simpan Penyesuaian Stok</button>
+               </div>
+           </div>
+       </div>
+   </form>
+</div>
+
 @endsection
 @push('js')
     {{-- filepond --}}
@@ -83,38 +97,7 @@
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
             })
-            $('#form_sample').submit(function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                $.ajax({
-                    type: 'POST',
-                    url: route('master-data.obat.update', @json($obat->id)),
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    beforeSend: function() {
-                        _showLoading()
-                    },
-                    success: (response) => {
-                        if (response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: response.message,
-                                showCancelButton: true,
-                                allowEscapeKey: false,
-                                showCancelButton: false,
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                window.location.replace(route('master-data.obat.index'))
-                            })
-                        }
-                    },
-                    error: function(response) {
-                        _showError(response)
-                    }
-                })
-            })
+       
             $('#form_penyesuaian_stok').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
@@ -147,12 +130,7 @@
                     }
                 })
             })
-            $('#nama').val(@json($obat->nama))
-            $('#kode_obat').val(@json($obat->kode_obat))
-            AutoNumeric.getAutoNumericElement('#harga').set(@json($obat->harga))
-            $('#stok').val(@json($obat->stok))
-            $('#keterangan').val(@json($obat->keterangan))
-            $('#penyesuaian_jumlah_stok').val(0)
+           
         })
     </script>
 @endpush

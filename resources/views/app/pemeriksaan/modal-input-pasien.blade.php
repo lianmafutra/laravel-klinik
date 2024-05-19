@@ -15,14 +15,12 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input autocomplete="off" hidden nama="user_id"></input>
                                     <x-select2 id="select_user" label="Pilih Pasien" placeholder="Pilih Pasien">
                                         @foreach ($anggota as $item)
                                             <option value="{{ $item->id }}"> {{ $item->nama }} -
                                                 {{ $item->nik }} - {{ $item->nrp }}</option>
                                         @endforeach
                                     </x-select2>
-
                                     <table class="table table-bordered display text-xs" style="width:100%">
                                         <tr>
                                             <th>Nama Lengkap:</th>
@@ -53,6 +51,10 @@
                                             <td id="no_hp"></td>
                                         </tr>
                                         <tr>
+                                            <th>Jenis Anggota</th>
+                                            <td id="jenis"></td>
+                                        </tr>
+                                        <tr>
                                             <th>No BPJS</th>
                                             <td id="no_bpjs"></td>
                                         </tr>
@@ -62,9 +64,22 @@
                         </div>
                     </section>
                 </div>
-                <div class="modal-footer ">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="btn_action" type="submit" class="float-right btn btn-primary">Input</button>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <div class="mr-auto p-2">
+
+                        </div>
+                        <div class="p-2"> <button type="button" class="btn btn-default"
+                                data-dismiss="modal">Tutup</button>
+                        </div>
+                        <div class="p-2">
+                            <button id="btn_action" type="submit" class="float-right btn btn-primary">Input
+                                Pasien</button>
+                        </div>
+
+                    </div>
+
+
                 </div>
             </form>
         </div>

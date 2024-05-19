@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\klinik\Pasien;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Pasien;
+use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
 {
+   use ApiResponse;
     /**
      * Display a listing of the resource.
      */
@@ -56,7 +58,7 @@ class PasienController extends Controller
      */
     public function show(Pasien $pasien)
     {
-        //
+        return $this->success('data pasien detail', $pasien);
     }
 
     /**

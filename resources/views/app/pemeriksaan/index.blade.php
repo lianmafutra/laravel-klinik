@@ -33,6 +33,7 @@
             <div class="card-header">
                 <a href="#" id="btn_input_pasien" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Input
                     Data Pasien</a>
+                    
             </div>
             <div class="card-body">
                 <x-datatable id="datatable" :th="['No', 'Kode RM', 'Nama', 'Jenis Kelamin', 'Tgl Lahir', 'No Hp', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
@@ -61,7 +62,7 @@
                 var select_val = $(e.currentTarget).val();
                 $.ajax({
                     type: "GET",
-                    url: route('user.detail', select_val),
+                    url: route('master-data.anggota.show', select_val),
                     dataType: "json",
                     success: function(response) {
                         console.log(response)
@@ -71,6 +72,7 @@
                         $("#alamat").text(response.data.alamat);
                         $("#jenis_kelamin").text(response.data.jenis_kelamin);
                         $("#pangkat_jabatan").text(response.data.pangkat);
+                        $("#jenis").text(response.data.jenis);
                         $("#no_hp").text(response.data.no_hp);
                         $("#no_bpjs").text(response.data.no_bpjs);
                     }

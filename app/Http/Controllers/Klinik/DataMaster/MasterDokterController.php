@@ -47,10 +47,10 @@ class MasterDokterController extends Controller
       try {
 
          DB::beginTransaction();
-         $user = User::create($request->safe()->only('username', 'password', 'name'));
+        
 
          $dokter = Dokter::create(
-            $request->safe()->merge(['user_id' => $user->id])->except('username', 'password', 'name')
+            $request->safe()->all()
          );
          DB::commit();
          return $this->success(__('trans.crud.success'));
@@ -86,12 +86,9 @@ class MasterDokterController extends Controller
     
          DB::beginTransaction();
       
-         $dokter->user->fill($request->safe()->only('username', 'password', 'name'))->save();
+         $dokter->fill($request->safe()->all())->save();
      
 
-         $dokter = $dokter->fill(
-            $request->safe()->except('username', 'password', 'name')
-         )->save();
 
          DB::commit();
 

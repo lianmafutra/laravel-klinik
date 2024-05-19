@@ -11,6 +11,7 @@ class Pasien extends Model
    use HasFactory;
    protected $table = 'pasien';
    protected $guarded = [];
+   protected $with = ['anggota'];
    protected $casts = [
      'created_at' => 'date:d-m-Y H:m:s',
      'updated_at' => 'date:d-m-Y H:m:s',

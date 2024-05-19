@@ -76,7 +76,7 @@ class MenuSidebar
             'title' => 'Data Obat',
             'url' => route('master-data.obat.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/obat*'],
+            'active' => ['master-data/obat*','master-data/penyesuaian/obat*'],
          ],
          [
             'type' => 'menu',

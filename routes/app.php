@@ -8,7 +8,7 @@ use App\Http\Controllers\klinik\Dashboard\DashboarddController;
 use App\Http\Controllers\Klinik\DataMaster\MasterAnggotaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
-
+use App\Http\Controllers\Klinik\DataMaster\PenyesuaianStokObatController;
 use App\Http\Controllers\Klinik\Laporan\LaporanController;
 use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
-  
+
    Route::resource('pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
    Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
      
    ]);
 
+   Route::get('master-data/penyesuaian/obat', [PenyesuaianStokObatController::class, 'index'])->name('penyesuaian.stok.obat');
+   Route::get('master-data/penyesuaian/obat/riwayat', [PenyesuaianStokObatController::class, 'riwayat'])->name('penyesuaian.stok.obat.riwayat');
    Route::resource('master-data/obat', MasterObatController::class, [
       'as' => 'master-data'
    ]);

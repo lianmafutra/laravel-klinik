@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
                     <x-input label="Nama Lengkap" id="nama" required />
-                    <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
+                 
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
                         <option value="L">Laki-Laki</option>
                         <option value="P">Perempuan</option>
@@ -26,7 +26,7 @@
                     <x-input label="Spesialis" id="spesialis" required />
                     <x-textarea id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal"  />
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
-                    <x-input-password id="password" placeholder="Password" label="Password" value="123456" info="Password Default : 123456"/>
+                  
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">

@@ -81,7 +81,8 @@ class MasterAnggotaController extends Controller
     */
    public function show(Anggota $anggota)
    {
-      //
+  
+      return $this->success('data anggota detail', $anggota);
    }
 
    /**
