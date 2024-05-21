@@ -30,7 +30,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
-        Route::model('master_kursus', MasterKursus::class);
+
+     
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')

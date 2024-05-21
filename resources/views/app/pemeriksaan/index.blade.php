@@ -26,7 +26,7 @@
     /* Ensure the dropdown has a white background */
 </style>
 @section('header')
-    <x-header title="Data Pemeriksaan Pasien"></x-header>
+    <x-header title="Data Pasien"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12">
@@ -50,6 +50,7 @@
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
         $(function() {
+      
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
                 allowClear: true,

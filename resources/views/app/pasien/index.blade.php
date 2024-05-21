@@ -51,6 +51,8 @@
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
         $(function() {
+        
+
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
                 allowClear: true,
@@ -174,17 +176,17 @@
                    
                     {
                         data: "action",
-                        width: '20%',
+                     
                         orderable: false,
                         searchable: false,
                     },
                 ]
             })
 
-            $('#datatable').on('click', '.btn-hapus', function(e) {
+            $('#datatable').on('click', '.btn_hapus', function(e) {
                 e.preventDefault()
                 Swal.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ?',
+                    title: 'Apakah anda yakin ingin menghapus data pasien ?',
                     text: $(this).attr('data-action'),
                     icon: 'warning',
                     showCancelButton: true,

@@ -1,15 +1,27 @@
-<div class="d-flex justify-content-center">
-   <div class="d-flex flex-column me-2">
-       <a href="{{ route('pemeriksaan.create.user', $data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Input Pemeriksaan" class="btn btn-xs btn-primary btn-edit mb-2" data-id=""><i class=" fas fa-plus fa-xs"></i>
-           Pemeriksaan</a>
-       <a href="{{ route('riwayat.show', $data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Riwayat Rekam Medis Pasien" class="btn btn-xs btn-secondary btn-edit" data-id=""><i class="far fa-file fa-sm"></i>
-           Riwayat</a>
-   </div>
-   <div class="d-flex align-items-start">
-       <a data-url="{{ route('pasien.destroy',$data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Hapus Data" class="btn btn-xs btn-danger btn-hapus ml-1 p-2" data-action="{{ $anggota->nama }}"><i class="fas fa-trash-alt"></i>
-           </a>
-   </div>
-</div>
+<style>
+   .dropdown-menu.show {
+       left: -50px !important;
+   }
+</style>
+<x-dropdown-action>
+
+
+   <li><a href='{{ route('pemeriksaan.create.user', $data?->id) }}' href="#" class="btn_pemeriksaan dropdown-item">
+           <i class="fas fa-check"></i> Pemeriksaan</a> </li>
+
+   <div class="dropdown-divider"></div>
+
+   <li><a href="{{ route('riwayat.show', $data?->id) }}" class="btn_edit dropdown-item">
+           <i class="fas fa-edit"></i> Edit</a> </li>
+
+   <div class="dropdown-divider"></div>
+
+   <li><a href="{{ route('riwayat.show', $data?->id) }}" class="btn_riwayat dropdown-item">
+           <i class="fas fa-history"></i> Riwayat</a> </li>
+
+   <div class="dropdown-divider"></div>
+
+   <li><a data-action="{{ $anggota?->nama }}" data-url="{{ route('pasien.destroy',$data?->id) }}" class="btn_hapus dropdown-item">
+           <i class="fas fa-trash"></i> Hapus</a> </li>
+
+</x-dropdown-action>
