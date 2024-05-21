@@ -4,27 +4,28 @@
     <link rel="stylesheet" href="{{ asset('template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <style>
+      /* .select2-search { background-color: #528fd5; } */
+      /* .select2-search input { background-color: #528fd5; } */
+      .select2-results {
+          background-color: #a9cffa;
+      }
+  
+      /* Add shadow to the dropdown */
+      .select2-container--open .select2-dropdown {
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+  
+      .select2-results__option[aria-selected=true] {
+          background-color: #509aef !important;
+  
+          overflow-x: inherit;
+      }
+  
+      /* Ensure the dropdown has a white background */
+  </style>
 @endpush
-<style>
-    /* .select2-search { background-color: #528fd5; } */
-    /* .select2-search input { background-color: #528fd5; } */
-    .select2-results {
-        background-color: #a9cffa;
-    }
 
-    /* Add shadow to the dropdown */
-    .select2-container--open .select2-dropdown {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .select2-results__option[aria-selected=true] {
-        background-color: #509aef !important;
-
-        overflow-x: inherit;
-    }
-
-    /* Ensure the dropdown has a white background */
-</style>
 @section('header')
     <x-header title="Data Pemeriksaan Pasien"></x-header>
 @endsection
@@ -41,7 +42,7 @@
             </div>
         </div>
     </div>
-    @include('app.pemeriksaan.modal-input-pasien')
+    @include('app.pasien.modal-input-pasien')
 @endsection
 
 @push('js')
@@ -70,7 +71,7 @@
                 formData.append('jenis_anggota', jenis_anggota);
                 $.ajax({
                     type: 'POST',
-                    url: route('pemeriksaan.pasien.store'),
+                    url: route('pasien.store'),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -141,7 +142,7 @@
                 aaSorting: [],
                 // order: [3, 'desc'],
                 scrollX: true,
-                ajax: route('pemeriksaan.index'),
+                ajax: route('pasien.index'),
                 columns: [{
                         data: "DT_RowIndex",
                         orderable: false,

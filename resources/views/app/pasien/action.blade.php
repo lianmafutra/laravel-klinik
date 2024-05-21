@@ -8,8 +8,8 @@
            Riwayat</a>
    </div>
    <div class="d-flex align-items-start">
-       <a data-url="{{ route('pemeriksaan.destroy',$data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Hapus Data" class="btn btn-xs btn-danger btn-hapus ml-1 p-2" data-action="{{ $data }}"><i class="fas fa-trash-alt"></i>
+       <a data-url="{{ route('pasien.destroy',$data?->id) }}" data-toggle="tooltip" data-placement="bottom"
+           title="Hapus Data" class="btn btn-xs btn-danger btn-hapus ml-1 p-2" data-action="{{ $anggota->nama }}"><i class="fas fa-trash-alt"></i>
            </a>
    </div>
 </div>

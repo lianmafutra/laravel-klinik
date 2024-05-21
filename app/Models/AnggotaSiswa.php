@@ -10,9 +10,17 @@ class AnggotaSiswa extends Model
    use HasFactory;
    protected $table = 'anggota_siswa';
    protected $guarded = [];
+   protected $appends = ['jenis_anggota'];
    protected $casts = [
-     'created_at' => 'date:d-m-Y H:m:s',
-     'updated_at' => 'date:d-m-Y H:m:s',
-     'tgl_lahir' => 'date:d-m-Y',
- ];
+      'created_at' => 'date:d-m-Y H:m:s',
+      'updated_at' => 'date:d-m-Y H:m:s',
+      'tgl_lahir' => 'date:d-m-Y',
+   ];
+
+
+
+   public function getJenisAnggotaAttribute() {
+       return 'siswa';
+   }
+
 }

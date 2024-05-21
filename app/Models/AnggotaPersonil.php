@@ -13,6 +13,11 @@ class AnggotaPersonil extends Model
    protected $casts = [
      'created_at' => 'date:d-m-Y H:m:s',
      'updated_at' => 'date:d-m-Y H:m:s',
-   
+     'tgl_lahir' => 'date:d-m-Y',
  ];
+
+ protected $appends = ['jenis_anggota'];
+   public function getJenisAnggotaAttribute() {
+       return 'personil';
+   }
 }

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\klinik\Pasien;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnggotaPersonil;
+use App\Models\AnggotaSiswa;
 use App\Models\Pasien;
 use App\Utils\ApiResponse;
+use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PasienController extends Controller
 {
@@ -15,26 +20,51 @@ class PasienController extends Controller
      */
     public function index()
     {
-      $x['users'] =  User::with(['user_detail' => function ($query) {
-         $query->whereIn('jenis_user', ['siswa', 'personil', 'pimpinan']);
-      }])
-         ->has('user_detail')
+      $x['siswa'] =  AnggotaSiswa::get();
+      $x['personil'] =  AnggotaPersonil::get();
 
-         ->where('username', '!=', 'superadmin')->select('users.*')->get();
+      $x['anggota'] = $x['siswa']->toBase()->merge($x['personil'])->sortBy('nama');;
 
+      $data = Pasien::with('personil', 'siswa');
 
-      $data = Pemeriksaan::with('user');
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-               return view('app.pemeriksaan.action', compact('data'));
+               if ($data->anggota_jenis == 'personil') {
+                  $anggota =  $data->personil;
+               } else {
+                  $anggota =  $data->siswa;
+               }
+               return view('app.pasien.action', compact('data', 'anggota'));
+            })
+            ->addColumn('nama', function ($data) {
+
+               if ($data->anggota_jenis == 'personil') {
+                  return $data->personil->nama;
+               } else {
+                  return $data->siswa->nama;
+               }
+            })
+            ->addColumn('jenis_kelamin', function ($data) {
+               if ($data->anggota_jenis == 'personil') {
+                  return $data->personil->jenis_kelamin;
+               } else {
+                  return $data->siswa->jenis_kelamin;
+               }
+            })
+            ->addColumn('tgl_lahir', function ($data) {
+               if ($data->anggota_jenis == 'personil') {
+                  return Carbon::parse($data->personil->tgl_lahir)->format('d-m-Y');
+               } else {
+                  return  Carbon::parse($data->siswa->tgl_lahir)->format('d-m-Y');
+               }
             })
             ->rawColumns(['action'])
             ->make(true);
       }
-   
-      return view('app.pemeriksaan.index', $x);
+
+      return view('app.pasien.index', $x);
     }
 
     /**
@@ -50,7 +80,38 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      try {
+         DB::beginTransaction();
+         if ($request->jenis_anggota == 'personil') {
+            $anggota =  AnggotaPersonil::where('id', $request->select_user)->first();
+         }
+         if ($request->jenis_anggota == 'siswa') {
+            $anggota =  AnggotaSiswa::where('id',  $request->select_user)->first();
+         }
+
+
+         $kodeRm = Pasien::generateKodeRm();
+
+
+         $pasien = Pasien::create([
+            "kode_rm" => $kodeRm,
+            "anggota_id" => $anggota->id,
+            "anggota_jenis" => $request->jenis_anggota,
+         ]);
+
+
+         DB::commit();
+         return $this->success(__('trans.crud.success'));
+      }catch (QueryException $e){
+         $errorCode = $e->errorInfo[1];
+         if($errorCode == 1062){
+            return $this->error("Pasien Sudah Pernah Terdaftar, Silahkan Cari dihalaman Pencarian Pasien", 400);
+         }
+     }
+      catch (\Throwable $th) {
+         DB::rollBack();
+         return $this->error(__('trans.crud.error') . $th, 400);
+      }
     }
 
     /**
@@ -82,6 +143,16 @@ class PasienController extends Controller
      */
     public function destroy(Pasien $pasien)
     {
-        //
+      try {
+         DB::beginTransaction();
+         $pasien->delete();
+         DB::commit();
+
+         return $this->success(__('trans.crud.delete'));
+      } catch (\Throwable $th) {
+         DB::rollBack();
+
+         return $this->error(__('trans.crud.error') . $th, 400);
+      }
     }
 }

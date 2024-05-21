@@ -98,7 +98,7 @@ class MenuSidebar
                   'type' => 'menu',
                   'title' => 'Data Siswa',
                   'url' => route('master-data.siswa.index'),
-                  'icon' => 'fas fa-angle-right',
+                  'icon' => 'far fa-circle',
                   'active' => ['master-data/anggota/siswa*'],
       
                ],
@@ -106,7 +106,7 @@ class MenuSidebar
                   'type' => 'menu',
                   'title' => 'Data Personil',
                   'url' => route('master-data.personil.index'),
-                  'icon' => 'fas fa-angle-right',
+                  'icon' => 'far fa-circle',
                   'active' => ['master-data/anggota/personil*'],
       
                ],
@@ -153,9 +153,9 @@ class MenuSidebar
                [
                   'type' => 'menu',
                   'title' => 'Pasien',
-                  'url' => route('pemeriksaan.index'),
+                  'url' => route('pasien.index'),
                   'icon' => 'far fa-circle',
-                  'active' => ['pemeriksaan*'],
+                  'active' => ['pasien*'],
                ],
 
                [

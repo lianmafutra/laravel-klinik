@@ -45,8 +45,11 @@ Route::middleware(['auth'])->group(function () {
 
    Route::resource('pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
-   Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
    
+   Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
+   Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
+ 
+
    Route::resource('master-data/anggota/siswa', AnggotaSiswaController::class, [
       'as' => 'master-data',
    ]) ->parameters(['anggota' => 'anggota_personil']);
@@ -58,8 +61,9 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('master-data/dokter', MasterDokterController::class, [
       'as' => 'master-data',
      
-   ]);
-
+   ]); 
+   
+  
    Route::get('master-data/penyesuaian/obat', [PenyesuaianStokObatController::class, 'index'])->name('penyesuaian.stok.obat');
    Route::get('master-data/penyesuaian/obat/riwayat', [PenyesuaianStokObatController::class, 'riwayat'])->name('penyesuaian.stok.obat.riwayat');
    Route::resource('master-data/obat', MasterObatController::class, [

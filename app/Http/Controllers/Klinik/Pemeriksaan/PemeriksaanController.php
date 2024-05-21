@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\klinik\Pemeriksaan;
 
 use App\Http\Controllers\Controller;
-use App\Models\Anggota;
+use App\Models\AnggotaPersonil;
+use App\Models\AnggotaSiswa;
 use App\Models\Dokter;
 use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
-use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PemeriksaanController extends Controller
 {
@@ -18,22 +21,29 @@ class PemeriksaanController extends Controller
     */
    public function index()
    {
-      $x['anggota'] =  Anggota::get();
-
-
-      $data = Pasien::with('anggota');
-      if (request()->ajax()) {
-         return datatables()->of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($data) {
-               return view('app.pemeriksaan.action', compact('data'));
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-      }
-   
-      return view('app.pemeriksaan.index', $x);
+     
    }
+
+   public function userDetail($user_id, $jenis)
+   {
+
+      if ($jenis == 'personil') {
+         $anggota =  AnggotaPersonil::where('id', $user_id)->first();
+      }
+      if ($jenis == 'siswa') {
+         $anggota =  AnggotaSiswa::where('id', $user_id)->first();
+      }
+
+      return $this->success('Data Anggota Detail', $anggota);
+   }
+
+   public function deletePasien(Request $request)
+   {
+   
+   }
+   
+
+ 
 
    /**
     * Show the form for creating a new resource.
@@ -43,7 +53,7 @@ class PemeriksaanController extends Controller
       $x['pasien'] =   Pasien::where('id', $user_id)->with('anggota')->first();
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
-    
+
       return view('app.pemeriksaan.create', $x);
    }
 
