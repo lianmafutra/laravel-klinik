@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Utils\DateUtils;
 use App\Utils\Rupiah;
 use Illuminate\Foundation\Http\FormRequest;
 class MasterObatRequest extends FormRequest
@@ -16,7 +17,10 @@ class MasterObatRequest extends FormRequest
    {
       $this->merge([
          'harga' =>  Rupiah::clean($this->harga),
+         'tgl_expired' => DateUtils::format($this->tgl_expired),
       ]);
+
+    
    }
     /**
      * Get the validation rules that apply to the request.
@@ -27,7 +31,8 @@ class MasterObatRequest extends FormRequest
    {
       $rules = [
          'kode_obat' => 'required',
-         'keterangan' => 'required',
+         'keterangan' => 'nullable',
+         'tgl_expired' => 'nullable',
          'nama' => 'required',
          'harga' => 'required',
          'stok' => 'required|integer',

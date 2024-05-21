@@ -37,6 +37,7 @@
                         <x-input label="Nama Obat" id="nama" required />
                         <x-input-rupiah label="Harga" id="harga" />
                         <x-input-number label="Jumlah Stok" id="stok" />
+                        <x-datepicker id="tgl_expired" label="Tanggal Expired"  />
                         <x-textarea id="keterangan" label="Keterangan" placeholder="Keterangan" />
                     </div>
                     <div class="card-footer">
@@ -70,6 +71,14 @@
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
+
+            const tgl_expired = flatpickr("#tgl_expired", {
+                allowInput: true,
+                locale: "id",
+                dateFormat: "d/m/Y",
+                defaultDate: ''
+            });
+
 
             AutoNumeric.multiple('.rupiah', {
                 digitGroupSeparator: '.',
@@ -151,6 +160,7 @@
             $('#kode_obat').val(@json($obat->kode_obat))
             AutoNumeric.getAutoNumericElement('#harga').set(@json($obat->harga))
             $('#stok').val(@json($obat->stok))
+            tgl_expired.setDate(@json($obat->tgl_expired))
             $('#keterangan').val(@json($obat->keterangan))
             $('#penyesuaian_jumlah_stok').val(0)
         })

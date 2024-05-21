@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Klinik\DataMaster;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterObatRequest;
 use App\Models\Obat;
+use App\Utils\Rupiah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,9 @@ class MasterObatController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                return view('app.master.obat.action', compact('data'));
+            })
+            ->addColumn('harga_format', function ($data) {
+               return    Rupiah::toRupiah($data->harga);
             })
             ->rawColumns(['action'])
             ->make(true);

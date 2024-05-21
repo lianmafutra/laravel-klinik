@@ -87,21 +87,32 @@ class MenuSidebar
             'permission' => ['settings'],
          ],
          [
-            'type' => 'menu',
+            'type' => 'tree',
             'title' => 'Data Anggota',
-            'url' => route('master-data.anggota.index'),
-            'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/anggota*'],
-
-         ],
-         [
-            'type' => 'menu',
-            'title' => 'Data Dokter',
-            'url' => route('master-data.dokter.index'),
-            'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/dokter*'],
-
-         ],
+            'url' => '#',
+             'icon' => 'fas fa-angle-right',
+           
+            'active' => ['master-data/anggota/personil*','master-data/anggota/siswa*'],
+            'items' => [
+               [
+                  'type' => 'menu',
+                  'title' => 'Data Siswa',
+                  'url' => route('master-data.siswa.index'),
+                  'icon' => 'fas fa-angle-right',
+                  'active' => ['master-data/anggota/siswa*'],
+      
+               ],
+               [
+                  'type' => 'menu',
+                  'title' => 'Data Personil',
+                  'url' => route('master-data.personil.index'),
+                  'icon' => 'fas fa-angle-right',
+                  'active' => ['master-data/anggota/personil*'],
+      
+               ],
+            ]
+            ],
+         
          [
             'type' => 'menu',
             'title' => 'Data Pengguna',

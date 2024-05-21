@@ -9,19 +9,18 @@
     </style>
 @endpush
 @section('header')
-    <x-header title="Edit Data User" back-button="true"></x-header>
+    <x-header title="Input Data User Personil" back-button="true"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-8 col-sm-12">
         <form id="form_sample" method="post">
             @csrf
-            @method('PUT')
             <div class="card">
                 <div class="card-body">
-                  <x-input label="Nama Lengkap" id="nama" required />
-                    <x-input label="Tempat Lahir" id="tempat_lahir" required />
-                    <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
-                    <x-select2 required id="agama" label="Agama" placeholder="Pilih Agama">
+                    <x-input label="Nama Lengkap" id="nama" required />
+                    <x-input label="Tempat Lahir" id="tempat_lahir"  />
+                    <x-datepicker id="tgl_lahir" label="Tanggal Lahir"  />
+                    <x-select2  id="agama" label="Agama" placeholder="Pilih Agama">
                      <option value="ISLAM">ISLAM</option>
                      <option value="PROTESTAN">PROTESTAN</option>
                      <option value="KHATOLIK">KHATOLIK</option>
@@ -31,23 +30,18 @@
                      <option value="KRISTEN">KRISTEN</option>
                      
                     </x-select2>
-                    <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
-                        <option value="L">Laki-Laki</option>
-                        <option value="P">Perempuan</option>
-
-                    </x-select2>
-                    <x-select2 required id="jenis" label="Jenis User" placeholder="Pilih Jenis User">
-                        <option value="siswa">Siswa</option>
-                        <option value="personil">Personil</option>
-                    
-                    </x-select2>
-              
-                    <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
+                    <x-select2  id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
+                     <option value="L">Laki-Laki</option>
+                     <option value="P">Perempuan</option>
+               
+                 </x-select2>
+                 
+                
+                   <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal"  />
                     <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
-                    <x-input-number label="NRP (Nomor Register Pokok)" id="nrp" />
+                    <x-input-number label="NRP (Nomor Register Pokok)" id="nrp" required/>
                     <x-input-number label="Nomor BPJS" id="no_bpjs" />
-                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required
-                        info="Gunaka Titik untuk Pemisah Desimal" />
+                    <x-input-float label="Tinggi Badan" id="tinggi_badan"   info="Gunaka Titik untuk Pemisah Desimal"/>
                     <x-select2  id="pangkat" label="Pangkat" placeholder="Pilih Pangkat">
                         @foreach ($pangkat as $item)
                             <option value="{{ $item->nama }}">{{ $item->nama }}</option>
@@ -60,11 +54,11 @@
                     </x-select2>
 
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
-
+                  
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('master-data.anggota.store') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('master-data.personil.index') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -80,7 +74,7 @@
     {{-- flatcpiker format date input --}}
     <script src="{{ asset('plugins/flatpicker/flatpickr.min.js') }}"></script>
     <script src="{{ asset('plugins/flatpicker/id.min.js') }}"></script>
-
+    
     {{-- password toggle show/hide --}}
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
     <script>
@@ -100,7 +94,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('master-data.anggota.update', @json($anggota->id)),
+                    url: route('master-data.personil.store'),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -118,7 +112,7 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                window.location.replace(route('master-data.anggota.index'))
+                                window.location.replace(route('master-data.personil.index'))
                             })
                         }
                     },
@@ -127,25 +121,6 @@
                     }
                 })
             })
-
-
-
-          
-            // set data 
-            $('#nama').val(@json($anggota->nama))
-            $('#tempat_lahir').val(@json($anggota->tempat_lahir))
-            tgl_lahir.setDate(@json($anggota->tgl_lahir))
-            $('#agama').val(@json($anggota->agama)).change()
-            $('#jenis_kelamin').val(@json($anggota->jenis_kelamin)).change()
-            $('#jenis').val(@json($anggota->jenis)).change()
-            $('#nik').val(@json($anggota->nik))
-            $('#nrp').val(@json($anggota->nrp))
-            $('#alamat').val(@json($anggota->alamat))
-            $('#no_bpjs').val(@json($anggota->no_bpjs))
-            $('#tinggi_badan').val(@json($anggota->tinggi_badan))
-            $('#pangkat').val(@json($anggota->pangkat)).change()
-            $('#jabatan').val(@json($anggota->jabatan)).change()
-            $('#no_hp').val(@json($anggota->no_hp))
         })
     </script>
 @endpush

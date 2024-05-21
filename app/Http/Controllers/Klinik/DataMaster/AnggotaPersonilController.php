@@ -1,61 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Klinik\DataMaster;
+namespace App\Http\Controllers\klinik\DataMaster;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MasterAnggotaRequest;
-use App\Models\Anggota;
+use App\Http\Requests\AnggotaPersonilRequest;
+use App\Models\AnggotaPersonil;
 use App\Models\Jabatan;
 use App\Models\Pangkat;
-
 use App\Utils\ApiResponse;
-use App\Utils\LmUtils;
 use Carbon\Carbon;
-use Illuminate\Http\Client\Request;
-use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MasterAnggotaController extends Controller
+class AnggotaPersonilController extends Controller
 {
-
    use ApiResponse;
-   protected $lmUtils;
-
-   public function __construct(LmUtils $lmUtils)
-   {
-      $this->lmUtils = $lmUtils;
-   }
-
-
-
 
    /**
     * Display a listing of the resource.
     */
-   public function index(HttpRequest $request)
+   public function index(Request $request)
    {
 
-      $x['jenis'] =  $request->input('jenis');
-      $data = Anggota::where('jenis',  $x['jenis']);
+  
+      $data = AnggotaPersonil::query();
 
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-               return view('app.master.Anggota.action', compact('data'));
+               return view('app.master.anggota-personil.action', compact('data'));
             })
 
-            ->addColumn('umur', function (Anggota $data) {
+            ->addColumn('umur', function (AnggotaPersonil $data) {
                return  Carbon::parse($data->tgl_lahir)->age . " Tahun";
             })
-            ->addColumn('pangkat_jabatan', function (Anggota $data) {
-               return $data?->pangkat . " - " . $data?->jabatan ?? "";
-            })
+            
 
             ->rawColumns(['action',])
             ->make(true);
       }
-      return view('app.master.anggota.index', $x);
+      return view('app.master.anggota-personil.index');
    }
 
    /**
@@ -65,19 +50,19 @@ class MasterAnggotaController extends Controller
    {
       $jabatan = Jabatan::get();
       $pangkat = Pangkat::get();
-      return view('app.master.anggota.create', compact('jabatan', 'pangkat'));
+      return view('app.master.anggota-personil.create', compact('jabatan', 'pangkat'));
    }
 
    /**
     * Store a newly created resource in storage.
     */
-   public function store(MasterAnggotaRequest $request)
+   public function store(AnggotaPersonilRequest $request)
    {
       try {
 
          DB::beginTransaction();
 
-         $anggota = Anggota::create($request->safe()->all());
+         $personil = AnggotaPersonil::create($request->safe()->all());
 
 
 
@@ -93,36 +78,36 @@ class MasterAnggotaController extends Controller
    /**
     * Display the specified resource.
     */
-   public function show(Anggota $anggota)
+   public function show(AnggotaPersonil $personil)
    {
 
-      return $this->success('data anggota detail', $anggota);
+      return $this->success('data anggota detail', $personil);
    }
 
    /**
     * Show the form for editing the specified resource.
     */
-   public function edit(Anggota $anggota)
+   public function edit(AnggotaPersonil $personil)
    {
       $jabatan = Jabatan::get();
       $pangkat = Pangkat::get();
 
+    
 
 
 
-
-      return view('app.master.anggota.edit', compact('anggota', 'jabatan', 'pangkat'));
+      return view('app.master.anggota-personil.edit', compact('personil', 'jabatan', 'pangkat'));
    }
 
    /**
     * Update the specified resource in storage.
     */
-   public function update(MasterAnggotaRequest $request, Anggota $anggota)
+   public function update(AnggotaPersonilRequest $request, AnggotaPersonil $personil)
    {
       try {
 
          DB::beginTransaction();
-         $anggota->fill($request->safe()->all())->save();
+         $personil->fill($request->safe()->all())->save();
 
 
          DB::commit();
@@ -137,11 +122,11 @@ class MasterAnggotaController extends Controller
    /**
     * Remove the specified resource from storage.
     */
-   public function destroy(Anggota $anggota)
+   public function destroy(AnggotaPersonil $personil)
    {
       try {
          DB::beginTransaction();
-         $anggota->delete();
+         $personil->delete();
          DB::commit();
 
          return $this->success(__('trans.crud.delete'));
@@ -155,7 +140,7 @@ class MasterAnggotaController extends Controller
 
    public function userDetail($user_id)
    {
-      $anggota =  Anggota::where('id', $user_id)->first();
-      return $this->success('Data Anggota Detail', $anggota);
+      $personil =  AnggotaPersonil::where('id', $user_id)->first();
+      return $this->success('Data Anggota Detail', $personil);
    }
 }

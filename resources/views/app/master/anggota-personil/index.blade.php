@@ -8,19 +8,18 @@
 @endpush
 
 @section('header')
-    <x-header title="Data Master Anggota"></x-header>
+    <x-header title="Data Master Anggota Personil"></x-header>
 @endsection
 @section('content')
-
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('master-data.anggota.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('master-data.personil.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama', 'Jenis', 'NIK','NRP','Pangkat/Jabatan','Tgl Lahir','Alamat', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'NRP', 'Pangkat','Jabatan', 'Tgl Lahir', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -41,43 +40,40 @@
             aaSorting: [],
             order: [1, 'asc'],
             scrollX: true,
-         
-            ajax: route('master-data.anggota.index'),
+            ajax: {
+                url: route('master-data.personil.index'),
+            }, 
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
                     searchable: false,
                     width: '1%'
                 },
-               
+
                 {
                     data: 'nama',
                     name: 'nama',
                     orderable: true,
                     searchable: true
                 },
-                {
-                    data: 'jenis',
-                    name: 'jenis',
-                    orderable: true, searchable: true
-                },
-                {
-                    data: 'nik',
-                    data: 'nik',
-                    orderable: true,
-                    searchable: true,
-                },
+                
                 {
                     data: 'nrp',
                     name: 'nrp',
                     orderable: true,
-                    searchable: false,
+                    searchable: true,
                 },
                 {
-                    data: 'pangkat_jabatan',
-                    name: 'pangkat_jabatan',
+                    data: 'pangkat',
+                    name: 'pangkat',
                     orderable: true,
-                    searchable: false,
+                    searchable: true,
+                },
+                {
+                    data: 'jabatan',
+                    name: 'jabatan',
+                    orderable: true,
+                    searchable: true,
                 },
                 {
                     data: 'tgl_lahir',
@@ -89,7 +85,7 @@
                     data: 'alamat',
                     name: 'alamat',
                     orderable: true,
-                    searchable: false,
+                    searchable: true,
                 },
                 {
                     data: "action",
@@ -146,7 +142,7 @@
                             _alertSuccess(response.message)
                         },
                         error: function(response) {
-             
+
                             _showError(response)
                         }
                     })

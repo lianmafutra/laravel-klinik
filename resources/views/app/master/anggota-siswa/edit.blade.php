@@ -9,24 +9,47 @@
     </style>
 @endpush
 @section('header')
-    <x-header title="Input Data Obat" back-button="true"></x-header>
+    <x-header title="Edit Data User Siswa" back-button="true"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-8 col-sm-12">
         <form id="form_sample" method="post">
             @csrf
+            @method('PUT')
             <div class="card">
                 <div class="card-body">
-                  <x-input label="Kode Obat" id="kode_obat" required />
-                    <x-input label="Nama Obat" id="nama" required />
-                    <x-input-rupiah  label="Harga" id="harga" />
-                    <x-input-number  label="Jumlah Stok" id="stok" />
-                    <x-datepicker id="tgl_expired" label="Tanggal Expired"  />
-                    <x-textarea id="keterangan" label="Keterangan" placeholder="Keterangan"  />
+                  <x-input label="Nama Lengkap" id="nama" required />
+                    <x-input label="Tempat Lahir" id="tempat_lahir" required />
+                    <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
+                    <x-select2 required id="agama" label="Agama" placeholder="Pilih Agama">
+                     <option value="ISLAM">ISLAM</option>
+                     <option value="PROTESTAN">PROTESTAN</option>
+                     <option value="KHATOLIK">KHATOLIK</option>
+                     <option value="HINDU">HINDU</option>
+                     <option value="BUDDHA">BUDDHA</option>
+                     <option value="KHONGHUCU">KHONGHUCU</option>
+                     <option value="KRISTEN">KRISTEN</option>
+                    </x-select2>
+                    <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
+                        <option value="L">Laki-Laki</option>
+                        <option value="P">Perempuan</option>
+
+                    </x-select2>
+                   
+              
+                    <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
+                    <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
+                    <x-input-number label="NOSIS" id="nosis" />
+                    <x-input-number label="Nomor BPJS" id="no_bpjs" />
+                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required
+                        info="Gunaka Titik untuk Pemisah Desimal" />
+                 
+                    <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
+
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('master-data.obat.index') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('master-data.siswa.store') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -42,39 +65,27 @@
     {{-- flatcpiker format date input --}}
     <script src="{{ asset('plugins/flatpicker/flatpickr.min.js') }}"></script>
     <script src="{{ asset('plugins/flatpicker/id.min.js') }}"></script>
+
     {{-- password toggle show/hide --}}
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
-        {{-- currency format input --}}
-        <script src="{{ asset('plugins/autoNumeric.min.js') }}"></script>
     <script>
         $(function() {
-
-         const tgl_expired = flatpickr("#tgl_expired", {
+            $('.select2bs4').select2({
+                theme: 'bootstrap4',
+                allowClear: true,
+            })
+            const tgl_lahir = flatpickr("#tgl_lahir", {
                 allowInput: true,
                 locale: "id",
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
-
-
-         AutoNumeric.multiple('.rupiah', {
-                digitGroupSeparator: '.',
-                decimalPlaces: 0,
-                minimumValue: 0,
-                decimalCharacter: ',',
-                formatOnPageLoad: true,
-                allowDecimalPadding: false,
-                alwaysAllowDecimalCharacter: false
-            });
-               $('.select2bs4').select2({
-                theme: 'bootstrap4',
-            })
             $('#form_sample').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('master-data.obat.store'),
+                    url: route('master-data.siswa.update', @json($siswa->id)),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -92,7 +103,7 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                window.location.replace(route('master-data.obat.index'))
+                                window.location.replace(route('master-data.siswa.index'))
                             })
                         }
                     },
@@ -101,6 +112,23 @@
                     }
                 })
             })
+
+
+
+          
+            // set data 
+            $('#nama').val(@json($siswa->nama))
+            $('#tempat_lahir').val(@json($siswa->tempat_lahir))
+            tgl_lahir.setDate(@json($siswa->tgl_lahir))
+            $('#agama').val(@json($siswa->agama)).change()
+            $('#jenis_kelamin').val(@json($siswa->jenis_kelamin)).change()
+            $('#jenis').val(@json($siswa->jenis)).change()
+            $('#nik').val(@json($siswa->nik))
+            $('#nosis').val(@json($siswa->nosis))
+            $('#alamat').val(@json($siswa->alamat))
+            $('#no_bpjs').val(@json($siswa->no_bpjs))
+            $('#tinggi_badan').val(@json($siswa->tinggi_badan))
+            $('#no_hp').val(@json($siswa->no_hp))
         })
     </script>
 @endpush

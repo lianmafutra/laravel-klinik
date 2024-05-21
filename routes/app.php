@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\SampleCrudController;
 use App\Http\Controllers\Admin\TinyEditorController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\klinik\Dashboard\DashboarddController;
+use App\Http\Controllers\klinik\DataMaster\AnggotaPersonilController;
+use App\Http\Controllers\klinik\DataMaster\AnggotaSiswaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterAnggotaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
@@ -45,9 +47,13 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('pasien', PasienController::class);
    Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
    
-   Route::resource('master-data/anggota', MasterAnggotaController::class, [
+   Route::resource('master-data/anggota/siswa', AnggotaSiswaController::class, [
       'as' => 'master-data',
-   ]) ->parameters(['anggota' => 'anggota']);
+   ]) ->parameters(['anggota' => 'anggota_personil']);
+
+   Route::resource('master-data/anggota/personil', AnggotaPersonilController::class, [
+      'as' => 'master-data',
+   ]) ->parameters(['anggota' => 'anggota_siswa']);
 
    Route::resource('master-data/dokter', MasterDokterController::class, [
       'as' => 'master-data',
