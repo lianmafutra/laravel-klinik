@@ -9,10 +9,7 @@ use App\Models\Dokter;
 use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
-use Carbon\Carbon;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PemeriksaanController extends Controller
 {
@@ -24,15 +21,16 @@ class PemeriksaanController extends Controller
      
    }
 
-   public function userDetail($user_id, $jenis)
+   public function userDetail($kode, $jenis)
    {
 
       if ($jenis == 'personil') {
-         $anggota =  AnggotaPersonil::where('id', $user_id)->first();
+         $anggota =  AnggotaPersonil::where('kode', $kode)->first();
       }
       if ($jenis == 'siswa') {
-         $anggota =  AnggotaSiswa::where('id', $user_id)->first();
+         $anggota =  AnggotaSiswa::where('kode', $kode)->first();
       }
+
 
       return $this->success('Data Anggota Detail', $anggota);
    }

@@ -1,13 +1,13 @@
-<div class="modal fade" id="modal_input_pasien" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" id="modal_edit_pasien" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Input Data Pasien</h5>
+                <h5 class="modal-title">Edit Data Pasien</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form autocomplete="off" id="form_submit_pasien" method="POST">
+            <form autocomplete="off" id="form_submit_edit_pasien" method="POST">
                 @csrf
                 @method('POST')
                 <div class="modal-body">
@@ -15,34 +15,31 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                 <x-input label="Pasine ID" id="pasien_id" hidden />
-                                 <div class="select_jenis_pasien">
-                                    <x-check-box label="Pilih Jenis Pasien : " >
-                                       <x-checkbox.item id="radio_1" value="anggota" name="radio" text="Dari Anggota" type="radio" color="primary" checked>
-                                       </x-checkbox.item>
-                                       <x-checkbox.item id="radio_2" value="lainnya" name="radio" text="Lainnya" type="radio" color="primary" >
-                                       </x-checkbox.item>
-                                   </x-check-box>
-                                 </div>
-                            
-                                <hr class="select_jenis_pasien" style="margin-bottom: 20px"> <!-- Horizontal Line -->
-                                    <x-select2 id="select_user" label="Pilih Anggota" placeholder="Pilih Anggota"
+                                 <x-check-box label="Pilih Jenis Pasien : " >
+                                    <x-checkbox.item id="edit_radio_1" value="anggota" name="radio" text="Dari Anggota" type="radio" color="primary" checked>
+                                    </x-checkbox.item>
+                                    <x-checkbox.item id="edit_radio_2" value="lainnya" name="radio" text="Lainnya" type="radio" color="primary" >
+                                    </x-checkbox.item>
+                                </x-check-box>
+                                <hr style="margin-bottom: 20px"> <!-- Horizontal Line -->
+                                    <x-select2 id="edit_select_user" label="Pilih Anggota" placeholder="Pilih Anggota"
                                         required>
                                         @foreach ($anggota as $item)
-                                            <option data-jenis="{{ $item->jenis_anggota }}" value="{{ $item->kode }}">
+                                            <option data-jenis="{{ $item->jenis_anggota }}" value="{{ $item->id }}">
                                                 {{ $item->nama }} - {{ $item->jenis_anggota }}</option>
                                         @endforeach
                                     </x-select2>
-                                    <x-input label="Nama Lengkap" id="nama" required />
-                                    <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
-                                    <x-select2 required id="jenis_kelamin" label="Jenis Kelamin"
+                                
+                                    <x-input label="Nama Lengkap" id="edit_nama" required />
+                                    <x-datepicker id="edit_tgl_lahir" label="Tanggal Lahir" required />
+                                    <x-select2 required id="edit_jenis_kelamin" label="Jenis Kelamin"
                                         placeholder="Pilih Jenis Kelamin">
                                         <option value="L">Laki-Laki</option>
                                         <option value="P">Perempuan</option>
                                     </x-select2>
-                                    <x-textarea id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal"
+                                    <x-textarea id="edit_alamat" label="Alamat" placeholder="Alamat Tempat Tinggal"
                                         required />
-                                    <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
+                                    <x-input-phone id="edit_no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
                                 </div>
                             </div>
                         </div>

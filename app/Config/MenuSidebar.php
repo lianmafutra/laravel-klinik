@@ -147,7 +147,7 @@ class MenuSidebar
             'title' => 'Pemeriksaan',
             'url' => '#',
             'icon' => 'fas fa-angle-right',
-            'active' => ['pemeriksaan*', 'riwayat*'],
+            'active' => ['pemeriksaan*', 'riwayat*', 'pasien*'],
 
             'items' => [
                [

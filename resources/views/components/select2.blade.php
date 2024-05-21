@@ -1,5 +1,5 @@
 
-    <div class="form-group">
+    <div class="form-group"  name="{{ $name }}">
       <label>{{ $label }}
          @if ($attributes['required'] == 'true')
              <span style="color: red">*</span>

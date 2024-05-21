@@ -28,7 +28,6 @@
                      <option value="BUDDHA">BUDDHA</option>
                      <option value="KHONGHUCU">KHONGHUCU</option>
                      <option value="KRISTEN">KRISTEN</option>
-                     
                     </x-select2>
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
                      <option value="L">Laki-Laki</option>
@@ -42,8 +41,6 @@
                     <x-input-number label="NOSIS" id="nosis" />
                     <x-input-number label="Nomor BPJS" id="no_bpjs" />
                     <x-input-float label="Tinggi Badan" id="tinggi_badan" required  info="Gunaka Titik untuk Pemisah Desimal"/>
-                 
-
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
                   
                 </div>
