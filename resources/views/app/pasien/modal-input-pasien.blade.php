@@ -15,8 +15,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                 <x-input label="Pasine ID" id="pasien_id" hidden />
+                                 
                                  <div class="select_jenis_pasien">
+                                    <x-input label="Pasine ID" id="pasien_id" hidden />
                                     <x-check-box label="Pilih Jenis Pasien : " >
                                        <x-checkbox.item id="radio_1" value="anggota" name="radio" text="Dari Anggota" type="radio" color="primary" checked>
                                        </x-checkbox.item>

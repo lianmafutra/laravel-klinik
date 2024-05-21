@@ -128,7 +128,7 @@ class PasienController extends Controller
          }
          else{
 
-            return $this->success('Insert Data Pasien');
+            return $this->success('Insert Data Pasien Berhasil');
          }
 
      
