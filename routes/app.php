@@ -9,11 +9,13 @@ use App\Http\Controllers\klinik\DataMaster\AnggotaPersonilController;
 use App\Http\Controllers\klinik\DataMaster\AnggotaSiswaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
+use App\Http\Controllers\Klinik\DataMaster\MasterTindakanController;
 use App\Http\Controllers\Klinik\DataMaster\PenyesuaianStokObatController;
 use App\Http\Controllers\Klinik\Laporan\LaporanController;
 use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
+
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -53,17 +55,24 @@ Route::middleware(['auth'])->group(function () {
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
  
 
+ 
+   Route::resource('master-data/tindakan', MasterTindakanController::class, [
+      'as' => 'master-data',
+   ])->parameters(['tindakan' => 'tindakan']);
+   
    Route::resource('master-data/anggota/siswa', AnggotaSiswaController::class, [
       'as' => 'master-data',
-   ]) ->parameters(['anggota' => 'anggota_personil']);
+   ])->parameters(['anggota' => 'anggota_personil']);
 
    Route::resource('master-data/anggota/personil', AnggotaPersonilController::class, [
       'as' => 'master-data',
-   ]) ->parameters(['anggota' => 'anggota_siswa']);
+   ])->parameters(['anggota' => 'anggota_siswa']);
 
    Route::resource('master-data/dokter', MasterDokterController::class, [
       'as' => 'master-data',
    ]); 
+
+ 
    Route::get('master-data/obat/{obat_id}/detail', [MasterObatController::class, 'getObatDetail'])->name('obat.detail');
  
    

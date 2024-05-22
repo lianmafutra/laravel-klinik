@@ -98,7 +98,7 @@
                                     </option>
                                 @endforeach
                             </x-select2>
-                            <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan" required />
+                            <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan"  required />
                             <x-textarea id="keluhan" label="Keluhan Pasien" placeholder="" required />
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                             <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
@@ -111,12 +111,26 @@
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
                             <x-input label="Tensi Darah" id="tensi" />
                             <x-input label=" Laju Pernafasan" id="nafas" />
-
-
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card">
+               <div class="card-header">
+                   <i class="fas fa-pills pr-2"></i> Data Tindakan
+               </div>
+               <div class="card-body">
+                   <a href="#" id="btn_tambah_tindakan" class="button mb-3  btn btn-primary">+ Tambah Tindakan</a>
+                   <x-datatable id="datatable" :th="[
+                       'No',
+                       'Kode',
+                       'Nama',
+                       'Biaya',
+                       'Keterangan',
+                       'Aksi',
+                   ]" style="width: 100%; margin-top: 40px"></x-datatable>
+               </div>
+           </div>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-pills pr-2"></i> Data Resep Obat

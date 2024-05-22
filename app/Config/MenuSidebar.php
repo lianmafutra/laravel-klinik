@@ -78,13 +78,20 @@ class MenuSidebar
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/obat*','master-data/penyesuaian/obat*'],
          ],
+         
+         [
+            'type' => 'menu',
+            'title' => 'Data Dokter',
+            'url' => route('master-data.dokter.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['master-data/dokter*'],
+         ],
          [
             'type' => 'menu',
             'title' => 'Data Tindakan',
-            'url' => route('settings.index'),
+            'url' => route('master-data.tindakan.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['admin/settings'],
-            'permission' => ['settings'],
+            'active' => ['master-data/tindakan*'],
          ],
          [
             'type' => 'tree',
