@@ -82,6 +82,12 @@
                     searchable: false,
                 },
                 {
+                    data: 'umur',
+                    name: 'umur',
+                    orderable: true,
+                    searchable: false,
+                },
+                {
                     data: 'alamat',
                     name: 'alamat',
                     orderable: true,

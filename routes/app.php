@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
    
-   Route::get('pemeriksaan/create/{user_id}', [PemeriksaanController::class, 'createPemeriksaan'])->name('pemeriksaan.create.user');
+  
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
  
 

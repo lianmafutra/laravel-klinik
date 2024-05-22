@@ -35,18 +35,10 @@ class PemeriksaanController extends Controller
       return $this->success('Data Anggota Detail', $anggota);
    }
 
-   public function deletePasien(Request $request)
-   {
-   
-   }
-   
-
- 
-
    /**
     * Show the form for creating a new resource.
     */
-   public function createPemeriksaan($user_id)
+   public function create()
    {
       $x['pasien'] =   Pasien::where('id', $user_id)->with('anggota')->first();
       $x['obat'] = Obat::get();

@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\DB;
 class AnggotaSiswaController extends Controller
 {
    use ApiResponse;
+   protected $lmUtils;
+
+   public function __construct(LmUtils $lmUtils)
+   {
+      $this->lmUtils = $lmUtils;
+   }
+
+
+
 
    /**
     * Display a listing of the resource.
