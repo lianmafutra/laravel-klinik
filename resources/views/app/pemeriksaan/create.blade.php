@@ -44,36 +44,40 @@
                         </tr>
                         <tr>
                             <th>Nama Lengkap:</th>
-                            <td id="nama">{{ $pasien?->anggota->nama }}</td>
+                            <td id="nama">{{ $pasien?->nama }}</td>
                         </tr>
                         <tr>
                             <th>NIK</th>
-                            <td id="nik">{{ $pasien?->anggota->nik }}</td>
+                            <td id="nik">{{ $pasien?->nik }}</td>
                         </tr>
                         <tr>
                             <th>NRP</th>
-                            <td id="nrp">{{ $pasien?->anggota->nrp }}</td>
+                            <td id="nrp">{{ $pasien?->nrp }}</td>
                         </tr>
                         <tr>
                             <th>Alamat</th>
-                            <td id="alamat">{{ $pasien?->anggota->alamat }}</td>
+                            <td id="alamat">{{ $pasien?->alamat }}</td>
                         </tr>
+                        <tr>
+                           <th>Tgl Lahir</th>
+                           <td id="jenis_kelamin">{{ $pasien?->toArray()['tgl_lahir']  }}</td>
+                       </tr>
+                       <tr>
+                        <th>Usia</th>
+                        <td id="jenis_kelamin">{{ $pasien?->getUsia() }}</td>
+                    </tr>
                         <tr>
                             <th>Jenis Kelamin</th>
-                            <td id="jenis_kelamin">{{ $pasien?->anggota->jenis_kelamin }}</td>
+                            <td id="jenis_kelamin">{{ $pasien?->jenis_kelamin }}</td>
                         </tr>
-                        <tr>
-                            <th>Pangkat | Jabatan</th>
-                            <td id="pangkat">{{ $pasien?->anggota->pangkat }} | {{ $pasien?->anggota->jabatan }}
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <th>No HP</th>
-                            <td id="no_hp">{{ $pasien?->anggota->no_hp }}</td>
+                            <td id="no_hp">{{ $pasien?->no_hp }}</td>
                         </tr>
                         <tr>
                             <th>No BPJS</th>
-                            <td id="no_bpjs">{{ $pasien?->anggota->no_bpjs }}</td>
+                            <td id="no_bpjs">{{ $pasien?->no_bpjs }}</td>
                         </tr>
                     </table>
                 </div>
@@ -115,7 +119,7 @@
             <div class="card">
                 <div class="card-body">
                     <div style="gap:8px; float: right;" class="d-flex">
-                        <a href="{{ route('pemeriksaan.index') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('pasien.index') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan Pemeriksaan</button>
                     </div>
                 </div>

@@ -42,7 +42,6 @@
         </div>
     </div>
     @include('app.pasien.modal-input-pasien')
-    @include('app.pasien.modal-edit-pasien')
 @endsection
 @push('js')
     <script src="{{ asset('template/admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>

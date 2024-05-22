@@ -40,11 +40,12 @@ class PemeriksaanController extends Controller
     */
    public function create()
    {
-      $x['pasien'] =   Pasien::where('id', $user_id)->with('anggota')->first();
+     $pasien =   Pasien::where('id', 37)->first();
+    
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
 
-      return view('app.pemeriksaan.create', $x);
+      return view('app.pemeriksaan.create', $x, compact('pasien'));
    }
 
    /**

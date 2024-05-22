@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ class Pasien extends Model
      'created_at' => 'date:d-m-Y H:m:s',
      'updated_at' => 'date:d-m-Y H:m:s',
      'tgl_lahir' => 'date:d/m/Y',
+    
  ];
 
  public function siswa(): BelongsTo
@@ -26,6 +28,12 @@ class Pasien extends Model
  public function personil(): BelongsTo
  {
      return $this->belongsTo(AnggotaPersonil::class, 'anggota_id', 'id');
+ }
+
+ public function getUsia(){
+   if($this->attributes['tgl_lahir']){
+      return Carbon::parse($this->attributes['tgl_lahir'])->age . " Tahun";
+   }
  }
 
  public static function generateKodeRm()

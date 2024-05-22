@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
 
-   Route::resource('pemeriksaan', PemeriksaanController::class);
+   Route::resource('pasien.pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
    
   

@@ -6,7 +6,7 @@
 <x-dropdown-action>
 
 
-    <li><a href='{{ route('pemeriksaan.create', $data?->id) }}' href="#" class="btn_pemeriksaan dropdown-item">
+    <li><a href='{{ route('pasien.pemeriksaan.create', $data?->id) }}' href="#" class="btn_pemeriksaan dropdown-item">
             <i class="fas fa-check"></i> Pemeriksaan</a> </li>
 
     <div class="dropdown-divider"></div>
