@@ -1,15 +1,13 @@
 <div class="d-flex justify-content-center">
    <div class="d-flex flex-column me-2">
-       <a href="{{ route('pemeriksaan.create.user', $data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Input Pemeriksaan" class="btn btn-xs btn-primary btn-edit mb-2" data-id=""><i class=" fas fa-plus fa-xs"></i>
-           Pemeriksaan</a>
-       <a href="{{ route('riwayat.show', $data?->id) }}" data-toggle="tooltip" data-placement="bottom"
+    
+       <a href="" data-toggle="tooltip" data-placement="bottom"
            title="Riwayat Rekam Medis Pasien" class="btn btn-xs btn-secondary btn-edit" data-id=""><i class="far fa-file fa-sm"></i>
-           Riwayat</a>
+           Edit</a>
    </div>
    <div class="d-flex align-items-start">
-       <a data-url="{{ route('pemeriksaan.destroy',$data?->id) }}" data-toggle="tooltip" data-placement="bottom"
-           title="Hapus Data" class="btn btn-xs btn-danger btn-hapus ml-1 p-2" data-action="{{ $data }}"><i class="fas fa-trash-alt"></i>
+       <a href="#" data-url="{{ route('pemeriksaan.destroy',$data?->id) }}" data-toggle="tooltip" data-placement="bottom"
+           title="Hapus Data" class="btn btn-xs btn-danger btn-hapus ml-1 p-2" data-action="{{ $data?->nomor_pemeriksaan }} | {{ $data?->pasien?->nama }}"><i class="fas fa-trash-alt"></i>
            </a>
    </div>
 </div>

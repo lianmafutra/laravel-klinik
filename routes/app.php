@@ -7,14 +7,13 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\klinik\Dashboard\DashboarddController;
 use App\Http\Controllers\klinik\DataMaster\AnggotaPersonilController;
 use App\Http\Controllers\klinik\DataMaster\AnggotaSiswaController;
-use App\Http\Controllers\Klinik\DataMaster\MasterAnggotaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
 use App\Http\Controllers\Klinik\DataMaster\PenyesuaianStokObatController;
 use App\Http\Controllers\Klinik\Laporan\LaporanController;
 use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
-use App\Http\Controllers\Klinik\Riwayat\RiwayatController;
+use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,17 +35,20 @@ Route::middleware(['auth'])->group(function () {
 
    // app klinik
    Route::get('dashboard', [DashboarddController::class, 'index'])->name('klinik.dashboard.index');
-   Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
-   Route::get('riwayat/user/{user_id}', [RiwayatController::class, 'show'])->name('riwayat.show');
+ 
 
    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
    Route::resource('pasien', PasienController::class);
-   
-   Route::resource('pasien.pemeriksaan', PemeriksaanController::class);;
 
+   Route::get('/pemeriksaan/riwayat', [PemeriksaanController::class, 'riwayat'])->name('pemeriksaan.riwayat.index');
+   Route::resource('pemeriksaan', PemeriksaanController::class)->except([
+      'create', 
+  ]);
+   Route::get('pasien/{user_id}/pemeriksaan/create/', [PemeriksaanController::class, 'create'])->name('pemeriksaan.create');
    
+   Route::resource('pemeriksaan-obat', PemeriksaanObatController::class);
   
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
  
@@ -61,8 +63,9 @@ Route::middleware(['auth'])->group(function () {
 
    Route::resource('master-data/dokter', MasterDokterController::class, [
       'as' => 'master-data',
-     
    ]); 
+   Route::get('master-data/obat/{obat_id}/detail', [MasterObatController::class, 'getObatDetail'])->name('obat.detail');
+ 
    
   
    Route::get('master-data/penyesuaian/obat', [PenyesuaianStokObatController::class, 'index'])->name('penyesuaian.stok.obat');

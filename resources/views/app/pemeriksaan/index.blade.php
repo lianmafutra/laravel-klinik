@@ -29,19 +29,7 @@
     <x-header title="Data Pasien"></x-header>
 @endsection
 @section('content')
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <a href="#" id="btn_input_pasien" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Input
-                    Data Pasien</a>
-
-            </div>
-            <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Kode RM', 'Nama', 'Jenis Kelamin', 'Tgl Lahir', 'Aksi']" style="width: 100%"></x-datatable>
-            </div>
-        </div>
-    </div>
-    @include('app.pemeriksaan.modal-input-pasien')
+   
 @endsection
 
 @push('js')
@@ -71,7 +59,7 @@
                 formData.append('jenis_anggota', jenis_anggota);
                 $.ajax({
                     type: 'POST',
-                    url: route('pemeriksaan.pasien.store'),
+                    url: "",
                     data: formData,
                     contentType: false,
                     processData: false,

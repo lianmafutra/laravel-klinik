@@ -19,7 +19,7 @@ class PemeriksaanRequest extends FormRequest
        $merges = [
           // 'category_multi_id' => json_encode($this->category_multi_id),
           'tgl_pemeriksaan' => DateUtils::format($this->tgl_pemeriksaan),
-          'user_id' => $this->route('pasien')->id,
+        
        ];
   
        $this->merge($merges);
@@ -34,7 +34,7 @@ class PemeriksaanRequest extends FormRequest
       
       $rules = [
             'nomor_pemeriksaan' => 'required|string|max:50',
-            'user_id' => 'required|max:50',
+            'pasien_id' => 'required|max:50',
             'dokter_id' => 'required|integer',
             'riwayat_penyakit' => 'nullable|string|max:500',
             'catatan' => 'nullable|string|max:500',

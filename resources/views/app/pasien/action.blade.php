@@ -6,7 +6,7 @@
 <x-dropdown-action>
 
 
-    <li><a href='{{ route('pasien.pemeriksaan.create', $data?->id) }}' href="#" class="btn_pemeriksaan dropdown-item">
+    <li><a href='{{ route('pemeriksaan.create', $data?->id) }}' href="#" class="btn_pemeriksaan dropdown-item">
             <i class="fas fa-check"></i> Pemeriksaan</a> </li>
 
     <div class="dropdown-divider"></div>
@@ -17,7 +17,7 @@
 
     <div class="dropdown-divider"></div>
 
-    <li><a href="{{ route('riwayat.show', $data?->id) }}" class="btn_riwayat dropdown-item">
+    <li><a href="" class="btn_riwayat dropdown-item">
             <i class="fas fa-history"></i> Riwayat</a> </li>
 
     <div class="dropdown-divider"></div>

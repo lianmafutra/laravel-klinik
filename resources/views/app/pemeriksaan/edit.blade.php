@@ -126,7 +126,7 @@
                     <x-datatable id="datatable" :th="[
                         'No',
                         'Kode Obat',
-                        'Nama Obat',
+                        'Nama',
                         'Jumlah',
                         'Dosis Perhari',
                         'Harga Satuan',
@@ -161,52 +161,77 @@
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $(function() {
-          
-            $("#nomor_pemeriksaan").val(@json($nomor_pemeriksaan));
-          let datatable_obat =  $('#datatable').DataTable({
-                serverSide: true,
-                processing: true,
-                searching: true,
-                lengthChange: true,
-                paging: true,
-                info: true,
-                ordering: true,
-                aaSorting: [],
-                // order: [3, 'desc'],
-                scrollX: true,
-
-                ajax: route('pemeriksaan-obat.show', $('#nomor_pemeriksaan').val()),
+            var dataSet = [{
+                    "No": "1",
+                    "kode_obat": "OBT-01",
+                    "nama": "Paracetamol",
+                    "jumlah": "1",
+                    "dosis": "2",
+                    "keterangan": "Sesudah Makan",
+                    "harga": "0",
+                    "aksi": `
+                    <a href="" data-toggle="tooltip" data-placement="bottom"
+        title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
+        Edit</a>
+                    <a href="" data-toggle="tooltip" data-placement="bottom"
+         title="Edit Data" class="btn btn-sm btn-danger btn-hapus" data-id=""><i class="fas fa-trash-alt"></i>
+         Hapus</a>`
+                },
+                {
+                    "No": "2",
+                    "kode_obat": "OBT-02",
+                    "nama": "Paracetamol",
+                    "jumlah": "1",
+                    "dosis": "2",
+                    "keterangan": "Sesudah Makan",
+                    "harga": "0",
+                    "aksi": `
+                    <a href="" data-toggle="tooltip" data-placement="bottom"
+        title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
+        Edit</a>
+                    <a href="" data-toggle="tooltip" data-placement="bottom"
+         title="Edit Data" class="btn btn-sm btn-danger btn-hapus" data-id=""><i class="fas fa-trash-alt"></i>
+         Hapus</a>`
+                }
+            ];
+            $('#datatable').DataTable({
+                data: dataSet,
+                lengthChange: false,
+                searching: false,
+                serverSide: false,
+                paging: false,
+                info: false,
                 columns: [{
-                        data: "DT_RowIndex",
-                        orderable: false,
-                        searchable: false,
-                        width: '1%'
+                        data: 'No'
                     },
                     {
                         data: 'kode_obat'
                     },
                     {
-                        data: 'nama_obat'
+                        data: 'nama'
                     },
-                  
                     {
                         data: 'jumlah'
                     },
                     {
-                        data: 'dosis_perhari'
+                        data: 'dosis'
                     },
                     {
                         data: 'harga'
                     },
                     {
-                        data: 'keterangan_obat'
+                        data: 'keterangan'
                     },
                     {
-                        data: 'action'
+                        data: 'aksi'
                     }
                 ]
             });
-
+            $('#btn_tambah_obat').click(function(e) {
+                e.preventDefault();
+                $('#modal_input_obat').modal('show');
+                _clearInput()
+            });
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
             })
@@ -216,28 +241,12 @@
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
-
-
-
-            $("#select_obat").on("select2:select", function(e) {
-                let obat_id = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    url: route('obat.detail', obat_id),
-                    dataType: "json",
-                    success: function(response) {
-                        $("#stok").val(response.data.stok);
-                        $("#harga").val(response.data.harga_rupiah);
-                    }
-                });
-            });
-
-
             $('#btn_tambah_obat').click(function(e) {
                 e.preventDefault();
-                $(".modal-title").text("Tambah Data Obat");
-                $('#modal_input_obat').modal('show');
-                _clearInput()
+                console.log($('#obat').val())
+                console.log($('#dosis_perhari').val())
+                console.log($('#jumlah').val())
+                console.log($('#keterangan_obat').val())
             });
 
 
@@ -246,13 +255,12 @@
             $('#form_sample').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
-
                 Swal.fire({
                     title: 'Apakah anda yakin ingin Simpan Data Pemeriksaan pasien ?',
                     text: $(this).attr('data-action'),
                     icon: 'warning',
                     showCancelButton: true,
-
+                 
                     confirmButtonText: 'Yes, Lanjutkan '
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -276,7 +284,7 @@
                                         showCancelButton: false,
                                         allowOutsideClick: false,
                                     }).then((result) => {
-
+                                          
                                     })
                                 }
                             },
@@ -293,10 +301,9 @@
             $('#form_input_obat').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
-                formData.append('nomor_pemeriksaan', $('#nomor_pemeriksaan').val())
                 $.ajax({
                     type: 'POST',
-                    url: route('pemeriksaan-obat.store'),
+                    url: route('master-data.obat.index'),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -306,7 +313,6 @@
                     },
                     success: (response) => {
                         if (response) {
-                           $('#modal_input_obat').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: response.message,
@@ -314,10 +320,7 @@
                                 allowEscapeKey: false,
                                 showCancelButton: false,
                                 allowOutsideClick: false,
-                            }).then((result) => {
-                              datatable_obat.ajax.reload()
-                           
-                            })
+                            }).then((result) => {})
                         }
                     },
                     error: function(response) {
@@ -325,63 +328,6 @@
                     }
                 })
             })
-
-            $('#datatable').on('click', '.btn_hapus_obat', function(e) {
-                e.preventDefault()
-                Swal.fire({
-                    title: 'Apakah anda yakin ingin menghapus data Obat?',
-                    text: $(this).attr('data-action'),
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6 ',
-                    confirmButtonText: 'Yes, Delete'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: 'POST',
-                            dataType: 'json',
-                            data: {
-                                _method: 'DELETE'
-                            },
-                            url: $(this).attr('data-url'),
-                            beforeSend: function() {
-                                _showLoading()
-                            },
-                            success: (response) => {
-                              datatable_obat.ajax.reload()
-                                _alertSuccess(response.message)
-                            },
-                            error: function(response) {
-                                _showError(response)
-                            }
-                        })
-                    }
-                })
-            })
-
-            $('#datatable').on('click', '.btn_edit_obat', function(e) {
-                e.preventDefault()
-                $(".modal-title").text("Edit Data Obat");
-                let pemeriksaan_obat_id =  $(this).attr('data-id');
-                $('#modal_input_obat').modal('show');
-                $('#pemeriksaan_obat_id').val(pemeriksaan_obat_id);
-                $.ajax({
-                    type: "GET",
-                    url: route('pemeriksaan-obat.edit', pemeriksaan_obat_id),
-                    dataType: "json",
-                    success: function(response) {
-                     console.log(response)
-                        $("#jumlah").val(response.data.jumlah);
-                        $("#harga").val(response.data.obat.harga_rupiah);
-                        $("#select_obat").val(response.data.obat.id).change();
-                        $("#stok").val(response.data.obat.stok);
-                        $("#dosis_perhari").val(response.data.dosis_perhari);
-                        $("#keterangan_obat").val(response.data.keterangan_obat);
-                    }
-                });
-            })
-
 
         })
     </script>

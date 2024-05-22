@@ -161,9 +161,9 @@ class MenuSidebar
                [
                   'type' => 'menu',
                   'title' => 'Riwayat ',
-                  'url' => route('riwayat.index'),
+                  'url' => route('pemeriksaan.riwayat.index'),
                   'icon' => 'far fa-circle',
-                  'active' => ['riwayat*'],
+                  'active' => ['pemeriksaan/riwayat*'],
                ],
 
             ],

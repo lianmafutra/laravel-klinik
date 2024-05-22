@@ -15,15 +15,16 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <x-select2 id="obat" label="Data Obat" placeholder="Pilih Obat">
+                                 <x-input label="" id="pemeriksaan_obat_id" hidden />
+                                    <x-select2 id="select_obat" label="Data Obat" placeholder="Pilih Obat">
                                         @foreach ($obat as $item)
                                             <option value="{{ $item->id }}">{{ $item->kode_obat }} -
                                                 {{ $item->nama }}
                                             </option>
                                         @endforeach
                                     </x-select2>
-                                    <x-input-number label="Sisa Stok " id="stok" placeholder="" />
-                                    <x-input-number label="Harga " id="harga" placeholder="" />
+                                    <x-input-number label="Sisa Stok " id="stok" placeholder="" disabled />
+                                    <x-input-number label="Harga " id="harga" placeholder="" disabled/>
                                     <x-input-number label="Jumlah " id="jumlah" placeholder="" />
                                     <x-input-number label="Dosis Perhari" id="dosis_perhari" placeholder="" />
                                     <x-input label="Keterangan" id="keterangan_obat" placeholder="" />
@@ -34,7 +35,7 @@
                 </div>
                 <div class="modal-footer ">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button id="btn_action" type="submit" class="float-right btn btn-primary">Tambah</button>
+                    <button id="btn_action" type="submit" class="float-right btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Klinik\DataMaster;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MasterObatRequest;
 use App\Models\Obat;
+use App\Utils\ApiResponse;
 use App\Utils\Rupiah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MasterObatController extends Controller
 {
+
+   use ApiResponse;
     /**
      * Display a listing of the resource.
      */
@@ -63,6 +66,12 @@ class MasterObatController extends Controller
     public function show(Obat $obat)
     {
         //
+    }
+
+    public function getObatDetail($obat_id)
+    {
+      $data = Obat::find($obat_id);
+      return $this->success('data obat',$data);
     }
 
     /**

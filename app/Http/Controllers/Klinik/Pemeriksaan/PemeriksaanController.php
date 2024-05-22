@@ -20,6 +20,29 @@ class PemeriksaanController extends Controller
     */
    public function index($pasien)
    {
+
+      return view('app.pemeriksaan.index');
+   }
+
+   public function riwayat()
+   {
+      $data = Pemeriksaan::with('dokter', 'pasien');
+      if (request()->ajax()) {
+         return datatables()->of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+               return view('app.pemeriksaan.action', compact('data'));
+            })
+            ->addColumn('kode_rm', function ($data) {
+               return $data?->pasien?->kode_rm;
+            })
+            ->addColumn('nama', function ($data) {
+               return $data?->pasien?->nama;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+      }
+      return view('app.pemeriksaan.riwayat-index');
    }
 
    public function userDetail($kode, $jenis)
@@ -39,24 +62,27 @@ class PemeriksaanController extends Controller
    /**
     * Show the form for creating a new resource.
     */
-   public function create(Pasien $pasien)
+   public function create($user_id)
    {
+
+      $nomor_pemeriksaan = Pemeriksaan::generateNomorPemeriksaan();
+      $pasien =  Pasien::find($user_id);
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
-      return view('app.pemeriksaan.create', $x, compact('pasien'));
+      return view('app.pemeriksaan.create', $x, compact('pasien','nomor_pemeriksaan'));
    }
 
    /**
     * Store a newly created resource in storage.
     */
-   public function store(PemeriksaanRequest $request, Pasien $pasien)
+   public function store(PemeriksaanRequest $request)
    {
       try {
-       
+
          DB::beginTransaction();
-         
+
          Pemeriksaan::create(
-            $request->merge(['user_id' => $pasien->id])->safe()->all()
+            $request->safe()->all()
          );
 
 
@@ -79,9 +105,9 @@ class PemeriksaanController extends Controller
    /**
     * Show the form for editing the specified resource.
     */
-   public function edit(Pasien $pasien)
+   public function edit(Pemeriksaan $pemeriksaan)
    {
-      //
+    
    }
 
    /**
@@ -95,8 +121,18 @@ class PemeriksaanController extends Controller
    /**
     * Remove the specified resource from storage.
     */
-   public function destroy(Pasien $pasien)
+   public function destroy(Pemeriksaan $pemeriksaan)
    {
-      //
+      try {
+         DB::beginTransaction();
+         $pemeriksaan->delete();
+         DB::commit();
+
+         return $this->success(__('trans.crud.delete'));
+      } catch (\Throwable $th) {
+         DB::rollBack();
+
+         return $this->error(__('trans.crud.error') . $th, 400);
+      }
    }
 }
