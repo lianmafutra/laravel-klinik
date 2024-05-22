@@ -42,9 +42,10 @@ Route::middleware(['auth'])->group(function () {
    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
-
-   Route::resource('pasien.pemeriksaan', PemeriksaanController::class);
    Route::resource('pasien', PasienController::class);
+   
+   Route::resource('pasien.pemeriksaan', PemeriksaanController::class);;
+
    
   
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');

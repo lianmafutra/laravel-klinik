@@ -8,21 +8,20 @@
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <style>
-         /* .select2-search { background-color: #528fd5; } */
-   /* .select2-search input { background-color: #528fd5; } */
-   .select2-results { background-color: #a9cffa; }
-   /* Add shadow to the dropdown */
-.select2-container--open .select2-dropdown {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-.select2-results__option[aria-selected=true] 
-{ 
-   background-color: #509aef !important;
-
-  overflow-x:  inherit;
-}
-
-/* Ensure the dropdown has a white background */
+        /* .select2-search { background-color: #528fd5; } */
+        /* .select2-search input { background-color: #528fd5; } */
+        .select2-results {
+            background-color: #a9cffa;
+        }
+        /* Add shadow to the dropdown */
+        .select2-container--open .select2-dropdown {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .select2-results__option[aria-selected=true] {
+            background-color: #509aef !important;
+            overflow-x: inherit;
+        }
+        /* Ensure the dropdown has a white background */
     </style>
 @endpush
 @section('header')
@@ -46,39 +45,38 @@
                             <th>Nama Lengkap:</th>
                             <td id="nama">{{ $pasien?->nama }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th>NIK</th>
                             <td id="nik">{{ $pasien?->nik }}</td>
                         </tr>
                         <tr>
                             <th>NRP</th>
                             <td id="nrp">{{ $pasien?->nrp }}</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th>Alamat</th>
                             <td id="alamat">{{ $pasien?->alamat }}</td>
                         </tr>
                         <tr>
-                           <th>Tgl Lahir</th>
-                           <td id="jenis_kelamin">{{ $pasien?->toArray()['tgl_lahir']  }}</td>
-                       </tr>
-                       <tr>
-                        <th>Usia</th>
-                        <td id="jenis_kelamin">{{ $pasien?->getUsia() }}</td>
-                    </tr>
+                            <th>Tgl Lahir</th>
+                            <td id="tgl_lahir">{{ $pasien?->toArray()['tgl_lahir'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>Usia</th>
+                            <td id="usia">{{ $pasien?->getUsia() }}</td>
+                        </tr>
                         <tr>
                             <th>Jenis Kelamin</th>
-                            <td id="jenis_kelamin">{{ $pasien?->jenis_kelamin }}</td>
+                            <td id="jenis_kelamin">{{ $pasien?->getJenisKelaminDetail() }}</td>
                         </tr>
-                        
                         <tr>
                             <th>No HP</th>
                             <td id="no_hp">{{ $pasien?->no_hp }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th>No BPJS</th>
                             <td id="no_bpjs">{{ $pasien?->no_bpjs }}</td>
-                        </tr>
+                        </tr> --}}
                     </table>
                 </div>
             </div>
@@ -88,21 +86,29 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-lg-6 col-sm-6">
-                           <x-select2 id="dokter" label="Pilih Dokter" placeholder="Pilih Dokter">
-                              @foreach ($dokter as $item)
-                                  <option value="{{ $item->id }}"> {{ $item->nama }}
-                                  </option>
-                              @endforeach
-                          </x-select2>
+                            <x-input label="Nomor Pemeriksaan" id="nomor_pemeriksaan" required />
+                            <x-select2 id="dokter_id" label="Pilih Dokter" placeholder="Pilih Dokter">
+                                @foreach ($dokter as $item)
+                                    <option value="{{ $item->id }}"> {{ $item->nama }}
+                                    </option>
+                                @endforeach
+                            </x-select2>
                             <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan" required />
                             <x-textarea id="keluhan" label="Keluhan Pasien" placeholder="" required />
-                            
+                            <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
+                            <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
+                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" required />
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            <x-input label="Nomor Pemeriksaan" id="nama" required />
-                            <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
+                           <x-input label="Berat Badan (Kg)" id="berat_badan"  />
+                            <x-input label="Tensi Darah (mmHg)" id="tensi"  />
+                            <x-input label="Denyut Nadi" id="denyut_nadi"  />
+                            <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu"  />
+                            <x-input label="Tensi Darah" id="tensi"  />
+                            <x-input label=" Laju Pernafasan" id="nafas"  />
+                            
+                           
                         </div>
                     </div>
                 </div>
@@ -112,8 +118,17 @@
                     <i class="fas fa-pills pr-2"></i> Data Resep Obat
                 </div>
                 <div class="card-body">
-                  <a href="#" id="btn_tambah_obat" class="button mb-3  btn btn-primary">+ Tambah Obat</a>
-                    <x-datatable id="datatable" :th="['No', 'Kode Obat', 'Nama', 'Jumlah', 'Dosis Perhari','Harga Satuan', 'Keterangan', 'Aksi']" style="width: 100%; margin-top: 40px"></x-datatable>
+                    <a href="#" id="btn_tambah_obat" class="button mb-3  btn btn-primary">+ Tambah Obat</a>
+                    <x-datatable id="datatable" :th="[
+                        'No',
+                        'Kode Obat',
+                        'Nama',
+                        'Jumlah',
+                        'Dosis Perhari',
+                        'Harga Satuan',
+                        'Keterangan',
+                        'Aksi',
+                    ]" style="width: 100%; margin-top: 40px"></x-datatable>
                 </div>
             </div>
             <div class="card">
@@ -148,9 +163,8 @@
                     "nama": "Paracetamol",
                     "jumlah": "1",
                     "dosis": "2",
-                  
                     "keterangan": "Sesudah Makan",
-                      "harga": "0",
+                    "harga": "0",
                     "aksi": `
                     <a href="" data-toggle="tooltip" data-placement="bottom"
         title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
@@ -165,9 +179,8 @@
                     "nama": "Paracetamol",
                     "jumlah": "1",
                     "dosis": "2",
-                  
                     "keterangan": "Sesudah Makan",
-                      "harga": "0",
+                    "harga": "0",
                     "aksi": `
                     <a href="" data-toggle="tooltip" data-placement="bottom"
         title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
@@ -232,6 +245,40 @@
                 console.log($('#keterangan_obat').val())
             });
 
+            $('#form_sample').submit(function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: route('pasien.pemeriksaan.store', @json($pasien)),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        _showLoading()
+                    },
+                    success: (response) => {
+                        if (response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.message,
+                                showCancelButton: true,
+                                allowEscapeKey: false,
+                                showCancelButton: false,
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        _showError(response)
+                    }
+                })
+            })
+
+
             $('#form_input_obat').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
@@ -247,15 +294,14 @@
                     },
                     success: (response) => {
                         if (response) {
-                           Swal.fire({
+                            Swal.fire({
                                 icon: 'success',
                                 title: response.message,
                                 showCancelButton: true,
                                 allowEscapeKey: false,
                                 showCancelButton: false,
                                 allowOutsideClick: false,
-                            }).then((result) => {
-                            })
+                            }).then((result) => {})
                         }
                     },
                     error: function(response) {
@@ -263,68 +309,7 @@
                     }
                 })
             })
-            $('#form_sample').submit(function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Apakah Anda Yakin Ingin Menyimpan data Pemeriksaan ?',
-                    text: "Pastikan Data Sudah Benar",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, Simpan'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: 'POST',
-                            dataType: 'json',
-                            data: {
-                                _method: 'DELETE'
-                            },
-                            url: "",
-                            beforeSend: function() {
-                                _showLoading()
-                            },
-                            success: (response) => {
-                                const formData = new FormData(this);
-                                $.ajax({
-                                    type: 'POST',
-                                    url: route('master-data.pemeriksaan.store'),
-                                    data: formData,
-                                    contentType: false,
-                                    processData: false,
-                                    dataType: 'json',
-                                    beforeSend: function() {
-                                        _showLoading()
-                                    },
-                                    success: (response) => {
-                                        if (response) {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: response
-                                                    .message,
-                                                showCancelButton: true,
-                                                allowEscapeKey: false,
-                                                showCancelButton: false,
-                                                allowOutsideClick: false,
-                                            }).then((result) => {
-                                                window.location
-                                                    .replace(route(
-                                                        'master-data.dokter.index'
-                                                        ))
-                                            })
-                                        }
-                                    },
-                                    error: function(response) {
-                                        _showError(response)
-                                    }
-                                })
-                            },
-                            error: function(response) {
-                                _showError(response)
-                            }
-                        })
-                    }
-                })
-            })
+         
         })
     </script>
 @endpush

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\klinik\Pasien;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasienRequest;
 use App\Models\AnggotaPersonil;
@@ -12,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class PasienController extends Controller
 {
    use ApiResponse;
@@ -21,19 +18,10 @@ class PasienController extends Controller
     */
    public function index()
    {
- 
-  
-
       $x['siswa'] =  AnggotaSiswa::get();
       $x['personil'] =  AnggotaPersonil::get();
-
       $x['anggota'] = $x['siswa']->toBase()->merge($x['personil'])->sortBy('nama');
-
-     
-
       $data = Pasien::with('personil', 'siswa');
-
-
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
@@ -46,10 +34,8 @@ class PasienController extends Controller
             ->rawColumns(['action'])
             ->make(true);
       }
-
       return view('app.pasien.index', $x);
    }
-
    /**
     * Show the form for creating a new resource.
     */
@@ -57,21 +43,16 @@ class PasienController extends Controller
    {
       //
    }
-
    /**
     * Store a newly created resource in storage.
     */
-   public function store(PasienRequest $request)
+   public function store(PasienRequest $request, Pasien $pasien)
    {
+     
       try {
          DB::beginTransaction();
-          
-
          if($request->pasien_id){
-            
             $array = [
-              
-      
                "nama" => $request->nama,
                "alamat" => $request->alamat,
                "jenis_kelamin" => $request->jenis_kelamin,
@@ -87,19 +68,12 @@ class PasienController extends Controller
             if ($request->jenis_anggota == 'siswa') {
                $anggota =  AnggotaSiswa::where('kode',   $request->select_user )->first();
             }
-   
-          
-   
-   
             if ($request->radio == "anggota") {
                $anggota_id = $anggota->kode;
-             
             } elseif ($request->radio == "lainnya") {
                $anggota_id = NULL;
             }
-
             $kodeRm = Pasien::generateKodeRm();
-   
             $array = [
                "kode_rm" => $kodeRm,
                "anggota_kode" =>   $anggota_id,
@@ -112,27 +86,17 @@ class PasienController extends Controller
                "no_hp" => $request->no_hp,
             ];
          }
-        
-      
-      
-
-       
          $pasien = Pasien::updateOrCreate(
             ['id' => $request->pasien_id],
          $array   
          );
-
          DB::commit();
          if($request->pasien_id){
             return $this->success('Update Data Pasien Berhasil');
          }
          else{
-
             return $this->success('Insert Data Pasien Berhasil');
          }
-
-     
-        
       } catch (QueryException $e) {
          $errorCode = $e->errorInfo[1];
          if ($errorCode == 1062) {
@@ -143,7 +107,6 @@ class PasienController extends Controller
          return $this->error(__('trans.crud.error') . $th, 400);
       }
    }
-
    /**
     * Display the specified resource.
     */
@@ -157,7 +120,6 @@ class PasienController extends Controller
       // }
       return $this->success('data pasien detail', $pasien);
    }
-
    /**
     * Show the form for editing the specified resource.
     */
@@ -165,7 +127,6 @@ class PasienController extends Controller
    {
       //
    }
-
    /**
     * Update the specified resource in storage.
     */
@@ -173,7 +134,6 @@ class PasienController extends Controller
    {
       dd($request);
    }
-
    /**
     * Remove the specified resource from storage.
     */
@@ -183,11 +143,9 @@ class PasienController extends Controller
          DB::beginTransaction();
          $pasien->delete();
          DB::commit();
-
          return $this->success(__('trans.crud.delete'));
       } catch (\Throwable $th) {
          DB::rollBack();
-
          return $this->error(__('trans.crud.error') . $th, 400);
       }
    }

@@ -10,7 +10,7 @@ class Pemeriksaan extends Model
 {
     use HasFactory;
     protected $table = 'pemeriksaan';
-    
+    protected $guarded = [];
     /**
      * Get the user that owns the Pemeriksaan
      *

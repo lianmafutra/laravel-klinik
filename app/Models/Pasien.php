@@ -36,6 +36,17 @@ class Pasien extends Model
    }
  }
 
+ public function getJenisKelaminDetail(){
+   $jenis_kelamin = $this->attributes['jenis_kelamin'];
+   if($this->attributes['jenis_kelamin']){
+      if( $jenis_kelamin == "L"){
+         return "LAKI-LAKI";
+      }else{
+         return "PEREMPUAN";
+      }
+   }
+ }
+
  public static function generateKodeRm()
  {
      // Ambil pasien dengan kode_rm terakhir
