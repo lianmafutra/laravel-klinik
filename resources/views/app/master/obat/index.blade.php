@@ -24,7 +24,7 @@
                            class="fas fa-history"></i> Riwayat Penyesuaian</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Kode', 'Nama', 'Harga', 'Stok','Tgl Expired', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Kode', 'Nama', 'Harga', 'Stok','Tgl Expired','Status Expired', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -84,6 +84,12 @@
                 {
                     data: 'tgl_expired',
                     name: 'tgl_expired',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'status_expired',
+                    name: 'status_expired',
                     orderable: true,
                     searchable: true
                 },

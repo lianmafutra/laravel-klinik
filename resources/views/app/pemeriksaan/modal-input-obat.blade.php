@@ -24,6 +24,7 @@
                                         @endforeach
                                     </x-select2>
                                     <x-input-number label="Sisa Stok " id="stok" placeholder="" disabled />
+                                    <x-input label="Tgl Expired" id="tgl_expired" placeholder="" disabled />
                                     <x-input-number label="Harga " id="harga" placeholder="" disabled/>
                                     <x-input-number label="Jumlah " id="jumlah" placeholder="" required/>
                                     <x-input-number label="Dosis Perhari" id="dosis_perhari" placeholder="" />

@@ -29,7 +29,7 @@ class PemeriksaanController extends Controller
    public function riwayat()
    {
       $data = Pemeriksaan::with('dokter', 'pasien');
-   
+
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
@@ -70,13 +70,16 @@ class PemeriksaanController extends Controller
    {
 
       $nomor_pemeriksaan = Pemeriksaan::generateNomorPemeriksaan();
+
+     $pemeriksaanTemp = PemeriksaanObat::doesnthave('pemeriksaan')->delete();
+   
       $pasien =  Pasien::find($user_id);
       $x['tindakan'] =  TIndakan::get();
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
 
-      
-      return view('app.pemeriksaan.create', $x, compact('pasien','nomor_pemeriksaan'));
+
+      return view('app.pemeriksaan.create', $x, compact('pasien', 'nomor_pemeriksaan'));
    }
 
    /**
@@ -88,10 +91,29 @@ class PemeriksaanController extends Controller
 
          DB::beginTransaction();
 
-         Pemeriksaan::create(
+         $pemeriksaan =  Pemeriksaan::create(
             $request->safe()->all()
          );
+
+         $obat = PemeriksaanObat::where('nomor_pemeriksaan', $request->nomor_pemeriksaan)->get();
+     
+         foreach ($obat as $key => $value) {
+           
+            $obat = Obat::where('id',  $value->obat_id);
          
+            $obat->update([
+               'stok' =>  $obat->first()->stok - $value->jumlah
+            ]);
+         }
+
+         // if($obat->first()->stok <= 0){
+         //    return $this->error("Stok Obat Habis", 400);
+         // }
+
+         // if($obat->first()->stok < $request->jumlah ){
+         //    return $this->error("Jumlah Obat Kurang, Pastikan jumlah tidak melebihi stok obat tersedia", 400);
+         // }
+
 
 
          DB::commit();
@@ -115,9 +137,9 @@ class PemeriksaanController extends Controller
     */
    public function edit(Pemeriksaan $pemeriksaan)
    {
-    
-   
-     
+
+
+
       $pasien =  Pasien::find($pemeriksaan->pasien_id);
       $x['tindakan'] =  TIndakan::get();
       $x['obat'] = Obat::get();
@@ -125,10 +147,11 @@ class PemeriksaanController extends Controller
 
       $data = PemeriksaanObat::with('obat', 'pemeriksaan')->where(
          'nomor_pemeriksaan',
-         $pemeriksaan->nomor_pemeriksaan );
+         $pemeriksaan->nomor_pemeriksaan
+      );
 
- 
-      return view('app.pemeriksaan.edit', $x, compact('pemeriksaan','pasien',));
+
+      return view('app.pemeriksaan.edit', $x, compact('pemeriksaan', 'pasien',));
    }
 
    /**

@@ -8,6 +8,8 @@ use App\Models\Pemeriksaan;
 use App\Models\PemeriksaanObat;
 use App\Utils\ApiResponse;
 use App\Utils\Rupiah;
+use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,9 +53,10 @@ class PemeriksaanObatController extends Controller
             return $this->error("Jumlah Obat Kurang, Pastikan jumlah tidak melebihi stok obat tersedia", 400);
          }
 
-         $obat->update([
-            'stok' =>  $obat->first()->stok - $request->jumlah
-         ]);
+         if($obat->first()->tgl_expired >= Carbon::now()->format('Y-m-d') ){
+            return $this->error("Perhatian, Obat Expired", 400);
+         }
+
 
          PemeriksaanObat::updateOrCreate(
             [
@@ -68,9 +71,6 @@ class PemeriksaanObatController extends Controller
             ]
          );
 
-      
-
-     
 
          DB::commit();
          if ($request->pemeriksaan_obat_id) {
@@ -78,7 +78,14 @@ class PemeriksaanObatController extends Controller
          } else {
             return $this->success(__('trans.crud.success'));
          }
-      } catch (\Throwable $th) {
+      }
+      catch (QueryException $e) {
+         $errorCode = $e->errorInfo[1];
+         if ($errorCode == 1062) {
+            return $this->error("Data Obat Sudah ada, untuk Menambah Silahkan edit data", 400);
+         }
+      }
+      catch (\Throwable $th) {
          DB::rollBack();
          return $this->error(__('trans.crud.error') . $th, 400);
       }
@@ -139,6 +146,13 @@ class PemeriksaanObatController extends Controller
       try {
          DB::beginTransaction();
          $pemeriksaanObat->delete();
+         // $obat = Obat::where('id', $pemeriksaanObat->obat_id);
+
+
+         // $obat->update([
+         //    'stok' =>  $obat->first()->stok + $pemeriksaanObat->jumlah
+         // ]);
+      
          DB::commit();
 
          return $this->success(__('trans.crud.delete'));

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Config\MenuSidebar;
+use App\Models\Obat;
+use App\Models\PemeriksaanObat;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
    {
       // Model::preventLazyLoading(!$this->app->isProduction());
 
+      
       Blade::directive('rupiah', function ($expression) {
          return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
       });

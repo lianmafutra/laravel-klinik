@@ -114,7 +114,7 @@
                          
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            <x-input label="Berat Badan (Kg)" id="berat_badan" />
+                            <x-input-number label="Berat Badan (Kg)" id="berat_badan" />
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
@@ -238,6 +238,7 @@
                     success: function(response) {
                         $("#stok").val(response.data.stok);
                         $("#harga").val(response.data.harga_rupiah);
+                        $("#tgl_expired").val(response.data.tgl_expired);
                     }
                 });
             });
@@ -388,6 +389,7 @@
                         $("#harga").val(response.data.obat.harga_rupiah);
                         $("#select_obat").val(response.data.obat.id).change();
                         $("#stok").val(response.data.obat.stok);
+                        $("#tgl_expired").val(response.data.obat.tgl_expired);
                         $("#dosis_perhari").val(response.data.dosis_perhari);
                         $("#keterangan_obat").val(response.data.keterangan_obat);
                     }
