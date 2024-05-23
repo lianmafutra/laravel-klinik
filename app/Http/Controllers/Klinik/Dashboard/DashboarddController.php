@@ -52,25 +52,26 @@ class DashboarddController extends Controller
       if ($request->waktu == "hari_ini") {
          $waktu = Carbon::today()->format('Y-m-d');
          $data2 = Pemeriksaan::with('dokter', 'pasien')->where('tgl_pemeriksaan',  $waktu);
-      }
-      else if ($request->waktu == "minggu_ini") {
+      } else if ($request->waktu == "minggu_ini") {
          $waktu = Carbon::now()->subDays(7)->format('Y-m-d');
          $data2 = Pemeriksaan::with('dokter', 'pasien')->where('tgl_pemeriksaan', '>=', $waktu);
-      }
-      else if ($request->waktu == "bulan_ini") {
+      } else if ($request->waktu == "bulan_ini") {
          $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
          $endOfMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
          $data2 = Pemeriksaan::with('dokter', 'pasien')->whereBetween('tgl_pemeriksaan', [$startOfMonth, $endOfMonth]);
-      }
-      else{
+      } else if ($request->waktu == "tahun_ini") {
+         $startOfYear = Carbon::now()->startOfYear()->format('Y-m-d');
+         $endOfYear = Carbon::now()->endOfYear()->format('Y-m-d');
+         $data2 = Pemeriksaan::with('dokter', 'pasien')->whereBetween('tgl_pemeriksaan', [$startOfYear, $endOfYear]);
+      } else {
          $data2 = Pemeriksaan::with('dokter', 'pasien')->where('tgl_pemeriksaan',  $waktu);
       }
 
- 
 
-    
 
-     
+
+
+
 
 
       if (request()->ajax()) {
@@ -86,8 +87,19 @@ class DashboarddController extends Controller
       }
 
 
+      $waktu22 = Carbon::today()->format('Y-m-d');
+      $count_pasien_hari_ini = Pemeriksaan::where('tgl_pemeriksaan',  $waktu22)->count();
 
 
-      return view('app.dashboard.index', compact('labels', 'data'));
+      $count_pasien_total = Pemeriksaan::count();
+
+      $startOfMonth2 = Carbon::now()->startOfMonth()->format('Y-m-d');
+      $endOfMonth2 = Carbon::now()->endOfMonth()->format('Y-m-d');
+      $count_pasien_bulan_ini = Pemeriksaan::with('dokter', 'pasien')->whereBetween('tgl_pemeriksaan', [$startOfMonth2, $endOfMonth2])->count();
+
+
+
+
+      return view('app.dashboard.index', compact('count_pasien_bulan_ini', 'count_pasien_total', 'labels', 'data', 'count_pasien_hari_ini'));
    }
 }

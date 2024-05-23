@@ -14,39 +14,39 @@
 @endpush
 @section('content')
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total Pasien</span>
                     <span style="font-size: 20px" class="info-box-number">
-                        <span style="font-size: 20px" class="info-box-number">10</span>
+                        <span style="font-size: 20px" class="info-box-number">{{ $count_pasien_total }} Orang</span>
                         {{-- <small>%</small> --}}
                     </span>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Pasien Hari ini</span>
-                    <span style="font-size: 20px" class="info-box-number">2,000</span>
+                    <span style="font-size: 20px" class="info-box-number">{{ $count_pasien_hari_ini }} Orang</span>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Dokter</span>
+                    <span class="info-box-text">Pasien Bulan Ini</span>
                     <span style="font-size: 20px" class="info-box-number"></span>
-                    <span style="font-size: 20px" class="info-box-number">5</span>
+                    <span style="font-size: 20px" class="info-box-number">{{ $count_pasien_bulan_ini }} Orang</span>
                 </div>
             </div>
         </div>
         <div class="clearfix hidden-md-up"></div>
-        <div class="col-12 col-sm-6 col-md-3">
+        {{-- <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                 <div class="info-box-content">
@@ -55,7 +55,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -89,6 +89,7 @@
                             <option value="hari_ini">Pasien Hari ini</option>
                             <option value="minggu_ini">Minggu Ini</option>
                             <option value="bulan_ini">Bulan Ini</option>
+                            <option value="tahun_ini">Tahun Ini</option>
                         </x-select2>
                     </div>
                 </div>
@@ -173,6 +174,9 @@
                 $('#text_filter_pasien').text("Pasien Minggu Ini");
             } else if ($waktu == "bulan_ini") {
                 $('#text_filter_pasien').text("Pasien Bulan Ini");
+            }
+            else if ($waktu == "tahun_ini") {
+                $('#text_filter_pasien').text("Pasien Tahun Ini");
             }
         });
 
