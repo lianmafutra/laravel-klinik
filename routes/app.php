@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
  
    
   
+   Route::post('master-data/penyesuaian/obat/store', [PenyesuaianStokObatController::class, 'store'])->name('penyesuaian.stok.obat.store');
+   Route::post('master-data/penyesuaian/obat/hapus/{id}', [PenyesuaianStokObatController::class, 'hapus'])->name('penyesuaian.stok.obat.hapus');
+   
    Route::get('master-data/penyesuaian/obat', [PenyesuaianStokObatController::class, 'index'])->name('penyesuaian.stok.obat');
    Route::get('master-data/penyesuaian/obat/riwayat', [PenyesuaianStokObatController::class, 'riwayat'])->name('penyesuaian.stok.obat.riwayat');
    Route::resource('master-data/obat', MasterObatController::class, [

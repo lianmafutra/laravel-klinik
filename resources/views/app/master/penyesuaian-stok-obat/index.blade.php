@@ -30,20 +30,20 @@
 <div class="col-lg-12 col-sm-12">
    <form id="form_penyesuaian_stok" method="post">
        @csrf
-       @method('PUT')
+      
        <div class="card">
            <div class="card-header">
                <i class="fas fa-database mr-2"></i> Penyesuaian Stok Obat
            </div>
            <div class="card-body">
-            <x-select2 id="obat" label="Data Obat" placeholder="Pilih Obat">
+            <x-select2 id="select_obat" label="Data Obat" placeholder="Pilih Obat" >
                @foreach ($obat as $item)
                    <option value="{{ $item->id }}">{{ $item->kode_obat }} -
                        {{ $item->nama }}
                    </option>
                @endforeach
            </x-select2>
-           <x-input-number label="Stok Saat ini" id="stok" />
+           <x-input-number label="Stok Saat ini" id="stok" disabled/>
                <x-select2 required id="penyesuaian_aksi" label="Pilih Aksi" placeholder="Pilih Aksi Penyesuaian">
                    <option value="pengurangan">(-) Pengurangan </option>
                    <option value="Penambahan">(+) Penambahan</option>
@@ -78,6 +78,22 @@
     <script src="{{ asset('plugins/autoNumeric.min.js') }}"></script>
     <script>
         $(function() {
+
+         $("#select_obat").on("select2:select", function(e) {
+                let obat_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: route('obat.detail', obat_id),
+                    dataType: "json",
+                    success: function(response) {
+                        $("#stok").val(response.data.stok);
+                       
+                    }
+                });
+            });
+
+
+
          const tgl_penyesuaian = flatpickr("#tgl_penyesuaian", {
                 allowInput: true,
                 locale: "id",
@@ -103,7 +119,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: "",
+                    url: route('penyesuaian.stok.obat.store'),
                     data: formData,
                     contentType: false,
                     processData: false,

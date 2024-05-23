@@ -14,7 +14,7 @@ class Obat extends Model
     protected $casts = [
       'created_at' => 'date:d-m-Y H:i:s',
       'updated_at' => 'date:d-m-Y H:i:s',
-      // 'tgl_expired' => 'date:d-m-Y',
+      'tgl_expired' => 'date:d-m-Y',
   ];
 
 
