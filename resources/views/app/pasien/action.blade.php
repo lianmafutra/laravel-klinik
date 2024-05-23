@@ -15,10 +15,10 @@
       <i class="fas fa-edit"></i> Edit Data pasien</a> </li>
 
 
-    <div class="dropdown-divider"></div>
+    {{-- <div class="dropdown-divider"></div> --}}
 
-    <li><a href="" class="btn_riwayat dropdown-item">
-            <i class="fas fa-history"></i> Riwayat</a> </li>
+    {{-- <li><a href="" class="btn_riwayat dropdown-item">
+            <i class="fas fa-history"></i> Riwayat</a> </li> --}}
 
     <div class="dropdown-divider"></div>
 

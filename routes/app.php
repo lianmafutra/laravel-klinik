@@ -15,7 +15,7 @@ use App\Http\Controllers\Klinik\Laporan\LaporanController;
 use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
-
+use App\Http\Controllers\Klinik\Rikkes\RikkesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -91,4 +91,9 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('master-data/pengguna', MasterUserController::class, [
       'as' => 'master-data'
    ]);
+
+
+
+   Route::resource('rikkes', RikkesController::class)->parameters(['rikkes' => 'rikkes']);;
+  
 });

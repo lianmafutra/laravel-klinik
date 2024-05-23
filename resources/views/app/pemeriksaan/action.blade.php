@@ -1,9 +1,9 @@
 
 
 <div class="dt-buttons">
-   <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Add New Record">
+   {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Add New Record">
        <i class="fa fa-print"></i> Cetak
-   </button>
+   </button> --}}
    <a href="{{ route('pemeriksaan.edit', $data->id) }}"  type="button" class="btn button btn-primary btn-sm" data-toggle="tooltip" title="Edit">
        <i class="fa fa-pencil"></i> Edit
    </a>

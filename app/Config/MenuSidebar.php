@@ -176,6 +176,13 @@ class MenuSidebar
             ],
          ],
          [
+            'type' => 'menu',
+            'title' => 'Data Rikkes',
+            'url' => route('rikkes.index'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['rikkes*'],
+         ],
+         [
             'type' => 'tree',
             'title' => 'Laporan',
             'url' => '#',
