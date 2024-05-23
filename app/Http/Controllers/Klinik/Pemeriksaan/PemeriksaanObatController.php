@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Klinik\Pemeriksaan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Obat;
 use App\Models\Pemeriksaan;
 use App\Models\PemeriksaanObat;
 use App\Utils\ApiResponse;
@@ -37,6 +38,22 @@ class PemeriksaanObatController extends Controller
 
 
          DB::beginTransaction();
+         
+         $obat = Obat::where('id', $request->select_obat);
+
+     
+
+         if($obat->first()->stok <= 0){
+            return $this->error("Stok Obat Habis", 400);
+         }
+
+         if($obat->first()->stok < $request->jumlah ){
+            return $this->error("Jumlah Obat Kurang, Pastikan jumlah tidak melebihi stok obat tersedia", 400);
+         }
+
+         $obat->update([
+            'stok' =>  $obat->first()->stok - $request->jumlah
+         ]);
 
          PemeriksaanObat::updateOrCreate(
             [
@@ -50,16 +67,17 @@ class PemeriksaanObatController extends Controller
                "keterangan_obat" =>  $request->keterangan_obat,
             ]
          );
+
+      
+
+     
+
          DB::commit();
-         if($request->pemeriksaan_obat_id){
+         if ($request->pemeriksaan_obat_id) {
             return $this->success(__('trans.crud.update'));
-         }else{
+         } else {
             return $this->success(__('trans.crud.success'));
          }
-
-
-       
-       
       } catch (\Throwable $th) {
          DB::rollBack();
          return $this->error(__('trans.crud.error') . $th, 400);

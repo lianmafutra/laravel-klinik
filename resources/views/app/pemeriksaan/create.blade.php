@@ -304,6 +304,8 @@
                 e.preventDefault();
                 const formData = new FormData(this);
                 formData.append('nomor_pemeriksaan', $('#nomor_pemeriksaan').val())
+
+               
                 $.ajax({
                     type: 'POST',
                     url: route('pemeriksaan-obat.store'),

@@ -74,6 +74,8 @@ class PemeriksaanController extends Controller
       $x['tindakan'] =  TIndakan::get();
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
+
+      
       return view('app.pemeriksaan.create', $x, compact('pasien','nomor_pemeriksaan'));
    }
 
@@ -89,6 +91,7 @@ class PemeriksaanController extends Controller
          Pemeriksaan::create(
             $request->safe()->all()
          );
+         
 
 
          DB::commit();

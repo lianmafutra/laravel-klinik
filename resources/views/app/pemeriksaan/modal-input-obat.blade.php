@@ -16,7 +16,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                  <x-input label="" id="pemeriksaan_obat_id" hidden />
-                                    <x-select2 id="select_obat" label="Data Obat" placeholder="Pilih Obat">
+                                    <x-select2 id="select_obat" label="Data Obat" placeholder="Pilih Obat" required>
                                         @foreach ($obat as $item)
                                             <option value="{{ $item->id }}">{{ $item->kode_obat }} -
                                                 {{ $item->nama }}
@@ -25,7 +25,7 @@
                                     </x-select2>
                                     <x-input-number label="Sisa Stok " id="stok" placeholder="" disabled />
                                     <x-input-number label="Harga " id="harga" placeholder="" disabled/>
-                                    <x-input-number label="Jumlah " id="jumlah" placeholder="" />
+                                    <x-input-number label="Jumlah " id="jumlah" placeholder="" required/>
                                     <x-input-number label="Dosis Perhari" id="dosis_perhari" placeholder="" />
                                     <x-input label="Keterangan" id="keterangan_obat" placeholder="" />
                                 </div>
