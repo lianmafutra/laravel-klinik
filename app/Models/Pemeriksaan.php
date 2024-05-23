@@ -15,6 +15,7 @@ class Pemeriksaan extends Model
       'created_at' => 'date:d-m-Y H:m:s',
       'updated_at' => 'date:d-m-Y H:m:s',
       'tgl_pemeriksaan' => 'date:d/m/Y',
+      'tindakan_array_id' => 'array'
    ];
 
    public static function generateNomorPemeriksaan()

@@ -89,8 +89,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                     <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
                         <div class="col-lg-6 col-sm-6">
-                            <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
+                         
                             <x-input label="Nomor Pemeriksaan" id="nomor_pemeriksaan" required />
                             <x-select2 id="dokter_id" label="Pilih Dokter" placeholder="Pilih Dokter">
                                 @foreach ($dokter as $item)
@@ -98,11 +99,19 @@
                                     </option>
                                 @endforeach
                             </x-select2>
-                            <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan"  required />
+                            <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan" required />
                             <x-textarea id="keluhan" label="Keluhan Pasien" placeholder="" required />
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                             <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
-                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" required />
+
+                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]" label="Pilih Tindakan "
+                                placeholder="Pilih Tindakan " multiple>
+                                @foreach ($tindakan as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+
+                            </x-select2>
+                         
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <x-input label="Berat Badan (Kg)" id="berat_badan" />
@@ -111,26 +120,12 @@
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
                             <x-input label="Tensi Darah" id="tensi" />
                             <x-input label=" Laju Pernafasan" id="nafas" />
+                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder=""  />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-               <div class="card-header">
-                   <i class="fas fa-pills pr-2"></i> Data Tindakan
-               </div>
-               <div class="card-body">
-                   <a href="#" id="btn_tambah_tindakan" class="button mb-3  btn btn-primary">+ Tambah Tindakan</a>
-                   <x-datatable id="datatable" :th="[
-                       'No',
-                       'Kode',
-                       'Nama',
-                       'Biaya',
-                       'Keterangan',
-                       'Aksi',
-                   ]" style="width: 100%; margin-top: 40px"></x-datatable>
-               </div>
-           </div>
+
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-pills pr-2"></i> Data Resep Obat
@@ -175,9 +170,10 @@
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $(function() {
-          
+
             $("#nomor_pemeriksaan").val(@json($nomor_pemeriksaan));
-          let datatable_obat =  $('#datatable').DataTable({
+
+            let datatable_obat = $('#datatable').DataTable({
                 serverSide: true,
                 processing: true,
                 searching: true,
@@ -202,7 +198,7 @@
                     {
                         data: 'nama_obat'
                     },
-                  
+
                     {
                         data: 'jumlah'
                     },
@@ -320,7 +316,7 @@
                     },
                     success: (response) => {
                         if (response) {
-                           $('#modal_input_obat').modal('hide');
+                            $('#modal_input_obat').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: response.message,
@@ -329,8 +325,8 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                              datatable_obat.ajax.reload()
-                           
+                                datatable_obat.ajax.reload()
+
                             })
                         }
                     },
@@ -363,7 +359,7 @@
                                 _showLoading()
                             },
                             success: (response) => {
-                              datatable_obat.ajax.reload()
+                                datatable_obat.ajax.reload()
                                 _alertSuccess(response.message)
                             },
                             error: function(response) {
@@ -377,7 +373,7 @@
             $('#datatable').on('click', '.btn_edit_obat', function(e) {
                 e.preventDefault()
                 $(".modal-title").text("Edit Data Obat");
-                let pemeriksaan_obat_id =  $(this).attr('data-id');
+                let pemeriksaan_obat_id = $(this).attr('data-id');
                 $('#modal_input_obat').modal('show');
                 $('#pemeriksaan_obat_id').val(pemeriksaan_obat_id);
                 $.ajax({
@@ -385,7 +381,7 @@
                     url: route('pemeriksaan-obat.edit', pemeriksaan_obat_id),
                     dataType: "json",
                     success: function(response) {
-                     console.log(response)
+                        console.log(response)
                         $("#jumlah").val(response.data.jumlah);
                         $("#harga").val(response.data.obat.harga_rupiah);
                         $("#select_obat").val(response.data.obat.id).change();

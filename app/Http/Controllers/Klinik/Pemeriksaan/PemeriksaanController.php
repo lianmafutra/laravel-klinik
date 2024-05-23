@@ -10,6 +10,7 @@ use App\Models\Dokter;
 use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
+use App\Models\TIndakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -67,6 +68,7 @@ class PemeriksaanController extends Controller
 
       $nomor_pemeriksaan = Pemeriksaan::generateNomorPemeriksaan();
       $pasien =  Pasien::find($user_id);
+      $x['tindakan'] =  TIndakan::get();
       $x['obat'] = Obat::get();
       $x['dokter'] = Dokter::get();
       return view('app.pemeriksaan.create', $x, compact('pasien','nomor_pemeriksaan'));
