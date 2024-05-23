@@ -18,7 +18,29 @@ class Pemeriksaan extends Model
       'tindakan_array_id' => 'array'
    ];
 
-  
+
+
+   protected $appends = ['tindakan_array_format'];
+   public function getTindakanArrayFormatAttribute()
+   {
+
+      // Assuming you have an array of IDs stored in JSON format in $this->attributes['tindakan_array_id']
+      $tindakanArrayId = json_decode($this->attributes['tindakan_array_id'], true);
+
+      // Query the TIndakan model to get the 'nama' fields
+      $tindakan = TIndakan::select('nama')
+         ->whereIn('id', $tindakanArrayId)
+         ->get();
+
+      // Extract the 'nama' values into an array
+      $namaArray = $tindakan->pluck('nama')->toArray();
+
+      // Convert the array to a comma-separated string
+      $namaString = implode(',', $namaArray);
+
+      // Output or use the resulting string
+      return $namaString;
+   }
 
    public static function generateNomorPemeriksaan()
    {

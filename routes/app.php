@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
  
 
    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporan.pemeriksaan');
+   Route::get('laporan/pemeriksaan/cetak', [LaporanController::class, 'cetakLaporanPemeriksaan'])->name('cetak.laporan.pemeriksaan');
+   Route::get('laporan/obat/cetak', [LaporanController::class, 'cetakLaporanObat'])->name('cetak.laporan.obat');
    Route::get('laporan/obat', [LaporanController::class, 'obat'])->name('laporan.obat');
 
    Route::resource('pasien', PasienController::class);

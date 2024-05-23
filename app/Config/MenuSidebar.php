@@ -190,13 +190,13 @@ class MenuSidebar
                   'active' => ['laporan/pemeriksaan'],
                ],
 
-               [
-                  'type' => 'menu',
-                  'title' => 'Laporan Data Obat',
-                  'url' => route('laporan.obat'),
-                  'icon' => 'far fa-circle',
-                  'active' => ['laporan/obat'],
-               ],
+               // [
+               //    'type' => 'menu',
+               //    'title' => 'Laporan Data Obat',
+               //    'url' => route('laporan.obat'),
+               //    'icon' => 'far fa-circle',
+               //    'active' => ['laporan/obat'],
+               // ],
 
             ],
 

@@ -9,7 +9,7 @@
     </style>
 @endpush
 @section('header')
-    <x-header title="Buat Laporan Data Stok Obat" back-button="true"></x-header>
+    <x-header title="Buat Laporan Data Stok Obat" ></x-header>
 @endsection
 @section('content')
     <div class="col-lg-8 col-sm-12">
