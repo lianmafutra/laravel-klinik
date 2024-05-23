@@ -11,8 +11,8 @@ class AnggotaPersonil extends Model
    protected $table = 'anggota_personil';
    protected $guarded = [];
    protected $casts = [
-     'created_at' => 'date:d-m-Y H:m:s',
-     'updated_at' => 'date:d-m-Y H:m:s',
+     'created_at' => 'date:d-m-Y H:i:s',
+     'updated_at' => 'date:d-m-Y H:i:s',
      'tgl_lahir' => 'date:d-m-Y',
  ];
 

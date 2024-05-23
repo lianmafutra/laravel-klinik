@@ -28,12 +28,13 @@
     </style>
 @endpush
 @section('header')
-    <x-header title="Input Data Pemeriksaan" back-button="true"></x-header>
+    <x-header title="Edit Data Pemeriksaan" back-button="true"></x-header>
 @endsection
 @section('content')
     <div class="col-lg-12 col-sm-12">
         <form id="form_sample" method="post">
-            @csrf
+         @csrf
+         @method('PUT')
             <div class="card">
                 <div class="card-header">
                     <i class="far fa-user pr-2"></i> Data Pasien
@@ -89,8 +90,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
                         <div class="col-lg-6 col-sm-6">
-                            <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
+
                             <x-input label="Nomor Pemeriksaan" id="nomor_pemeriksaan" required />
                             <x-select2 id="dokter_id" label="Pilih Dokter" placeholder="Pilih Dokter">
                                 @foreach ($dokter as $item)
@@ -102,21 +104,29 @@
                             <x-textarea id="keluhan" label="Keluhan Pasien" placeholder="" required />
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                             <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
-                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" required />
+
+                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]" label="Pilih Tindakan "
+                                placeholder="Pilih Tindakan " multiple>
+                                @foreach ($tindakan as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+
+                            </x-select2>
+
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <x-input label="Berat Badan (Kg)" id="berat_badan" />
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
-                            <x-input label="Tensi Darah" id="tensi" />
+                          
                             <x-input label=" Laju Pernafasan" id="nafas" />
-
-
+                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-pills pr-2"></i> Data Resep Obat
@@ -126,7 +136,7 @@
                     <x-datatable id="datatable" :th="[
                         'No',
                         'Kode Obat',
-                        'Nama',
+                        'Nama Obat',
                         'Jumlah',
                         'Dosis Perhari',
                         'Harga Satuan',
@@ -138,8 +148,9 @@
             <div class="card">
                 <div class="card-body">
                     <div style="gap:8px; float: right;" class="d-flex">
-                        <a href="{{ route('pasien.index') }}" type="button" class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn_submit btn btn-primary">Simpan Pemeriksaan</button>
+                        <a href="{{ route('pemeriksaan.riwayat.index') }}" type="button"
+                            class="btn btn-secondary">Kembali</a>
+                        <button type="submit" class="btn_submit btn btn-primary">Update Pemeriksaan</button>
                     </div>
                 </div>
             </div>
@@ -161,77 +172,52 @@
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $(function() {
-            var dataSet = [{
-                    "No": "1",
-                    "kode_obat": "OBT-01",
-                    "nama": "Paracetamol",
-                    "jumlah": "1",
-                    "dosis": "2",
-                    "keterangan": "Sesudah Makan",
-                    "harga": "0",
-                    "aksi": `
-                    <a href="" data-toggle="tooltip" data-placement="bottom"
-        title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
-        Edit</a>
-                    <a href="" data-toggle="tooltip" data-placement="bottom"
-         title="Edit Data" class="btn btn-sm btn-danger btn-hapus" data-id=""><i class="fas fa-trash-alt"></i>
-         Hapus</a>`
-                },
-                {
-                    "No": "2",
-                    "kode_obat": "OBT-02",
-                    "nama": "Paracetamol",
-                    "jumlah": "1",
-                    "dosis": "2",
-                    "keterangan": "Sesudah Makan",
-                    "harga": "0",
-                    "aksi": `
-                    <a href="" data-toggle="tooltip" data-placement="bottom"
-        title="Edit" class="btn btn-sm btn-primary btn-edit" data-id=""><i class="fas fa-edit"></i>
-        Edit</a>
-                    <a href="" data-toggle="tooltip" data-placement="bottom"
-         title="Edit Data" class="btn btn-sm btn-danger btn-hapus" data-id=""><i class="fas fa-trash-alt"></i>
-         Hapus</a>`
-                }
-            ];
-            $('#datatable').DataTable({
-                data: dataSet,
-                lengthChange: false,
-                searching: false,
-                serverSide: false,
-                paging: false,
-                info: false,
+
+
+            let datatable_obat = $('#datatable').DataTable({
+                serverSide: true,
+                processing: true,
+                searching: true,
+                lengthChange: true,
+                paging: true,
+                info: true,
+                ordering: true,
+                aaSorting: [],
+                // order: [3, 'desc'],
+                scrollX: true,
+
+                ajax: route('pemeriksaan-obat.show', @json($pemeriksaan->nomor_pemeriksaan)),
                 columns: [{
-                        data: 'No'
+                        data: "DT_RowIndex",
+                        orderable: false,
+                        searchable: false,
+                        width: '1%'
                     },
                     {
                         data: 'kode_obat'
                     },
                     {
-                        data: 'nama'
+                        data: 'nama_obat'
                     },
+
                     {
                         data: 'jumlah'
                     },
                     {
-                        data: 'dosis'
+                        data: 'dosis_perhari'
                     },
                     {
                         data: 'harga'
                     },
                     {
-                        data: 'keterangan'
+                        data: 'keterangan_obat'
                     },
                     {
-                        data: 'aksi'
+                        data: 'action'
                     }
                 ]
             });
-            $('#btn_tambah_obat').click(function(e) {
-                e.preventDefault();
-                $('#modal_input_obat').modal('show');
-                _clearInput()
-            });
+
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
             })
@@ -241,12 +227,28 @@
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
+
+
+
+            $("#select_obat").on("select2:select", function(e) {
+                let obat_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: route('obat.detail', obat_id),
+                    dataType: "json",
+                    success: function(response) {
+                        $("#stok").val(response.data.stok);
+                        $("#harga").val(response.data.harga_rupiah);
+                    }
+                });
+            });
+
+
             $('#btn_tambah_obat').click(function(e) {
                 e.preventDefault();
-                console.log($('#obat').val())
-                console.log($('#dosis_perhari').val())
-                console.log($('#jumlah').val())
-                console.log($('#keterangan_obat').val())
+                $(".modal-title").text("Tambah Data Obat");
+                $('#modal_input_obat').modal('show');
+                _clearInput()
             });
 
 
@@ -255,18 +257,18 @@
             $('#form_sample').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
+
                 Swal.fire({
-                    title: 'Apakah anda yakin ingin Simpan Data Pemeriksaan pasien ?',
+                    title: 'Apakah anda yakin ingin Mengupdate Data Pemeriksaan pasien ?',
                     text: $(this).attr('data-action'),
                     icon: 'warning',
                     showCancelButton: true,
-                 
                     confirmButtonText: 'Yes, Lanjutkan '
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'POST',
-                            url: route('pemeriksaan.store', @json($pasien)),
+                            url: route('pemeriksaan.update', @json($pemeriksaan->id)),
                             data: formData,
                             contentType: false,
                             processData: false,
@@ -278,13 +280,13 @@
                                 if (response) {
                                     Swal.fire({
                                         icon: 'success',
-                                        title: "Sukses, Data Pemeriksaan Disimpan Di riwayat",
+                                        title: "Sukses, Data Pemeriksaan Berhasil Di Update",
                                         showCancelButton: true,
                                         allowEscapeKey: false,
                                         showCancelButton: false,
                                         allowOutsideClick: false,
                                     }).then((result) => {
-                                          
+
                                     })
                                 }
                             },
@@ -301,9 +303,10 @@
             $('#form_input_obat').submit(function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
+                formData.append('nomor_pemeriksaan', $('#nomor_pemeriksaan').val())
                 $.ajax({
                     type: 'POST',
-                    url: route('master-data.obat.index'),
+                    url: route('pemeriksaan-obat.store'),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -313,6 +316,7 @@
                     },
                     success: (response) => {
                         if (response) {
+                            $('#modal_input_obat').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: response.message,
@@ -320,7 +324,10 @@
                                 allowEscapeKey: false,
                                 showCancelButton: false,
                                 allowOutsideClick: false,
-                            }).then((result) => {})
+                            }).then((result) => {
+                                datatable_obat.ajax.reload()
+
+                            })
                         }
                     },
                     error: function(response) {
@@ -328,6 +335,83 @@
                     }
                 })
             })
+
+            $('#datatable').on('click', '.btn_hapus_obat', function(e) {
+                e.preventDefault()
+                Swal.fire({
+                    title: 'Apakah anda yakin ingin menghapus data Obat?',
+                    text: $(this).attr('data-action'),
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6 ',
+                    confirmButtonText: 'Yes, Delete'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {
+                                _method: 'DELETE'
+                            },
+                            url: $(this).attr('data-url'),
+                            beforeSend: function() {
+                                _showLoading()
+                            },
+                            success: (response) => {
+                                datatable_obat.ajax.reload()
+                                _alertSuccess(response.message)
+                            },
+                            error: function(response) {
+                                _showError(response)
+                            }
+                        })
+                    }
+                })
+            })
+
+            $('#datatable').on('click', '.btn_edit_obat', function(e) {
+                e.preventDefault()
+                $(".modal-title").text("Edit Data Obat");
+                let pemeriksaan_obat_id = $(this).attr('data-id');
+                $('#modal_input_obat').modal('show');
+                $('#pemeriksaan_obat_id').val(pemeriksaan_obat_id);
+                $.ajax({
+                    type: "GET",
+                    url: route('pemeriksaan-obat.edit', pemeriksaan_obat_id),
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response)
+                        $("#jumlah").val(response.data.jumlah);
+                        $("#harga").val(response.data.obat.harga_rupiah);
+                        $("#select_obat").val(response.data.obat.id).change();
+                        $("#stok").val(response.data.obat.stok);
+                        $("#dosis_perhari").val(response.data.dosis_perhari);
+                        $("#keterangan_obat").val(response.data.keterangan_obat);
+                    }
+                });
+            })
+
+
+
+            // set value
+
+            $("#nomor_pemeriksaan").val(@json($pemeriksaan->nomor_pemeriksaan));
+            $("#dokter_id").val(@json($pemeriksaan->dokter_id)).change();
+            tgl_pemeriksaan.setDate(@json($pemeriksaan->tgl_pemeriksaan))
+            $("#keluhan").val(@json($pemeriksaan->keluhan))
+            $("#diagnosis").val(@json($pemeriksaan->diagnosis))
+            $("#riwayat_penyakit").val(@json($pemeriksaan->riwayat_penyakit))
+            $("#tindakan_array_id").val(@json($pemeriksaan->tindakan_array_id)).change();
+            $("#berat_badan").val(@json($pemeriksaan->berat_badan))
+           
+            $("#tensi").val(@json($pemeriksaan->tensi))
+            $("#denyut_nadi").val(@json($pemeriksaan->denyut_nadi))
+            $("#suhu").val(@json($pemeriksaan->suhu))
+            $("#nafas").val(@json($pemeriksaan->nafas))
+            $("#catatan").val(@json($pemeriksaan->catatan))
+
+            
 
         })
     </script>

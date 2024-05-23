@@ -47,7 +47,7 @@ class RoleController extends Controller
                     }
                 })
                 ->editColumn('created_at', function ($data) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y h:i:s');
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y H:i:s');
                 })
                 ->rawColumns(['action', 'permissions', 'user'])
                 ->make(true);

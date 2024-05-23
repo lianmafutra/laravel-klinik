@@ -14,8 +14,8 @@ class Pasien extends Model
    protected $guarded = [];
  
    protected $casts = [
-     'created_at' => 'date:d-m-Y H:m:s',
-     'updated_at' => 'date:d-m-Y H:m:s',
+     'created_at' => 'datetime:d-m-Y  H:i:s',
+     'updated_at' => 'datetime:d-m-Y  H:i:s',
      'tgl_lahir' => 'date:d/m/Y',
     
  ];

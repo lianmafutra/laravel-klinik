@@ -10,6 +10,7 @@ use App\Models\Dokter;
 use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
+use App\Models\PemeriksaanObat;
 use App\Models\TIndakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class PemeriksaanController extends Controller
    public function riwayat()
    {
       $data = Pemeriksaan::with('dokter', 'pasien');
+   
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
@@ -40,6 +42,7 @@ class PemeriksaanController extends Controller
             ->addColumn('nama', function ($data) {
                return $data?->pasien?->nama;
             })
+
             ->rawColumns(['action'])
             ->make(true);
       }
@@ -110,14 +113,39 @@ class PemeriksaanController extends Controller
    public function edit(Pemeriksaan $pemeriksaan)
    {
     
+   
+     
+      $pasien =  Pasien::find($pemeriksaan->pasien_id);
+      $x['tindakan'] =  TIndakan::get();
+      $x['obat'] = Obat::get();
+      $x['dokter'] = Dokter::get();
+
+      $data = PemeriksaanObat::with('obat', 'pemeriksaan')->where(
+         'nomor_pemeriksaan',
+         $pemeriksaan->nomor_pemeriksaan );
+
+ 
+      return view('app.pemeriksaan.edit', $x, compact('pemeriksaan','pasien',));
    }
 
    /**
     * Update the specified resource in storage.
     */
-   public function update(Request $request, Pasien $pasien)
+   public function update(PemeriksaanRequest $request, Pemeriksaan $pemeriksaan)
    {
-      //
+      try {
+
+         DB::beginTransaction();
+
+         $pemeriksaan->fill($request->safe()->all())->save();
+
+
+         DB::commit();
+         return $this->success(__('trans.crud.success'));
+      } catch (\Throwable $th) {
+         DB::rollBack();
+         return $this->error(__('trans.crud.error') . $th, 400);
+      }
    }
 
    /**

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pemeriksaan extends Model
 {
@@ -12,11 +13,12 @@ class Pemeriksaan extends Model
    protected $table = 'pemeriksaan';
    protected $guarded = [];
    protected $casts = [
-      'created_at' => 'date:d-m-Y H:m:s',
-      'updated_at' => 'date:d-m-Y H:m:s',
       'tgl_pemeriksaan' => 'date:d/m/Y',
+      'created_at' => 'datetime:d/m/Y H:i:s',
       'tindakan_array_id' => 'array'
    ];
+
+  
 
    public static function generateNomorPemeriksaan()
    {
@@ -49,5 +51,10 @@ class Pemeriksaan extends Model
    public function pasien(): BelongsTo
    {
       return $this->belongsTo(pasien::class, 'pasien_id', 'id');
+   }
+
+   public function pemeriksaan_obat(): HasMany
+   {
+      return $this->hasMany(PemeriksaanObat::class, 'nomor_pemeriksaan', 'nomor_pemeriksaan');
    }
 }

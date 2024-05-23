@@ -28,7 +28,7 @@ class SampleCrudController extends Controller
                     return view('admin.sample.action', compact('data'));
                 })
                 ->editColumn('created_at', function ($data) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y h:i:s');
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y H:i:s');
                 })
                 ->editColumn('category_multi_id', function ($data) {
                     $boldArray = array_map(function ($item) {

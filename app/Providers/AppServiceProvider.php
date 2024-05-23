@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
       });
 
       Blade::directive('tanggal', function ($expression) {
-         return "<?php echo \Carbon\Carbon::parse($expression)->translatedFormat('d-m-y H:m:s'); ?>";
+         return "<?php echo \Carbon\Carbon::parse($expression)->translatedFormat('d-m-y H:i:s'); ?>";
       });
 
       view()->composer('admin.layouts.navbar', function ($view) {

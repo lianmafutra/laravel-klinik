@@ -51,7 +51,7 @@ class DashboardController extends Controller
       //           'event' => EventAuditServices::getEventColor($item->event),
       //           'auditable_type' => $item->auditable_type,
       //           'url' => $item->url,
-      //           'created_at' => Carbon::parse($item?->created_at)?->format('d-m-Y H:m:s'),
+      //           'created_at' => Carbon::parse($item?->created_at)?->format('d-m-Y H:i:s'),
       //       ];
       //   });
 

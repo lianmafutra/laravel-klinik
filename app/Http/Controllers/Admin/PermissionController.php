@@ -28,7 +28,7 @@ class PermissionController extends Controller
                     return view('admin.permissions.action', compact('data'));
                 })
                 ->editColumn('created_at', function ($data) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y h:i:s');
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y H:i:s');
                 })
                 ->editColumn('guard_name', function ($data) {
                     if ($data->guard_name == 'web') {
@@ -56,7 +56,7 @@ class PermissionController extends Controller
                     return view('admin.permissions.action', compact('data'));
                 })
                 ->editColumn('created_at', function ($data) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y h:i:s');
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y H:i:s');
                 })
                 ->editColumn('guard_name', function ($data) {
                     if ($data->guard_name == 'web') {

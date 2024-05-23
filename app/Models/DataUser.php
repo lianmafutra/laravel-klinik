@@ -26,8 +26,8 @@ class DataUser extends Model
     }
 
     protected $casts = [
-        'created_at' => 'datetime:d/m/Y H:m:s',
-        'updated_at' => 'datetime:d/m/Y  H:m:s',
+        'created_at' => 'datetime:d/m/Y H:i:s',
+        'updated_at' => 'datetime:d/m/Y  H:i:s',
     ];
 
     public function file_foto_r(): HasOne

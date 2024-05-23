@@ -11,8 +11,8 @@ class TIndakan extends Model
    protected $table = 'tindakan';
    protected $guarded = [];
    protected $casts = [
-     'created_at' => 'date:d-m-Y H:m:s',
-     'updated_at' => 'date:d-m-Y H:m:s',
+     'created_at' => 'date:d-m-Y H:i:s',
+     'updated_at' => 'date:d-m-Y H:i:s',
  ];
 
 }

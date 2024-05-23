@@ -28,7 +28,7 @@ class PermissionGroupController extends Controller
                     return view('admin.permissions-group.action', compact('data'));
                 })
                 ->editColumn('created_at', function ($data) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y h:i:s');
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d/m/Y H:i:s');
                 })
                 ->editColumn('permissions', function ($data) {
                     $output = array_map(function ($val) {

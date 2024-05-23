@@ -35,9 +35,9 @@ class User extends Authenticatable
    //  }
 
     protected $casts = [
-        'created_at' => 'date:d-m-Y H:m:s',
-        'updated_at' => 'date:d-m-Y H:m:s',
-        'last_login_at' => 'date:d/m/Y H:m:s',
+        'created_at' => 'date:d-m-Y H:i:s',
+        'updated_at' => 'date:d-m-Y H:i:s',
+        'last_login_at' => 'date:d/m/Y H:i:s',
     ];
 
     protected $appends = [

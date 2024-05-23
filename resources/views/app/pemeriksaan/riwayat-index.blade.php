@@ -35,7 +35,7 @@
 
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Kode Pemeriksaan', 'Kode RM', 'Nama', 'Tgl Pemeriksaan', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Kode Pemeriksaan', 'Kode RM', 'Nama', 'Tgl Pemeriksaan','Dokter','Waktu Input', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
             info: true,
             ordering: true,
             aaSorting: [],
-            // order: [3, 'desc'],
+            order: [6, 'desc'],
             scrollX: true,
             ajax: route('pemeriksaan.riwayat.index'),
             columns: [{
@@ -66,17 +66,30 @@
                     width: '1%'
                 },
                 {
-                    data: 'nomor_pemeriksaan'
+                    data: 'nomor_pemeriksaan',
+                    name : 'nomor_pemeriksaan',
                 },
                 {
-                    data: 'kode_rm'
+                    data: 'kode_rm',
+                    name : 'kode_rm',
                 },
                 {
-                    data: 'nama'
+                    data: 'nama',
+                    name : 'nama',
                 },
 
                 {
-                    data: 'tgl_pemeriksaan'
+                    data: 'tgl_pemeriksaan',
+                    name : 'tgl_pemeriksaan',
+                },
+                
+                {
+                    data: 'dokter.nama',
+                    name : 'dokter.nama',
+                },
+                {
+                    data: 'created_at',
+                    name : 'created_at',
                 },
                 {
                     data: "action",
