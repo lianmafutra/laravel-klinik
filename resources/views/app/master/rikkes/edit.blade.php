@@ -18,7 +18,7 @@
             @method('PUT')
             <div class="card">
                 <div class="card-body">
-                    <x-input label="Judul Rikkes" id="nama" required value="{{ $rikkes->nama }}" />
+                    <x-input label="Judul Rikkes" id="nama" required value="{{ $rikkes_bintara->nama }}" />
                     <div class="form-group">
                         <label for="file">File Rikkes :</label>
                         <input type="file" name="file" id="file"class="form-control">
@@ -58,7 +58,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('rikkes-bintara.update', @json( $rikkes)),
+                    url: route('rikkes-bintara.update', @json( $rikkes_bintara)),
                     data: formData,
                     contentType: false,
                     processData: false,

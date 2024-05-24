@@ -100,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-   Route::resource('rikkes-bintara', RikkesController::class)->parameters(['rikkes' => 'rikkes']);
+   Route::resource('rikkes-bintara', RikkesController::class);
    Route::resource('rikkes-siswa-jadwal', RikkesSiswaJadwalController::class);
  
    Route::get('rikkes-siswa-jadwal/input/absensi/{rikkes_jadwal_id}', [RikkesSiswaAbsensiController::class, 'inputRikkes'])->name('rikkes-siswa-absensi.input');

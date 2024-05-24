@@ -74,7 +74,7 @@ class RikkesController extends Controller
    /**
     * Display the specified resource.
     */
-   public function show(Rikkes $rikkes)
+   public function show(Rikkes $rikkes_bintara)
    {
       //
    }
@@ -82,16 +82,16 @@ class RikkesController extends Controller
    /**
     * Show the form for editing the specified resource.
     */
-   public function edit(Rikkes $rikkes)
+   public function edit(Rikkes $rikkes_bintara)
    {
-      $file = '<a href="' . Storage::disk('public')->url('uploads/' . $rikkes->file_rikkes) . '" target="_blank">' . $rikkes->nama . '</a>';
-      return view('app.master.rikkes.edit', compact('rikkes', 'file'));
+      $file = '<a href="' . Storage::disk('public')->url('uploads/' . $rikkes_bintara->file_rikkes) . '" target="_blank">' . $rikkes_bintara->nama . '</a>';
+      return view('app.master.rikkes.edit', compact('rikkes_bintara', 'file'));
    }
 
    /**
     * Update the specified resource in storage.
     */
-   public function update(Request $request, Rikkes $rikkes)
+   public function update(Request $request, Rikkes $rikkes_bintara)
    {
       try {
 
@@ -108,12 +108,12 @@ class RikkesController extends Controller
             $fileName = Str::of($file->getClientOriginalName())->basename() . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/uploads', $fileName);
 
-            $rikkes->update([
+            $rikkes_bintara->update([
                'nama' => $request->nama,
                'file_rikkes' => $fileName,
             ]);
          } else {
-            $rikkes->update([
+            $rikkes_bintara->update([
                'nama' => $request->nama,
             ]);
          }
@@ -134,11 +134,11 @@ class RikkesController extends Controller
    /**
     * Remove the specified resource from storage.
     */
-   public function destroy(Rikkes $rikkes)
+   public function destroy(Rikkes $rikkes_bintara)
    {
       try {
          DB::beginTransaction();
-         $rikkes->delete();
+         $rikkes_bintara->delete();
          DB::commit();
 
          return $this->success(__('trans.crud.delete'));
