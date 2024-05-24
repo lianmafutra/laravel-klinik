@@ -17,7 +17,7 @@
         <div class="col-lg-8 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <x-select2 id="select_jenis_laporan" label="Pilih Jenis Laporan" placeholder="Pilih  Jenis Laporan">
+                    <x-select2 required id="select_jenis_laporan" label="Pilih Jenis Laporan" placeholder="Pilih  Jenis Laporan">
                         <option value="semua_pasien"> Semua Pasien</option>
                         <option value="pasien_tertentu"> Pilih Pasien</option>
                     </x-select2>
