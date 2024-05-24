@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AnggotaSiswa extends Model
 {
@@ -21,6 +22,16 @@ class AnggotaSiswa extends Model
 
    public function getJenisAnggotaAttribute() {
        return 'siswa';
+   }
+
+   /**
+    * Get all of the comments for the AnggotaSiswa
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function rikkes_absensi(): HasMany
+   {
+       return $this->hasMany(RikkesSiswaAbsensi::class, 'user_id', 'id');
    }
 
 }

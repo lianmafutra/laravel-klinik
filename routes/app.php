@@ -16,6 +16,8 @@ use App\Http\Controllers\klinik\Pasien\PasienController;
 use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesController;
+use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaAbsensiController;
+use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaJadwalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -94,6 +96,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-   Route::resource('rikkes', RikkesController::class)->parameters(['rikkes' => 'rikkes']);;
-  
+   Route::resource('rikkes', RikkesController::class)->parameters(['rikkes' => 'rikkes']);
+   Route::resource('rikkes-siswa-jadwal', RikkesSiswaJadwalController::class);
+ 
+   Route::get('rikkes-siswa-jadwal/input/absensi/{rikkes_jadwal_id}', [RikkesSiswaAbsensiController::class, 'inputRikkes'])->name('rikkes-siswa-absensi.input');
+   Route::post('rikkes-siswa-store', [RikkesSiswaAbsensiController::class, 'store'])->name('rikkes-siswa-absensi.store');
+ 
 });

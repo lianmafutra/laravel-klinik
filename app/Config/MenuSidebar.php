@@ -180,14 +180,14 @@ class MenuSidebar
             'title' => ' Laporan Rikkes',
             'url' => route('rikkes.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['rikkes*'],
+            'active' => ['rikkes-laporan*'],
          ],
          [
             'type' => 'menu',
             'title' => ' Rikkes Siswa',
-            'url' => route('rikkes.index'),
+            'url' => route('rikkes-siswa-jadwal.index'),
             'icon' => 'fas fa-angle-right',
-            'active' => ['rikkes*'],
+            'active' => ['rikkes-siswa-jadwal*'],
          ],
          [
             'type' => 'tree',

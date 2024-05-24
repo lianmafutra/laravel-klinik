@@ -287,7 +287,7 @@
                                         showCancelButton: false,
                                         allowOutsideClick: false,
                                     }).then((result) => {
-
+                                       window.location.replace(route('pemeriksaan.riwayat.index'))
                                     })
                                 }
                             },
