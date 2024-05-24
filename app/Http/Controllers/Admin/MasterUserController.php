@@ -238,7 +238,7 @@ class MasterUserController extends Controller
     {
         try {
             User::find($request->user_id)->update([
-                'password' => bcrypt($request->password_baru),
+                'password' => bcrypt($request->password),
             ]);
 
             return redirect()->back()->with('success', __('trans.crud.update'));

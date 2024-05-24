@@ -4,10 +4,11 @@
     <link href="{{ asset('plugins/filepond/filepond.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-@endpush
-<style>
+    <style>
 
-</style>
+    </style>
+@endpush
+
 @section('header')
     <x-header title="Master Data User ( Pengguna )"></x-header>
 @endsection
@@ -123,7 +124,7 @@
         $('#btn_create_user').click(function(e) {
             e.preventDefault()
             _clearInput()
-            $('#modal_create_edit_jawaban').modal('show')
+            $('#modal_create_edit_user').modal('show')
             $('.modal-title').text('Add New user')
         })
 

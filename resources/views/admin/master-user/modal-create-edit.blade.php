@@ -17,8 +17,8 @@
                                 <div class="col-md-12">
                                  <input autocomplete="off" hidden name="user_id"></input>
                                     <x-input id='username'  name='username' placeholder='Username Login'  label='Username' required='true' />
-                                    <x-input id='nama_lengkap' name='nama_lengkap' placeholder='Nama Lengkap user'  label='Nama Lengkap' required='true'  />
-                                    <x-input-number id='kontak' name='kontak'  label='Kontak' required=false  placeholder="Kontak User" />
+                                    <x-input id='name' name='name' placeholder='Nama Lengkap user'  label='Nama Lengkap' required='true'  />
+                                    <x-input-number id='kontak' name='kontak'  label='Kontak'  placeholder="Kontak User" />
                                     {{-- <x-input id='email' name='email' placeholder='Email'  label='Email' required='false'  /> --}}
                                    
                                     <x-select2 id="role" name='role' label='Select Role' required="true" placeholder='Select Role User'>
