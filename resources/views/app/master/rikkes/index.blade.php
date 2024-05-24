@@ -19,6 +19,7 @@
                         Data</a>
                 @endcan
             </div>
+
             <div class="card-body">
                 <x-datatable id="datatable" :th="['No', 'Nama', 'File Rikkes', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
@@ -64,17 +65,14 @@
                 {
                     data: "action",
                     width: '15%',
-                    visible: false,
+                    visible: @can('role-admin') true @else false @endcan,
                     orderable: false,
                     searchable: false,
                 },
             ]
         })
 
-
-        @can('role-admin')
-            datatable.column(3).visible(true);
-        @endcan
+     
 
         $('#datatable').on('click', '.btn_hapus', function(e) {
             let data = $(this).attr('data-hapus');

@@ -16,6 +16,7 @@ class RikkesController extends Controller
     */
    public function index()
    {
+    
       $data = Rikkes::query();
       if (request()->ajax()) {
          return datatables()->of($data)

@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
          return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
       });
 
+  
       Blade::directive('tanggal', function ($expression) {
          return "<?php echo \Carbon\Carbon::parse($expression)->translatedFormat('d-m-y H:i:s'); ?>";
       });
