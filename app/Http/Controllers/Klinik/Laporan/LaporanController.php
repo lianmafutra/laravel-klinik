@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Klinik\Laporan;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnggotaSiswa;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
+use App\Models\RikkesSiswaAbsensi;
+use App\Models\RikkesSiswaJadwal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -30,7 +33,7 @@ class LaporanController extends Controller
          $data =  Pemeriksaan::whereBetween('tgl_pemeriksaan', [$startDate, $endDate])->get();
       }
       if (request()->get('jenis_laporan') == "pasien_tertentu") {
-        $pasien = Pasien::where('id', request()->get('pasien_id'))->first();
+         $pasien = Pasien::where('id', request()->get('pasien_id'))->first();
          $data =  Pemeriksaan::whereBetween('tgl_pemeriksaan', [$startDate, $endDate])->where('pasien_id', request()->get('pasien_id'))->get();
       }
 
@@ -38,14 +41,30 @@ class LaporanController extends Controller
          return view('app.laporan.cetak-pemeriksaan-semua', compact('data', 'start_date', 'end_date'));
       }
       if (request()->get('jenis_laporan') == "pasien_tertentu") {
-         return view('app.laporan.cetak-pemeriksaan-pasien', compact('data', 'start_date', 'end_date','pasien'));
+         return view('app.laporan.cetak-pemeriksaan-pasien', compact('data', 'start_date', 'end_date', 'pasien'));
       }
+   }
+
+   public function rikkesSiswa()
+   {
+      $data = RikkesSiswaJadwal::get();
+      return view('app.laporan.rikkes-siswa', compact('data'));
+   }
+
+   public function cetakRikkesSiswa(Request $request)
+   {
+     
+      $jadwal = RikkesSiswaJadwal::find( request()->get('jadwal_rikkes'));
+    
+      $data =    AnggotaSiswa::with(['rikkes_absensi' => function ($query) {
+         $query->where('rikkes_siswa_jadwal_id', request()->get('jadwal_rikkes'));
+      }])->get();
+
+      return view('app.laporan.cetak-rikkes-siswa', compact('data','jadwal'));
    }
 
    public function obat()
    {
-
-
       return view('app.laporan.obat');
    }
 }

@@ -17,8 +17,6 @@ class RikkesSiswaAbsensiController extends Controller
    public function inputRikkes($jadwal_id)
    {
 
-  
-
       $jadwal = RikkesSiswaJadwal::find($jadwal_id);
 
       $data = AnggotaSiswa::with(['rikkes_absensi' => function ($query) use ($jadwal_id) {

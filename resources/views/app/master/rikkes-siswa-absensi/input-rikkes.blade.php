@@ -104,7 +104,7 @@
                 info: true,
                 ordering: true,
                 aaSorting: [],
-                // order: [3, 'desc'],
+                order: [1, 'asc'],
                 scrollX: true,
 
                 ajax: route('rikkes-siswa-absensi.input', @json($jadwal->id)),
@@ -134,37 +134,37 @@
                     },
                     {
                         data: 'tensi',
-                        name: 'tensi',
+                        name: 'rikkes_absensi.tensi',
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: 'tinggi',
-                        name: 'tinggi',
+                        name: 'rikkes_absensi.tinggi',
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: 'bb',
-                        name: 'bb',
+                        name: 'rikkes_absensi.bb',
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: 'imt',
-                        name: 'imt',
+                        name: 'rikkes_absensi.imt',
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: 'nilai',
-                        name: 'nilai',
+                        name: 'rikkes_absensi.nilai',
                         orderable: true,
                         searchable: true
                     },
                     {
                         data: 'keterangan',
-                        name: 'keterangan',
+                        name: 'rikkes_absensi.keterangan',
                         orderable: true,
                         searchable: true
                     },

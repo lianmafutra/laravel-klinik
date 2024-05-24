@@ -26,4 +26,14 @@ class RikkesSiswaAbsensi extends Model
     {
         return $this->belongsTo(RikkesSiswaJadwal::class, 'rikkes_siswa_jadwal_id', 'id');
     }
+
+    /**
+     * Get the user that owns the RikkesSiswaAbsensi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -6,3 +6,6 @@
       data-toggle="tooltip" data-placement="bottom" title="Input Pemeriksaan Rikkes" class="p-2 btn btn-sm btn-primary btn_input"
        data-id="">Input </a>
   
+
+
+       

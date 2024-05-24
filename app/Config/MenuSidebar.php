@@ -203,6 +203,13 @@ class MenuSidebar
                   'icon' => 'far fa-circle',
                   'active' => ['laporan/pemeriksaan'],
                ],
+               [
+                  'type' => 'menu',
+                  'title' => 'Laporan Rikkes Siswa',
+                  'url' => route('laporan.rikkes.siswa'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['laporan/rikkes/siswa'],
+               ],
 
                // [
                //    'type' => 'menu',
