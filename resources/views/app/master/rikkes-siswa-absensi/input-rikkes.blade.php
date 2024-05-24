@@ -12,11 +12,8 @@
 @endpush
 @section('header')
     <x-header title="{{ $jadwal->nama }}" back-button="true"></x-header>
-  
-  
 @endsection
 @section('content')
- 
     <div class="col-sm-12">
         <form id="form_sample" method="post">
             @csrf
@@ -24,7 +21,19 @@
                 <div class="card-body">
                     <div class="card-body">
 
-                        <x-datatable id="datatable" :th="['No', 'Nama', 'NOSIS', 'PELETON','Tensi','tinggi','bb','imt','nilai','keterangan' ,'Aksi']" style="width: 100%"></x-datatable>
+                        <x-datatable id="datatable" :th="[
+                            'No',
+                            'Nama',
+                            'NOSIS',
+                            'PELETON',
+                            'Tensi',
+                            'Tinggi',
+                            'BB',
+                            'IMT',
+                            'Nilai',
+                            'Keterangan',
+                            'Aksi',
+                        ]" style="width: 100%"></x-datatable>
                     </div>
                 </div>
 
@@ -177,10 +186,23 @@
                 $('#nama').val(user.nama)
                 $('#user_id').val(user.id)
                 $('#nosis').val(user.nosis)
+                $('#rikkes_siswa_absensi_id').val($(this).attr('data-absensi'))
                 $('#rikkes_siswa_jadwal_id').val($(this).attr('data-jadwal'))
+                $.ajax({
+                    type: "GET",
+                    url: route('rikkes-siswa-absensi.detail', $(this).attr('data-absensi')),
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response)
+                        $("#tensi").val(response.data.tensi);
+                        $("#tinggi").val(response.data.tinggi);
+                        $("#bb").val(response.data.bb);
+                        $("#imt").val(response.data.imt);
+                        $("#nilai").val(response.data.nilai);
+                        $("#keterangan").val(response.data.keterangan);
+                    }
+                });
 
-               
-                
             })
         })
     </script>

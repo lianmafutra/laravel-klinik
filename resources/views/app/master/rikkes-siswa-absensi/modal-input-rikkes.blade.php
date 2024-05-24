@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_input_rikkes">
+<div class="modal fade" id="modal_input_rikkes" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,10 +14,11 @@
                     <section class="content">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-12">     
-                                    <x-input label="" id="rikkes_siswa_jadwal_id" placeholder=""  hidden  />  
-                                    <x-input label="" id="user_id" placeholder="" hidden  />
+                              <x-input label="" id="rikkes_siswa_jadwal_id" placeholder=""  hidden  />  
+                              <x-input label="" id="user_id" placeholder="" hidden  />
+                              <x-input label="" id="rikkes_siswa_absensi_id" placeholder=""  hidden />
 
+                                <div class="col-md-12">                                        
                                     <x-input label="Nama" id="nama" placeholder="" disabled />
                                     <x-input label="Nosis" id="nosis" placeholder="" disabled />
                                     <x-input-float label="TENSI" id="tensi" placeholder="" info="" />

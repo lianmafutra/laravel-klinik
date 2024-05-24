@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\AnggotaSiswa;
 use App\Models\RikkesSiswaAbsensi;
 use App\Models\RikkesSiswaJadwal;
+use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RikkesSiswaAbsensiController extends Controller
 {
+   use ApiResponse;
+
    public function inputRikkes($jadwal_id)
    {
 
+  
 
       $jadwal = RikkesSiswaJadwal::find($jadwal_id);
 
@@ -58,11 +62,33 @@ class RikkesSiswaAbsensiController extends Controller
       return view('app.master.rikkes-siswa-absensi.input-rikkes', compact('jadwal_id','jadwal'));
    }
 
+   public function getAbsensiDetail($absensi_id){
+      $data = RikkesSiswaAbsensi::where('id',$absensi_id)->first();
+      return $this->success('', $data);
+   }
+
    public function store(Request $request)
    {
+
       try {
          DB::beginTransaction();
-         $data = RikkesSiswaAbsensi::create($request->all());
+
+         if($request->rikkes_siswa_absensi_id){
+         
+            $data = RikkesSiswaAbsensi::where('id',$request->rikkes_siswa_absensi_id)->update([
+               'tensi' => $request->tensi,
+               'tinggi' => $request->tinggi,
+               'bb' => $request->bb,
+               'imt' => $request->imt,
+               'nilai' => $request->nilai,
+               'keterangan' => $request->keterangan,
+            ]);
+         }else{
+            $data = RikkesSiswaAbsensi::create(
+               $request->except('rikkes_siswa_absensi_id')
+            );
+         }
+       
          DB::commit();
          return $this->success(__('trans.crud.success'));
       } catch (\Throwable $th) {

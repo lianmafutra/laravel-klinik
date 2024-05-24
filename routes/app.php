@@ -101,5 +101,8 @@ Route::middleware(['auth'])->group(function () {
  
    Route::get('rikkes-siswa-jadwal/input/absensi/{rikkes_jadwal_id}', [RikkesSiswaAbsensiController::class, 'inputRikkes'])->name('rikkes-siswa-absensi.input');
    Route::post('rikkes-siswa-store', [RikkesSiswaAbsensiController::class, 'store'])->name('rikkes-siswa-absensi.store');
+   Route::get('rikkes-siswa-absensi-detail/{absensi_id}', [RikkesSiswaAbsensiController::class, 'getAbsensiDetail'])->name('rikkes-siswa-absensi.detail');
  
 });
+
+
