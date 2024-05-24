@@ -98,7 +98,6 @@ class MenuSidebar
             'title' => 'Data Anggota',
             'url' => '#',
              'icon' => 'fas fa-angle-right',
-           
             'active' => ['master-data/anggota/personil*','master-data/anggota/siswa*'],
             'items' => [
                [

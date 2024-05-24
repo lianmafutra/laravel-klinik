@@ -25,7 +25,7 @@
                     'Foto',
                     'Username',
                     'Nama',
-                    'Kontak',
+                 
                     'Role',
                     'Status',
                     'Last Login',
@@ -82,10 +82,7 @@
                     orderable: true,
                 },
 
-                {
-                    data: 'kontak',
-                    orderable: true,
-                },
+              
                
 
                 {
@@ -183,7 +180,7 @@
             })
         })
 
-        $('#datatable').on('click', '.btn_edit', function(e) {
+        $('body').on('click', '.btn_edit', function(e) {
             _clearInput()
             $('#modal_create_edit_user').modal('show')
             $('.modal-title').text('Ubah Data')
@@ -200,7 +197,7 @@
             })
         })
 
-        $('#datatable').on('click', '.btn_delete', function(e) {
+        $('body').on('click', '.btn_delete', function(e) {
             e.preventDefault()
             Swal.fire({
                 title: 'Are you sure, you want to delete this data ?',
