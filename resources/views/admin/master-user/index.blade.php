@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <style>
 
+
     </style>
 @endpush
-
 @section('header')
     <x-header title="Master Data User ( Pengguna )"></x-header>
 @endsection
@@ -25,7 +25,6 @@
                     'Foto',
                     'Username',
                     'Nama',
-                 
                     'Role',
                     'Status',
                     'Last Login',
@@ -43,12 +42,10 @@
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
-
     <script>
         $('.select2bs4').select2({
             theme: 'bootstrap4',
         })
-
         let datatable = $("#datatable").DataTable({
             serverSide: true,
             processing: true,
@@ -81,10 +78,6 @@
                     data: 'name',
                     orderable: true,
                 },
-
-              
-               
-
                 {
                     data: 'role',
                     orderable: true,
@@ -117,14 +110,12 @@
                 },
             ]
         })
-
         $('#btn_create_user').click(function(e) {
             e.preventDefault()
             _clearInput()
             $('#modal_create_edit_user').modal('show')
             $('.modal-title').text('Add New user')
         })
-
         $('#form_modal_create_edit').submit(function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -152,7 +143,6 @@
                 }
             })
         })
-
         $('#form_reset_password').submit(function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -179,7 +169,6 @@
                 }
             })
         })
-
         $('body').on('click', '.btn_edit', function(e) {
             _clearInput()
             $('#modal_create_edit_user').modal('show')
@@ -187,7 +176,6 @@
             $('.error').hide();
             let url = $(this).attr('data-url');
             $.get(url, function(response) {
-
                 $('#modal_create_edit_user input[name=user_id]').val(response.data.id)
                 $('#username').val(response.data.username)
                 $('#nama_lengkap').val(response.data.nama_lengkap)
@@ -196,7 +184,6 @@
                 $('#email').val(response.data.email)
             })
         })
-
         $('body').on('click', '.btn_delete', function(e) {
             e.preventDefault()
             Swal.fire({
@@ -230,19 +217,16 @@
                 }
             })
         })
-
         $('body').on('click', '.btn_reset_password', function(e) {
             e.preventDefault();
             $('#modal_reset_password').modal('show')
             let name = $(this).attr('data-name');
             $('#modal_reset_password input[name=user_id]').val($(this).attr('data-id'))
         })
-
         $('body').on('click', '.btn_nonaktifkan', function(e) {
             e.preventDefault();
             let data = $(this).attr('data-user');
             let status = $(this).attr('data-status');
-
             Swal.fire({
                 title: 'Apakah anda yakin ingin ' + status + ' User ?',
                 text: data,
@@ -258,8 +242,6 @@
                 }
             })
         })
-
-
         $('body').on('click', '.btn_force_login', function(e) {
             e.preventDefault();
             let user = $(this).attr('data-user');
@@ -274,7 +256,6 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-
                     $(this).find('#form-force-login').submit();
                 }
             })

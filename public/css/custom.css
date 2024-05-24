@@ -45,14 +45,25 @@ li.nav-link:hover {
     color: #fff;
     border-top-right-radius: 10px; /* Adjust the radius as needed */
     border-bottom-right-radius: 10px; /* Adjust the radius as needed */
+    border-radius: 10px;
+  
     
+}
+
+[class*=sidebar-dark] .nav-legacy .nav-treeview>.nav-item>.nav-link.active {
+   font-weight: 650;
+   
 }
 
 [class*=sidebar-dark] .nav-legacy .nav-treeview>.nav-item>.nav-link:hover {
    background-color: #94949435;
    color: #fff;
+   
    border-top-right-radius: 10px; /* Adjust the radius as needed */
    border-bottom-right-radius: 10px; /* Adjust the radius as needed */
+   border-radius: 10px;
+  
+  
    
 }
 
