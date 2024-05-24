@@ -19,7 +19,7 @@
                     Data</a>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama', 'NRP', 'Pangkat','Jabatan', 'Tgl Lahir', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'NRP', 'Pangkat','Jabatan', 'Tgl Lahir','Umur', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             info: true,
             ordering: true,
             aaSorting: [],
-            order: [1, 'asc'],
+            // order: [1, 'asc'],
             scrollX: true,
             ajax: {
                 url: route('master-data.personil.index'),
