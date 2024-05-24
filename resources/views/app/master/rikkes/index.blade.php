@@ -13,7 +13,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('rikkes.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                <a href="{{ route('rikkes-bintara.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
             </div>
@@ -39,7 +39,7 @@
             // order: [3, 'desc'],
             scrollX: true,
          
-            ajax: route('rikkes.index'),
+            ajax: route('rikkes-bintara.index'),
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,

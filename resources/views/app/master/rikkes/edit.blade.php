@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('rikkes.index') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('rikkes-bintara.index') }}" type="button" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('rikkes.update', @json( $rikkes)),
+                    url: route('rikkes-bintara.update', @json( $rikkes)),
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -77,7 +77,7 @@
                                 allowOutsideClick: false,
                             }).then((result) => {
                                 window.location.replace(route(
-                                    'rikkes.index'))
+                                    'rikkes-bintara.index'))
                             })
                         }
                     },

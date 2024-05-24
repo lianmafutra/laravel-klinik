@@ -177,7 +177,7 @@ class MenuSidebar
          ],
          [
             'type' => 'menu',
-            'title' => ' Laporan Rikkes',
+            'title' => ' Rikkes Bintara',
             'url' => route('rikkes.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['rikkes-laporan*'],
