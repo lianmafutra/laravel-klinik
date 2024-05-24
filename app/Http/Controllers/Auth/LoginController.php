@@ -66,7 +66,7 @@ class LoginController extends Controller
                     if (auth()->user()->getRoleName() == 'superadmin') {
                         return to_route('dashboard');
                     } else {
-                        return to_route('beranda.index');
+                        return to_route('klinik.dashboard.index');
                     }
                 }
             }

@@ -13,12 +13,14 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('rikkes-bintara.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
-                        class="fas fa-plus"></i> Input
-                    Data</a>
+                @can('role-admin')
+                    <a href="{{ route('rikkes-bintara.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
+                            class="fas fa-plus"></i> Input
+                        Data</a>
+                @endcan
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama' ,'File Rikkes', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'File Rikkes', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -38,7 +40,7 @@
             aaSorting: [],
             // order: [3, 'desc'],
             scrollX: true,
-         
+
             ajax: route('rikkes-bintara.index'),
             columns: [{
                     data: "DT_RowIndex",
@@ -58,15 +60,21 @@
                     orderable: true,
                     searchable: true
                 },
+
                 {
                     data: "action",
                     width: '15%',
+                    visible: false,
                     orderable: false,
                     searchable: false,
                 },
             ]
         })
 
+
+        @can('role-admin')
+            datatable.column(3).visible(true);
+        @endcan
 
         $('#datatable').on('click', '.btn_hapus', function(e) {
             let data = $(this).attr('data-hapus');
@@ -113,7 +121,7 @@
                             _alertSuccess(response.message)
                         },
                         error: function(response) {
-             
+
                             _showError(response)
                         }
                     })

@@ -69,6 +69,7 @@ class MenuSidebar
          [
             'type' => 'header',
             'title' => 'Data Master',
+            'permission' => ['role-admin'],
          ],
 
          [
@@ -77,6 +78,7 @@ class MenuSidebar
             'url' => route('master-data.obat.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/obat*','master-data/penyesuaian/obat*'],
+            'permission' => ['role-admin'],
          ],
          
          [
@@ -85,6 +87,7 @@ class MenuSidebar
             'url' => route('master-data.dokter.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/dokter*'],
+            'permission' => ['role-admin'],
          ],
          [
             'type' => 'menu',
@@ -92,6 +95,7 @@ class MenuSidebar
             'url' => route('master-data.tindakan.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/tindakan*'],
+            'permission' => ['role-admin'],
          ],
          [
             'type' => 'tree',
@@ -99,6 +103,7 @@ class MenuSidebar
             'url' => '#',
              'icon' => 'fas fa-angle-right',
             'active' => ['master-data/anggota/personil*','master-data/anggota/siswa*'],
+            'permission' => ['role-admin'],
             'items' => [
                [
                   'type' => 'menu',
@@ -125,6 +130,7 @@ class MenuSidebar
             'url' => route('master-data.pengguna.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['master-data/pengguna*'],
+            'permission' => ['role-admin'],
          ],
 
          [
@@ -154,6 +160,7 @@ class MenuSidebar
             'url' => '#',
             'icon' => 'fas fa-angle-right',
             'active' => ['pemeriksaan*', 'riwayat*', 'pasien*'],
+            'permission' => ['role-admin'],
 
             'items' => [
                [
@@ -180,6 +187,7 @@ class MenuSidebar
             'url' => route('rikkes-bintara.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['rikkes-bintara*'],
+            // 'permission' => ['role-admin'],
          ],
          [
             'type' => 'menu',
@@ -187,6 +195,7 @@ class MenuSidebar
             'url' => route('rikkes-siswa-jadwal.index'),
             'icon' => 'fas fa-angle-right',
             'active' => ['rikkes-siswa-jadwal*'],
+            'permission' => ['role-admin'],
          ],
          [
             'type' => 'tree',
@@ -209,6 +218,7 @@ class MenuSidebar
                   'icon' => 'far fa-circle',
                   'active' => ['laporan/rikkes/siswa'],
                ],
+               
 
                // [
                //    'type' => 'menu',
@@ -222,16 +232,23 @@ class MenuSidebar
 
          ],
          [
-            'type' => 'header',
-            'title' => 'Menu App',
-         ],
-         [
             'type' => 'menu',
-            'title' => 'Beranda',
-            'url' => route('beranda.index'),
-            'icon' => 'fas fa-home',
-            'active' => ['beranda*'],
+            'title' => 'Profile',
+            'url' => route('user.profile'),
+            'icon' => 'fas fa-angle-right',
+            'active' => ['user/profile*'],
          ],
+         // [
+         //    'type' => 'header',
+         //    'title' => 'Menu App',
+         // ],
+         // [
+         //    'type' => 'menu',
+         //    'title' => 'Beranda',
+         //    'url' => route('beranda.index'),
+         //    'icon' => 'fas fa-home',
+         //    'active' => ['beranda*'],
+         // ],
          // [
          //    'type'   => 'tree',
          //    'title'  => 'Sample Data',
@@ -264,13 +281,13 @@ class MenuSidebar
          //    'active' => ['data-user*'],
          //    'permission' => ['master-user-list'],
          // ],
-         [
-            'type' => 'menu',
-            'title' => 'Profile',
-            'url' => route('user.profile'),
-            'icon' => 'fas fa-user-alt',
-            'active' => ['user/profile*'],
-         ],
+         // [
+         //    'type' => 'menu',
+         //    'title' => 'Profile',
+         //    'url' => route('user.profile'),
+         //    'icon' => 'fas fa-angle-right',
+         //    'active' => ['user/profile*'],
+         // ],
       ]);
    }
 }
