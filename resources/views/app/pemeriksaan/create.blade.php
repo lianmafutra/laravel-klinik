@@ -89,9 +89,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                     <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
+                        <x-input hidden value="{{ $pasien->id }}" label="" id="pasien_id" />
                         <div class="col-lg-6 col-sm-6">
-                         
+
                             <x-input label="Nomor Pemeriksaan" id="nomor_pemeriksaan" required />
                             <x-select2 id="dokter_id" label="Pilih Dokter" placeholder="Pilih Dokter">
                                 @foreach ($dokter as $item)
@@ -104,14 +104,28 @@
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                             <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
 
-                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]" label="Pilih Tindakan "
-                                placeholder="Pilih Tindakan " multiple>
+                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]"
+                                label="Pilih Tindakan Yang Diberikan" placeholder="Pilih Tindakan" multiple>
                                 @foreach ($tindakan as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
 
                             </x-select2>
-                         
+
+                            <x-select2 required id="status_pemeriksaan" label="Status Pemeriksaan"
+                                placeholder="Pilih Status Pemeriksaan">
+                                <option value="selesai" selected>Selesai</option>
+                                <option value="rujukan">Rujukan</option>
+                            </x-select2>
+
+                            <div style="display: none" id="layout_rujukan">
+                                <hr style="margin-top: 20px">
+                                <label style="color:blue"> -- Rujukan --</label>
+                                <x-input label="Nomor Rujukan" id="rujukan_no"  />
+                                <x-textarea id="rujukan_ket" label="rujukan_ket" placeholder="" />
+                                <x-textarea id="rujukan_tujuan" label="Tujuan Klinik/Rumah Sakit" placeholder=""  />
+                            </div>
+
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <x-input-number label="Berat Badan (Kg)" id="berat_badan" />
@@ -120,7 +134,7 @@
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
                             <x-input label="Tensi Darah" id="tensi" />
                             <x-input label=" Laju Pernafasan" id="nafas" />
-                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder=""  />
+                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -227,6 +241,19 @@
                 defaultDate: ''
             });
 
+            
+            $("#layout_rujukan").css('display','none')
+
+            $("#status_pemeriksaan").on("select2:select", function(e) {
+                let value = $(this).val();
+                if (value == "rujukan") {
+                  $("#layout_rujukan").css('display','block')
+                } else {
+                    $("#layout_rujukan").css('display','none')
+                }
+            });
+
+         
 
 
             $("#select_obat").on("select2:select", function(e) {
@@ -287,7 +314,9 @@
                                         showCancelButton: false,
                                         allowOutsideClick: false,
                                     }).then((result) => {
-                                       window.location.replace(route('pemeriksaan.riwayat.index'))
+                                        window.location.replace(route(
+                                            'pemeriksaan.riwayat.index'
+                                        ))
                                     })
                                 }
                             },
@@ -306,7 +335,7 @@
                 const formData = new FormData(this);
                 formData.append('nomor_pemeriksaan', $('#nomor_pemeriksaan').val())
 
-               
+
                 $.ajax({
                     type: 'POST',
                     url: route('pemeriksaan-obat.store'),

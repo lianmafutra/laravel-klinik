@@ -33,8 +33,8 @@
 @section('content')
     <div class="col-lg-12 col-sm-12">
         <form id="form_sample" method="post">
-         @csrf
-         @method('PUT')
+            @csrf
+            @method('PUT')
             <div class="card">
                 <div class="card-header">
                     <i class="far fa-user pr-2"></i> Data Pasien
@@ -105,13 +105,29 @@
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
                             <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
 
-                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]" label="Pilih Tindakan "
-                                placeholder="Pilih Tindakan " multiple>
+                            <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]"
+                                label="Pilih Tindakan Yang Diberikan" placeholder="Pilih Tindakan" multiple>
                                 @foreach ($tindakan as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
 
                             </x-select2>
+
+                       
+                            <x-select2 required id="status_pemeriksaan" label="Status Pemeriksaan"
+                                placeholder="Pilih Status Pemeriksaan">
+                                <option value="selesai" selected>Selesai</option>
+                                <option value="rujukan">Rujukan</option>
+                            </x-select2>
+
+
+                            <div style="display: none" id="layout_rujukan">
+                                <hr style="margin-top: 20px">
+                                <label style="color:blue"> -- Rujukan --</label>
+                                <x-input label="Nomor Rujukan" id="rujukan_no" />
+                                <x-textarea id="rujukan_ket" label="rujukan_ket" placeholder="" />
+                                <x-textarea id="rujukan_tujuan" label="Tujuan Klinik/Rumah Sakit" placeholder="" />
+                            </div>
 
                         </div>
                         <div class="col-lg-6 col-sm-6">
@@ -119,7 +135,7 @@
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
-                          
+
                             <x-input label=" Laju Pernafasan" id="nafas" />
                             <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
                         </div>
@@ -226,6 +242,27 @@
                 locale: "id",
                 dateFormat: "d/m/Y",
                 defaultDate: ''
+            });
+
+            $("#layout_rujukan").css('display', 'none')
+
+            $("#status_pemeriksaan").on("select2:select", function(e) {
+                let value = $(this).val();
+                if (value == "rujukan") {
+                    $("#layout_rujukan").css('display', 'block')
+                } else {
+                    $("#layout_rujukan").css('display', 'none')
+                }
+            });
+
+
+            $("#status_pemeriksaan").change(function() {
+                let value = $(this).val();
+                if (value == "rujukan") {
+                    $("#layout_rujukan").css('display', 'block')
+                } else {
+                    $("#layout_rujukan").css('display', 'none')
+                }
             });
 
 
@@ -404,14 +441,18 @@
             $("#riwayat_penyakit").val(@json($pemeriksaan->riwayat_penyakit))
             $("#tindakan_array_id").val(@json($pemeriksaan->tindakan_array_id)).change();
             $("#berat_badan").val(@json($pemeriksaan->berat_badan))
-           
+
             $("#tensi").val(@json($pemeriksaan->tensi))
             $("#denyut_nadi").val(@json($pemeriksaan->denyut_nadi))
             $("#suhu").val(@json($pemeriksaan->suhu))
             $("#nafas").val(@json($pemeriksaan->nafas))
             $("#catatan").val(@json($pemeriksaan->catatan))
+            $("#status_pemeriksaan").val(@json($pemeriksaan?->status_pemeriksaan)).change();
+            $("#rujukan_no").val(@json($pemeriksaan?->rujukan_no))
+            $("#rujukan_ket").val(@json($pemeriksaan?->rujukan_ket))
+            $("#rujukan_tujuan").val(@json($pemeriksaan?->rujukan_tujuan))
 
-            
+
 
         })
     </script>

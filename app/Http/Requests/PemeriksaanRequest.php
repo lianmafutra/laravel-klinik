@@ -47,6 +47,10 @@ class PemeriksaanRequest extends FormRequest
          'suhu' => 'nullable|string',
          'nafas' => 'nullable|string',
          'diagnosis' => 'nullable|string',
+         'rujukan_no' => 'nullable|string',
+         'rujukan_ket' => 'nullable|string',
+         'rujukan_tujuan' => 'nullable|string',
+         'status_pemeriksaan' => 'required|string',
       ];
 
       return $rules;

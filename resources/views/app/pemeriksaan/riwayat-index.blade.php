@@ -35,7 +35,7 @@
 
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Kode Pemeriksaan', 'Kode RM', 'Nama', 'Tgl Pemeriksaan','Dokter','Waktu Input', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Kode Pemeriksaan', 'Kode RM', 'Nama', 'Tgl Pemeriksaan','Dokter','Status','Waktu Input', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -86,6 +86,10 @@
                 {
                     data: 'dokter.nama',
                     name : 'dokter.nama',
+                },
+                {
+                    data: 'status_pemeriksaan',
+                    name : 'status_pemeriksaan',
                 },
                 {
                     data: 'created_at',

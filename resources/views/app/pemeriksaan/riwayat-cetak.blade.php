@@ -93,8 +93,8 @@
                 <label>Nomor Pemeriksaan: </label> {{ $data->nomor_pemeriksaan }}
             </div>
             <div>
-               <label>Waktu Pemeriksaan: </label> {{ $data?->toArray()['created_at'] }}
-           </div>
+                <label>Waktu Pemeriksaan: </label> {{ $data?->toArray()['created_at'] }}
+            </div>
             <div>
                 <label>No. RM: </label> {{ $data?->pasien?->kode_rm }}
             </div>
@@ -110,10 +110,10 @@
             <div>
                 <label>Berat Badan: </label> {{ $data?->berat_badan }} Kg
             </div>
-           
+
             <div>
-               <label>Dokter: </label>  {{ $data?->dokter?->nama }}
-           </div>
+                <label>Dokter: </label> {{ $data?->dokter?->nama }}
+            </div>
         </div>
         <table class="table">
             <thead>
@@ -131,6 +131,28 @@
                 </tr>
             </tbody>
         </table>
+
+
+        @if ($data?->status_pemeriksaan == 'rujukan')
+            <h5>Rujukan</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nomor Rujukan</th>
+                        <th>Keterangan</th>
+                        <th>klinik/Rumah Sakit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $data->rujukan_no }}</td>
+                        <td>{{ $data?->rujukan_ket }}</td>
+                        <td>{{ $data?->rujukan_tujuan }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        @endif
+
         <h5>Resep Obat:</h5>
         <table class="table">
             <thead>
@@ -151,8 +173,9 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table> 
-        <h5>Catatan Tambahan :</h5> <p> {{ $data?->catatan }}</p>
+        </table>
+        <h5>Catatan Tambahan :</h5>
+        <p> {{ $data?->catatan }}</p>
     </div>
 </body>
 
