@@ -16,6 +16,10 @@
             <a class="nav-link d-none d-sm-inline-block" id="btntheme" role="button">
                 {{-- <i id="icontheme" class="fas fa-sun"></i> --}}
                 {{ \Carbon\Carbon::now()->translatedFormat('l, d-F-Y') }}
+
+                
+                 
+                
             </a>
         </li>
         <li class="nav-item">

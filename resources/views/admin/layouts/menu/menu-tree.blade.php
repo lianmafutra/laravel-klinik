@@ -4,7 +4,7 @@
       @else
       {{ request()->is($active) ? 'menu-open' : '' }}"> @endif
           <a href="{{ $url }}"
-            class="nav-link  {!! request()->is($active) ? 'active' : '' !!}">
+            class="nav-link rippleJS {!! request()->is($active) ? 'active' : '' !!}">
             <i class="{{ $icon }} nav-icon"></i>
             <p>{{ $title }}</p>
             @if (isset($notif))
@@ -20,13 +20,13 @@
         </li>
     @endif
 @else
-    <li class="nav-item menu-is-opening @if (isset($menu_open) && $menu_open == true) menu-open">
+    <li class="nav-item  menu-is-opening @if (isset($menu_open) && $menu_open == true) menu-open">
    @else
    {{ request()->is($active) ? 'menu-open' : '' }}"> @endif
        <a href="{{ $url }}"
-        class="nav-link  {!! request()->is($active) ? 'active' : '' !!}">
-        <i class="{{ $icon }} nav-icon"></i>
-        <p>{{ $title }}</p>
+        class="nav-link rippleJS {!! request()->is($active) ? 'active' : '' !!}">
+        <i class="{{ $icon }} nav-icon "></i>
+        <p clas>{{ $title }}</p>
         @if (isset($notif))
             {!! $notif ? '<span class="badge badge-info right">' . $notif . '</span>' : '' !!}
         @endif

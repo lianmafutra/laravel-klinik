@@ -12,7 +12,6 @@ use App\Models\Pasien;
 use App\Models\Pemeriksaan;
 use App\Models\PemeriksaanObat;
 use App\Models\TIndakan;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PemeriksaanController extends Controller
@@ -24,6 +23,12 @@ class PemeriksaanController extends Controller
    {
 
       return view('app.pemeriksaan.index');
+   }
+
+   public function riwayatCetak($pemeriksaan_id){
+      $data = Pemeriksaan::with('dokter', 'pasien','pemeriksaan_obat','pemeriksaan_obat.obat')->where('id', $pemeriksaan_id)->first();
+      
+      return view('app.pemeriksaan.riwayat-cetak', compact('data'));
    }
 
    public function riwayat()

@@ -13,7 +13,7 @@
     @endif
 @else
     <li class="nav-item">
-        <a href="{{ $url }}" class="nav-link {!! request()->is($active) ? 'active' : '' !!}">
+        <a href="{{ $url }}" class="rippleJS nav-link {!! request()->is($active) ? 'active' : '' !!}">
          <div class="wrapper2">
             <div class="icon">
                <i class="nav-icon {{ $icon }}"></i>
