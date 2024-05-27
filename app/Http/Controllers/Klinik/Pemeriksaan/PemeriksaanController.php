@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\klinik\Pemeriksaan;
+namespace App\Http\Controllers\Klinik\Pemeriksaan;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PemeriksaanRequest;
