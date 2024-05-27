@@ -53,8 +53,6 @@ class PemeriksaanObatController extends Controller
             return $this->error("Jumlah Obat Kurang, Pastikan jumlah tidak melebihi stok obat tersedia", 400);
          }
 
-
-        
          if ($obat?->first()?->tgl_expired != NULL) {
             if ($obat->first()->tgl_expired <= Carbon::today()->format('Y-m-d')) {
                return $this->error("Perhatian, Obat Expired", 400);

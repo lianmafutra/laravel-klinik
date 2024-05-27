@@ -8,7 +8,6 @@ use App\Models\Obat;
 use App\Utils\ApiResponse;
 use App\Utils\Rupiah;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MasterObatController extends Controller

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klinik SAMPEYAN</title>
     <style>
+      @page { margin: 0; }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -132,7 +133,6 @@
             </tbody>
         </table>
 
-
         @if ($data?->status_pemeriksaan == 'rujukan')
             <h5>Rujukan</h5>
             <table class="table">
@@ -175,7 +175,7 @@
             </tbody>
         </table>
         <h5>Catatan Tambahan :</h5>
-        <p> {{ $data?->catatan }}</p>
+        <p style="font-style: italic"> {{ $data?->catatan }}</p>
     </div>
 </body>
 
