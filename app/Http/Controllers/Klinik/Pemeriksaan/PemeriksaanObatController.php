@@ -40,21 +40,25 @@ class PemeriksaanObatController extends Controller
 
 
          DB::beginTransaction();
-         
+
          $obat = Obat::where('id', $request->select_obat);
 
-     
 
-         if($obat->first()->stok <= 0){
+
+         if ($obat->first()->stok <= 0) {
             return $this->error("Stok Obat Habis", 400);
          }
 
-         if($obat->first()->stok < $request->jumlah ){
+         if ($obat->first()->stok < $request->jumlah) {
             return $this->error("Jumlah Obat Kurang, Pastikan jumlah tidak melebihi stok obat tersedia", 400);
          }
 
-         if($obat->first()->tgl_expired <= Carbon::today()->format('Y-m-d') ){
-            return $this->error("Perhatian, Obat Expired", 400);
+
+        
+         if ($obat?->first()?->tgl_expired != NULL) {
+            if ($obat->first()->tgl_expired <= Carbon::today()->format('Y-m-d')) {
+               return $this->error("Perhatian, Obat Expired", 400);
+            }
          }
 
 
@@ -78,14 +82,12 @@ class PemeriksaanObatController extends Controller
          } else {
             return $this->success(__('trans.crud.success'));
          }
-      }
-      catch (QueryException $e) {
+      } catch (QueryException $e) {
          $errorCode = $e->errorInfo[1];
          if ($errorCode == 1062) {
             return $this->error("Data Obat Sudah ada, untuk Menambah Silahkan edit data", 400);
          }
-      }
-      catch (\Throwable $th) {
+      } catch (\Throwable $th) {
          DB::rollBack();
          return $this->error(__('trans.crud.error') . $th, 400);
       }
@@ -152,7 +154,7 @@ class PemeriksaanObatController extends Controller
          // $obat->update([
          //    'stok' =>  $obat->first()->stok + $pemeriksaanObat->jumlah
          // ]);
-      
+
          DB::commit();
 
          return $this->success(__('trans.crud.delete'));

@@ -276,6 +276,7 @@
                     success: function(response) {
                         $("#stok").val(response.data.stok);
                         $("#harga").val(response.data.harga_rupiah);
+                        $("#tgl_expired").val(response.data.tgl_expired);
                     }
                 });
             });
