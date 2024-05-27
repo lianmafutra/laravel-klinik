@@ -32,8 +32,9 @@ class MasterObatController extends Controller
             ->addColumn('status_expired', function ($data) {
 
                $now = Carbon::today();
-
-               $selisihHari = $now->diffInDays($data->tgl_expired);
+               
+               if($data->tgl_expired){
+                    $selisihHari = $now->diffInDays($data->tgl_expired);
 
              
                if ($selisihHari > 0) {
@@ -45,6 +46,9 @@ class MasterObatController extends Controller
                } else if ($selisihHari == 0) {
                   return '<span style="color: red;">Hari Ini </span>';
                }
+               }
+
+              
             })
             ->rawColumns(['action', 'status_expired'])
             ->make(true);

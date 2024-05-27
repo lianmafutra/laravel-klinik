@@ -4,16 +4,16 @@ use App\Http\Controllers\Admin\MasterUserController;
 use App\Http\Controllers\Admin\SampleCrudController;
 use App\Http\Controllers\Admin\TinyEditorController;
 use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\klinik\Dashboard\DashboarddController;
-use App\Http\Controllers\klinik\DataMaster\AnggotaPersonilController;
-use App\Http\Controllers\klinik\DataMaster\AnggotaSiswaController;
+use App\Http\Controllers\Klinik\Dashboard\DashboarddController;
+use App\Http\Controllers\Klinik\DataMaster\AnggotaPersonilController;
+use App\Http\Controllers\Klinik\DataMaster\AnggotaSiswaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
 use App\Http\Controllers\Klinik\DataMaster\MasterTindakanController;
 use App\Http\Controllers\Klinik\DataMaster\PenyesuaianStokObatController;
 use App\Http\Controllers\Klinik\Laporan\LaporanController;
-use App\Http\Controllers\klinik\Pasien\PasienController;
-use App\Http\Controllers\klinik\Pemeriksaan\PemeriksaanController;
+use App\Http\Controllers\Klinik\Pasien\PasienController;
+use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaAbsensiController;
@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('sample-crud', SampleCrudController::class);
 
 
-   // app klinik
+   // app Klinik
    Route::get('dashboard', [DashboarddController::class, 'index'])->name('klinik.dashboard.index');
  
 
