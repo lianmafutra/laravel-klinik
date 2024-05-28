@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Klinik\DataMaster;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tindakan;
+use App\Models\TIndakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +11,7 @@ class MasterTindakanController extends Controller
 {
     public function index()
     {
-      $data = Tindakan::query();
+      $data = TIndakan::query();
        if (request()->ajax()) {
           return datatables()->of($data)
              ->addIndexColumn()
@@ -41,7 +41,7 @@ class MasterTindakanController extends Controller
       try {
        
          DB::beginTransaction();
-         $tindakan = Tindakan::create(
+         $tindakan = TIndakan::create(
             $request->all()
          );
          DB::commit();
@@ -55,7 +55,7 @@ class MasterTindakanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tindakan $tindakan)
+    public function show(TIndakan $tindakan)
     {
         //
     }
@@ -63,7 +63,7 @@ class MasterTindakanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tindakan $tindakan)
+    public function edit(TIndakan $tindakan)
     {
    
       return view('app.master.tindakan.edit', compact('tindakan'));
@@ -72,7 +72,7 @@ class MasterTindakanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tindakan $tindakan)
+    public function update(Request $request, TIndakan $tindakan)
     {
       try {
 
@@ -95,7 +95,7 @@ class MasterTindakanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tindakan $tindakan)
+    public function destroy(TIndakan $tindakan)
     {
       try {
          DB::beginTransaction();
