@@ -18,10 +18,10 @@ class inputFloat extends Component
 
   public function render()
   {
-      if ($this->name == '') {
-          $this->name = $this->id;
-      }
-
+     if ($this->name == "") {
+            $this->name = $this->id;
+        }
+        
       return view('components.input-float');
   }
 }

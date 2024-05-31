@@ -21,12 +21,12 @@
                                 <div class="col-md-12">                                        
                                     <x-input label="Nama" id="nama" placeholder="" disabled />
                                     <x-input label="Nosis" id="nosis" placeholder="" disabled />
-                                    <x-input-float label="TENSI" id="tensi" placeholder="" info="" />
-                                    <x-input-float label="TINGGI" id="tinggi" placeholder=""  info=""/>
-                                    <x-input-float label="BB" id="bb" placeholder="" info=""/>
-                                    <x-input-float label="IMT" id="imt" placeholder="" info=""/>
-                                    <x-input-float label="NILAI" id="nilai" placeholder="" info=""/>
-                                    <x-textarea  label="Keterangan" id="keterangan" placeholder="" info=""/>
+                                    <x-input-float label="TENSI" id="tensi" name="tensi" placeholder="" info="" />
+                                    <x-input-float label="TINGGI" id="tinggi" name="tinggi" placeholder=""  info=""/>
+                                    <x-input-float label="BB" id="bb" placeholder="" name="bb" info=""/>
+                                    <x-input-float label="IMT" id="imt" placeholder="" name="imt" info=""/>
+                                    <x-input-float label="NILAI" id="nilai" placeholder="" name="nilai" info=""/>
+                                    <x-textarea  label="Keterangan" id="keterangan" placeholder="" name="keterangan" info=""/>
                                 </div>
                             </div>
                         </div>
