@@ -132,7 +132,6 @@
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
-                            <x-input label="Tensi Darah" id="tensi" />
                             <x-input label=" Laju Pernafasan" id="nafas" />
                             <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
                         </div>

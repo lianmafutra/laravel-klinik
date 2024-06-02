@@ -244,6 +244,7 @@
                         $("#select_user").val(response.data.anggota_kode).change();
                         $("#no_hp").val(response.data.no_hp);
                         $("#pasien_id").val(response.data.id);
+                        $("#pasien_id").css('display', 'none')
                         tgl_lahir.setDate(response.data.tgl_lahir)
 
                     }
