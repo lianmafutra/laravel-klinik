@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');

@@ -16,7 +16,10 @@ class CheckUser
    public function handle(Request $request, Closure $next): Response
    {
 
-     
+      if (!auth()->user()) {
+       
+         // return redirect('login');
+      }
       return $next($request);
    }
 }
