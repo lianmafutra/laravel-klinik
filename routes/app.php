@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['check_user'])->group(function () {
+Route::middleware(['auth'])->group(function () {
    Route::get('beranda', [BerandaController::class, 'index'])->name('beranda.index');
    Route::controller(UserController::class)->group(function () {
       Route::put('user/profile/{user_id}', 'update')->name('user.update');
