@@ -11,8 +11,14 @@ class LoginController extends Controller
 {
 
 
-   public function showLoginForm(){
-     return view('auth.login');
+   public function showLoginForm(Request $request){
+      if(auth()->user()){
+         return to_route('klinik.dashboard.index');
+      }else{
+         $request->session()->regenerate();
+         return view('auth.login');
+      }
+   
    }
 
    public function login(Request $request)

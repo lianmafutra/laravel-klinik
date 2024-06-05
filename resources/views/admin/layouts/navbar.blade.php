@@ -16,14 +16,10 @@
             <a class="nav-link d-none d-sm-inline-block" id="btntheme" role="button">
                 {{-- <i id="icontheme" class="fas fa-sun"></i> --}}
                 {{ \Carbon\Carbon::now()->translatedFormat('l, d-F-Y') }}
-
-                
-                 
-                
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('index') }}" target="_bkank" role="button">
+            <a class="nav-link" href="" target="_bkank" role="button">
                 <i class="fas fa-globe"></i>
             </a>
         <li class="nav-item">
@@ -32,7 +28,6 @@
             </a>
         </li>
         </li>
-
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img onerror="this.onerror=null; this.src='{{ asset('img/avatar.png') }}'" style="object-fit: cover"
@@ -40,7 +35,6 @@
                 {{-- <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> --}}
             </a>
             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-
                 {{-- <span 
                     class="dropdown-item dropdown-header">
                     <span  class="d-none d-md-inline">{{ Auth::user()->name }}</span></span>
