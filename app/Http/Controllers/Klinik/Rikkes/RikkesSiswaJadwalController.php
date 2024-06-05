@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Klinik\Rikkes;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RikkesSiswaJadwalRequest;
+use App\Models\AnggotaSiswaAngkatan;
 use App\Models\RikkesSiswaJadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,15 @@ class RikkesSiswaJadwalController extends Controller
     */
    public function index()
    {
-      $data = RikkesSiswaJadwal::query();
+      $data = RikkesSiswaJadwal::with('angkatan');
       if (request()->ajax()) {
          return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                return view('app.master.rikkes-siswa.action', compact('data'));
+            })
+            ->addColumn('angkatan', function ($data) {
+               return $data?->angkatan?->nama;
             })
             ->rawColumns(['action', 'file_rikkes'])
             ->make(true);
@@ -33,7 +37,8 @@ class RikkesSiswaJadwalController extends Controller
     */
    public function create()
    {
-      return view('app.master.rikkes-siswa.create');
+      $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
+      return view('app.master.rikkes-siswa.create', compact('angkatan'));
    }
 
    /**
@@ -66,8 +71,8 @@ class RikkesSiswaJadwalController extends Controller
     */
    public function edit(RikkesSiswaJadwal $rikkesSiswaJadwal)
    {
-     
-      return view('app.master.rikkes-siswa.edit', compact('rikkesSiswaJadwal'));
+      $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
+      return view('app.master.rikkes-siswa.edit', compact('rikkesSiswaJadwal','angkatan'));
    }
 
    /**

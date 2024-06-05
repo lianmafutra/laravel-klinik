@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RikkesSiswaJadwal extends Model
 {
@@ -16,4 +17,14 @@ class RikkesSiswaJadwal extends Model
       'updated_at' => 'datetime:d-m-Y  H:i:s',
       'tgl' => 'datetime:d-m-Y',
    ];
+
+   /**
+    * Get the angkatan that owns the RikkesSiswaJadwal
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function angkatan(): BelongsTo
+   {
+       return $this->belongsTo(AnggotaSiswaAngkatan::class, 'angkatan_id', 'id');
+   }
 }

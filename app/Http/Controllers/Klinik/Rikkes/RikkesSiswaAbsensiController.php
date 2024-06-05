@@ -21,7 +21,7 @@ class RikkesSiswaAbsensiController extends Controller
 
       $data = AnggotaSiswa::with(['rikkes_absensi' => function ($query) use ($jadwal_id) {
          $query->where('rikkes_siswa_jadwal_id', $jadwal_id);
-      }]);
+      }])->where('angkatan_id', $jadwal->angkatan_id);
 
       if (request()->ajax()) {
          return datatables()->of($data)

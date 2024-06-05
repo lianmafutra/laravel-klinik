@@ -18,6 +18,11 @@
             <div class="card">
                 <div class="card-body">
                     <x-input label="Judul Rikkes" id="nama" required />
+                    <x-select2 required id="angkatan_id" label="Pilih Angkatan" placeholder="Pilih Angkatan">
+                     @foreach ($angkatan as $index => $item)
+                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                     @endforeach
+                 </x-select2>
                     <x-datepicker id="tgl" label="Tanggal Event"  required/>
                 </div>
                 <div class="card-footer">

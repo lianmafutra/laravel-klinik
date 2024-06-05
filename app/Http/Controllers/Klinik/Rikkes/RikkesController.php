@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Klinik\Rikkes;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnggotaSiswaAngkatan;
 use App\Models\Rikkes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class RikkesController extends Controller
     */
    public function create()
    {
-
+    
       return view('app.master.rikkes.create');
    }
 

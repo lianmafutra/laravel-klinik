@@ -17,17 +17,23 @@
             @csrf
             @method('PUT')
             <div class="card">
-               <div class="card-body">
-                   <x-input label="Judul Rikkes" id="nama" required value="{{ $rikkesSiswaJadwal->nama }}"/>
-                   <x-datepicker id="tgl" label="Tanggal Event"  required/>
-               </div>
-               <div class="card-footer">
-                   <div style="gap:8px;" class="d-flex">
-                       <a href="{{ route('rikkes-siswa-jadwal.index') }}" type="button" class="btn btn-secondary">Kembali</a>
-                       <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
-                   </div>
-               </div>
-           </div>
+                <div class="card-body">
+                    <x-input label="Judul Rikkes" id="nama" required value="{{ $rikkesSiswaJadwal->nama }}" />
+                    <x-select2 required id="angkatan_id" label="Pilih Angkatan" placeholder="Pilih Angkatan">
+                        @foreach ($angkatan as $index => $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </x-select2>
+                    <x-datepicker id="tgl" label="Tanggal Event" required />
+                </div>
+                <div class="card-footer">
+                    <div style="gap:8px;" class="d-flex">
+                        <a href="{{ route('rikkes-siswa-jadwal.index') }}" type="button"
+                            class="btn btn-secondary">Kembali</a>
+                        <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 @endsection
@@ -44,6 +50,10 @@
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
     <script>
         $(function() {
+
+
+            $('#angkatan_id').val(@json($rikkesSiswaJadwal?->angkatan?->id)).trigger('change')
+
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
             })
@@ -60,7 +70,7 @@
                 const formData = new FormData(this);
                 $.ajax({
                     type: 'POST',
-                    url: route('rikkes-siswa-jadwal.update', @json( $rikkesSiswaJadwal)),
+                    url: route('rikkes-siswa-jadwal.update', @json($rikkesSiswaJadwal)),
                     data: formData,
                     contentType: false,
                     processData: false,

@@ -35,6 +35,7 @@ class RikkesSiswaJadwalRequest extends FormRequest
       $rules = [
          'nama' => 'required',
          'tgl' => 'required',
+         'angkatan_id' => 'required',
       ];
 
       return $rules;
