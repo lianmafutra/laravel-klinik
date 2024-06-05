@@ -30,7 +30,7 @@ class MasterObatRequest extends FormRequest
     public function rules(): array
    {
       $rules = [
-         'kode_obat' => 'required',
+         'kode_obat' => 'nullable',
          'keterangan' => 'nullable',
          'tgl_expired' => 'nullable',
          'nama' => 'required',

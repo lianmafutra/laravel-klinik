@@ -25,7 +25,7 @@
         <!-- /.login-logo -->
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a href="{{ route('login') }}" class="h1"><b>{{ config('global.app_name') }}</b></a>
+                    <a href="" class="h1"><b>{{ config('global.app_name') }}</b></a>
                      <p>{{ config('global.app_desc') }}</p>
                 </div>
                 <div class="card-body">

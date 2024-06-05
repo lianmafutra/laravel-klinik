@@ -66,7 +66,7 @@
                         <div class="page-links">
                             <a href="login9.html" class="active">Login Akun</a>
                         </div>
-                        <form autocomplete="false" method="POST" id="#recaptcha-form" action="{{ route('login') }}">
+                        <form autocomplete="false" method="POST" id="#recaptcha-form" action="{{ route('login.action') }}">
                             @csrf
                             <input class="login form-control" type="text" name="username" placeholder="Username"
                                 required>

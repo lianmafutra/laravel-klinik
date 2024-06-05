@@ -129,10 +129,12 @@
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <x-input-number label="Berat Badan (Kg)" id="berat_badan" />
+                            <x-input-float label="Tinggi (Cm)" id="tinggi" />
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
-                            <x-input label=" Laju Pernafasan" id="nafas" />
+                            <x-input label="Pernafasan" id="nafas" />
+                            <x-input label="SPO2" id="spo2" />
                             <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
                         </div>
                     </div>

@@ -19,12 +19,11 @@ use App\Http\Controllers\Klinik\Rikkes\RikkesController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaAbsensiController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaJadwalController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware(['check_user'])->group(function () {
    Route::get('beranda', [BerandaController::class, 'index'])->name('beranda.index');
    Route::controller(UserController::class)->group(function () {
       Route::put('user/profile/{user_id}', 'update')->name('user.update');

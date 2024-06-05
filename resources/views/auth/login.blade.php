@@ -23,11 +23,11 @@
         {!! implode('<br>', $errors->all()) !!}
     </div>
     <div class="login-box">
-        <form method="POST" id="#recaptcha-form" action="{{ route('login') }}">
+        <form method="POST" id="#recaptcha-form" action="{{ route('login.action') }}">
             @csrf
             <div class="card card-outline card-primary">
                 <div style="background-color: #c2e8fb" class="card-header text-center">
-                    <a href="#" class="h1"><b>SAMPYEAN</a>
+                    <a href="#" class="h1"><b>SAMPEYAN</a>
                 </div>
 
                 <div class="card">

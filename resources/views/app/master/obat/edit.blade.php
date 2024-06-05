@@ -33,7 +33,7 @@
                 @method('PUT')
                 <div class="card">
                     <div class="card-body">
-                        <x-input label="Kode Obat" id="kode_obat" required />
+                        <x-input label="Kode Obat" id="kode_obat"  />
                         <x-input label="Nama Obat" id="nama" required />
                         <x-input-rupiah label="Harga" id="harga" />
                         <x-input-number label="Jumlah Stok" id="stok" />

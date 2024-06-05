@@ -10,9 +10,9 @@ class inputFloat extends Component
 {
    public function __construct(
       public string $id,
-      public string $info = '',
       public string $label,
       public string $name = '',
+      public string $info = '',
   ) {
   }
 

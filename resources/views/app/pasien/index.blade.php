@@ -172,7 +172,7 @@
                 info: true,
                 ordering: true,
                 aaSorting: [],
-                // order: [3, 'desc'],
+                order: [6, 'desc'],
                 scrollX: true,
                 ajax: route('pasien.index'),
                 columns: [{

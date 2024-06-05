@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,18 +22,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   return redirect()->route('login');
+   return redirect()->route('login.form');
 })->name('index');
 
-Auth::routes([
-   'register' => false,
-   'reset' => false,
-   'confirm' => false,
-]);
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('login-action', [LoginController::class, 'login'])->name('login.action');
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware(['check_user'])->group(function () {
 
-   Route::prefix('app')->middleware(['auth'])->group(function () {
+   Route::prefix('app')->middleware(['check_user'])->group(function () {
       Route::resource('role', RoleController::class);
       Route::resource('permission-group', PermissionGroupController::class);
       Route::resource('permission', PermissionController::class);
@@ -60,4 +57,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
    Route::controller(AuthController::class)->group(function () {
       Route::put('password-ubah', 'ubahPassword')->name('password.ubah');
    });
+   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });

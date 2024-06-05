@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klinik SAMPEYAN</title>
+    <title>Klinik Punai Merindu</title>
     <style>
       @page { margin: 0; }
         body {
@@ -84,8 +84,8 @@
 <body onload="window.print()">
     <div class="container">
         <div class="header">
-            <h1>Klinik SAMPEYAN</h1>
-            <p>Jl. Jend. Sudirman No.45, Tambak Sari, Kec. Jambi Sel., Kota Jambi</p>
+            <h1>Klinik Punai Merindu</h1>
+            {{-- <p>Jl. Jend. Sudirman No.45, Tambak Sari, Kec. Jambi Sel., Kota Jambi</p> --}}
             <p>Telp: xxxx</p>
         </div>
         <hr class="double-line">

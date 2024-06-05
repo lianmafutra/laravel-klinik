@@ -35,7 +35,17 @@
 
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Kode Pemeriksaan', 'Kode RM', 'Nama', 'Tgl Pemeriksaan','Dokter','Status','Waktu Input', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="[
+                    'No',
+                    'Kode Pemeriksaan',
+                    'Kode RM',
+                    'Nama',
+                    'Tgl Pemeriksaan',
+                    'Dokter',
+                    'Status',
+                    'Waktu Input',
+                    'Aksi',
+                ]" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -46,8 +56,7 @@
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
-      
-    let  datatable =  $('#datatable').DataTable({
+        let datatable = $('#datatable').DataTable({
             serverSide: true,
             processing: true,
             searching: true,
@@ -56,7 +65,7 @@
             info: true,
             ordering: true,
             aaSorting: [],
-            order: [6, 'desc'],
+            order: [7, 'desc'],
             scrollX: true,
             ajax: route('pemeriksaan.riwayat.index'),
             columns: [{
@@ -67,33 +76,33 @@
                 },
                 {
                     data: 'nomor_pemeriksaan',
-                    name : 'nomor_pemeriksaan',
+                    name: 'nomor_pemeriksaan',
                 },
                 {
                     data: 'kode_rm',
-                    name : 'kode_rm',
+                    name: 'kode_rm',
                 },
                 {
                     data: 'nama',
-                    name : 'nama',
+                    name: 'nama',
                 },
 
                 {
                     data: 'tgl_pemeriksaan',
-                    name : 'tgl_pemeriksaan',
+                    name: 'tgl_pemeriksaan',
                 },
-                
+
                 {
                     data: 'dokter.nama',
-                    name : 'dokter.nama',
+                    name: 'dokter.nama',
                 },
                 {
                     data: 'status_pemeriksaan',
-                    name : 'status_pemeriksaan',
+                    name: 'status_pemeriksaan',
                 },
                 {
                     data: 'created_at',
-                    name : 'created_at',
+                    name: 'created_at',
                 },
                 {
                     data: "action",
