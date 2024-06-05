@@ -2,11 +2,11 @@
 @push('css')
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <style>
-
     </style>
 @endpush
-
 @section('header')
     <x-header title="Data Master Anggota Siswa"></x-header>
 @endsection
@@ -14,12 +14,24 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('master-data.siswa.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
-                        class="fas fa-plus"></i> Input
-                    Data</a>
+                <div class="d-flex flex-row bd-highlight align-items-center">
+                    <div class="p-2">
+                        <a href="{{ route('master-data.siswa.create') }}" id="btn_input_data"
+                            class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Input
+                            Data</a>
+                    </div>
+                    <div class="ml-auto p-2 bd-highlight">
+                        <x-select2 id="select_angkatan" label="" placeholder="Pilih Angkatan Siswa">
+                            @foreach ($angkatan as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </x-select2>
+                    </div>
+                 
+                </div>
             </div>
             <div class="card-body">
-                <x-datatable id="datatable" :th="['No', 'Nama','Nosis', 'NIK', 'Tgl Lahir', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
+                <x-datatable id="datatable" :th="['No', 'Nama', 'Nosis', 'NIK', 'Tgl Lahir', 'Alamat', 'Aksi']" style="width: 100%"></x-datatable>
             </div>
         </div>
     </div>
@@ -27,7 +39,55 @@
 @push('js')
     <script src="{{ asset('template/admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
+        $('.select2bs4').select2({
+            theme: 'bootstrap4',
+        })
+
+        let datatable_angkatan = $("#datatable_angkatan").DataTable({
+            serverSide: true,
+            processing: true,
+            searching: false,
+            lengthChange: false,
+            pageLength: 20,
+            paging: false,
+            info: false,
+            ordering: false,
+            aaSorting: [],
+            order: [1, 'asc'],
+            scrollX: false,
+            ajax: route('angkatan.index'),
+            columns: [{
+                    data: "DT_RowIndex",
+                    orderable: false,
+                    searchable: false,
+                    width: '1%'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "action",
+                  
+                    orderable: false,
+                    searchable: false,
+                },
+            ]
+        })
+
+    
+
+        $('#select_angkatan').val(1).trigger('change')
+
+        $("#select_angkatan").on("select2:select", function(e) {
+            var select_val = $(e.currentTarget).val();
+            datatable.draw();
+        });
+
         let datatable = $("#datatable").DataTable({
             serverSide: true,
             processing: true,
@@ -42,14 +102,16 @@
             scrollX: true,
             ajax: {
                 url: route('master-data.siswa.index'),
-            }, 
+                data: function(d) {
+                    d.angkatan = $('#select_angkatan').val();
+                }
+            },
             columns: [{
                     data: "DT_RowIndex",
                     orderable: false,
                     searchable: false,
                     width: '1%'
                 },
-
                 {
                     data: 'nama',
                     name: 'nama',
@@ -68,7 +130,6 @@
                     orderable: true,
                     searchable: true,
                 },
-               
                 {
                     data: 'tgl_lahir',
                     name: 'tgl_lahir',
@@ -90,24 +151,8 @@
             ]
         })
 
+     
 
-        $('#datatable').on('click', '.btn_hapus', function(e) {
-            let data = $(this).attr('data-hapus');
-            Swal.fire({
-                title: 'Apakah anda yakin ingin menghapus data ?',
-                text: data,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(this).find('#form-delete').submit();
-                }
-            })
-        })
 
         $('#datatable').on('click', '.btn_delete', function(e) {
             e.preventDefault()
@@ -136,7 +181,6 @@
                             _alertSuccess(response.message)
                         },
                         error: function(response) {
-
                             _showError(response)
                         }
                     })

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\AnggotaSiswaRequest;
 use App\Models\AnggotaSiswa;
+use App\Models\AnggotaSiswaAngkatan;
 use App\Models\Jabatan;
 use App\Models\Pangkat;
 use App\Utils\ApiResponse;
@@ -34,8 +35,14 @@ class AnggotaSiswaController extends Controller
    public function index(Request $request)
    {
 
-  
+
+      $angkatan = AnggotaSiswaAngkatan::get();
       $data = AnggotaSiswa::query();
+
+      if (request()->has('angkatan')) {
+         
+         $data->where('angkatan_id',   request('angkatan'));
+      }
 
       if (request()->ajax()) {
          return datatables()->of($data)
@@ -47,12 +54,12 @@ class AnggotaSiswaController extends Controller
             ->addColumn('umur', function (AnggotaSiswa $data) {
                return  Carbon::parse($data->tgl_lahir)->age . " Tahun";
             })
-            
+
 
             ->rawColumns(['action',])
             ->make(true);
       }
-      return view('app.master.anggota-siswa.index');
+      return view('app.master.anggota-siswa.index', compact('angkatan'));
    }
 
    /**
@@ -62,7 +69,9 @@ class AnggotaSiswaController extends Controller
    {
       $jabatan = Jabatan::get();
       $pangkat = Pangkat::get();
-      return view('app.master.anggota-siswa.create', compact('jabatan', 'pangkat'));
+      $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
+
+      return view('app.master.anggota-siswa.create', compact('jabatan', 'pangkat','angkatan'));
    }
 
    /**
@@ -103,9 +112,9 @@ class AnggotaSiswaController extends Controller
    {
       $jabatan = Jabatan::get();
       $pangkat = Pangkat::get();
+      $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
 
-     
-      return view('app.master.anggota-siswa.edit', compact('siswa', 'jabatan', 'pangkat'));
+      return view('app.master.anggota-siswa.edit', compact('siswa', 'jabatan','angkatan', 'pangkat'));
    }
 
    /**

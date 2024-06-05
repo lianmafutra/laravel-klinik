@@ -17,36 +17,43 @@
             @csrf
             <div class="card">
                 <div class="card-body">
+                    <x-select2 required id="angkatan_id" label="Pilih Angkatan" placeholder="Pilih Angkatan">
+                        @foreach ($angkatan as $index => $item)
+                            @if ($index == 0)
+                                <option selected value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @else
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endif
+                        @endforeach
+                    </x-select2>
                     <x-input label="Nama Lengkap" id="nama" required />
                     <x-input label="Tempat Lahir" id="tempat_lahir" required />
                     <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
                     <x-select2 required id="agama" label="Agama" placeholder="Pilih Agama">
-                     <option value="ISLAM">ISLAM</option>
-                     <option value="PROTESTAN">PROTESTAN</option>
-                     <option value="KHATOLIK">KHATOLIK</option>
-                     <option value="HINDU">HINDU</option>
-                     <option value="BUDDHA">BUDDHA</option>
-                     <option value="KHONGHUCU">KHONGHUCU</option>
-                     <option value="KRISTEN">KRISTEN</option>
+                        <option value="ISLAM">ISLAM</option>
+                        <option value="PROTESTAN">PROTESTAN</option>
+                        <option value="KHATOLIK">KHATOLIK</option>
+                        <option value="HINDU">HINDU</option>
+                        <option value="BUDDHA">BUDDHA</option>
+                        <option value="KHONGHUCU">KHONGHUCU</option>
+                        <option value="KRISTEN">KRISTEN</option>
                     </x-select2>
                     <x-select2 required id="jenis_kelamin" label="Jenis Kelamin" placeholder="Pilih Jenis Kelamin">
-                     <option value="L">Laki-Laki</option>
-                     <option value="P">Perempuan</option>
-               
-                 </x-select2>
-                   
-                
-                   <x-textarea  id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
+                        <option value="L">Laki-Laki</option>
+                        <option value="P">Perempuan</option>
+                    </x-select2>
+                    <x-textarea id="alamat" label="Alamat" placeholder="Alamat Tempat Tinggal" required />
                     <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
                     <x-input-number label="NOSIS" id="nosis" />
                     <x-input-number label="Nomor BPJS" id="no_bpjs" />
-                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required  info="Gunaka Titik untuk Pemisah Desimal"/>
+                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required
+                        info="Gunaka Titik untuk Pemisah Desimal" />
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />
-                  
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">
-                        <a href="{{ route('master-data.siswa.store') }}" type="button" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('master-data.siswa.store') }}" type="button"
+                            class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn_submit btn btn-primary">Simpan</button>
                     </div>
                 </div>
@@ -62,7 +69,6 @@
     {{-- flatcpiker format date input --}}
     <script src="{{ asset('plugins/flatpicker/flatpickr.min.js') }}"></script>
     <script src="{{ asset('plugins/flatpicker/id.min.js') }}"></script>
-    
     {{-- password toggle show/hide --}}
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
     <script>
@@ -100,7 +106,8 @@
                                 showCancelButton: false,
                                 allowOutsideClick: false,
                             }).then((result) => {
-                                window.location.replace(route('master-data.siswa.index'))
+                                window.location.replace(route(
+                                    'master-data.siswa.index'))
                             })
                         }
                     },

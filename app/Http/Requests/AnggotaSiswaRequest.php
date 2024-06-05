@@ -34,6 +34,7 @@ class AnggotaSiswaRequest extends FormRequest
       $rules =  [
          'nama' => 'required',
          'user_id' => 'nullable|integer',
+         'angkatan_id' => 'nullable|integer',
          'nosis' => 'nullable|string|max:50',
          'nik' => 'nullable|string|max:50',
          'agama' => 'nullable|string|max:100',

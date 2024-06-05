@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TinyEditorController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\Klinik\Dashboard\DashboarddController;
 use App\Http\Controllers\Klinik\DataMaster\AnggotaPersonilController;
+use App\Http\Controllers\Klinik\DataMaster\AnggotaSiswaAngkatanController;
 use App\Http\Controllers\Klinik\DataMaster\AnggotaSiswaController;
 use App\Http\Controllers\Klinik\DataMaster\MasterDokterController;
 use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Klinik\Rikkes\RikkesController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaAbsensiController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaJadwalController;
 use App\Http\Controllers\UserController;
+use App\Models\AnggotaSiswaAngkatan;
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
   
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
  
-
+   Route::resource('master-data/angkatan', AnggotaSiswaAngkatanController::class);
  
    Route::resource('master-data/tindakan', MasterTindakanController::class, [
       'as' => 'master-data',
@@ -71,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
    Route::resource('master-data/anggota/siswa', AnggotaSiswaController::class, [
       'as' => 'master-data',
    ])->parameters(['anggota' => 'anggota_personil']);
+
+
+
 
    Route::resource('master-data/anggota/personil', AnggotaPersonilController::class, [
       'as' => 'master-data',

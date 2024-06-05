@@ -102,7 +102,7 @@ class MenuSidebar
             'title' => 'Data Anggota',
             'url' => '#',
              'icon' => 'fas fa-angle-right',
-            'active' => ['master-data/anggota/personil*','master-data/anggota/siswa*'],
+            'active' => ['master-data/anggota/personil*','master-data/anggota/siswa*','master-data/angkatan*'],
             'permission' => ['role-admin'],
             'items' => [
                [
@@ -111,6 +111,14 @@ class MenuSidebar
                   'url' => route('master-data.siswa.index'),
                   'icon' => 'far fa-circle',
                   'active' => ['master-data/anggota/siswa*'],
+      
+               ],
+               [
+                  'type' => 'menu',
+                  'title' => 'Angkatan Siswa',
+                  'url' => route('angkatan.index'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['master-data/angkatan*'],
       
                ],
                [

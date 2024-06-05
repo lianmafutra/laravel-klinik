@@ -18,6 +18,11 @@
             @method('PUT')
             <div class="card">
                 <div class="card-body">
+                  <x-select2 required id="angkatan_id" label="Pilih Angkatan" placeholder="Pilih Angkatan">
+                     @foreach ($angkatan as $index => $item)
+                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                     @endforeach
+                 </x-select2>
                   <x-input label="Nama Lengkap" id="nama" required />
                     <x-input label="Tempat Lahir" id="tempat_lahir" required />
                     <x-datepicker id="tgl_lahir" label="Tanggal Lahir" required />
@@ -122,6 +127,7 @@
             tgl_lahir.setDate(@json($siswa->tgl_lahir))
             $('#agama').val(@json($siswa->agama)).change()
             $('#jenis_kelamin').val(@json($siswa->jenis_kelamin)).change()
+            $('#angkatan_id').val(@json($siswa->angkatan_id)).change()
             $('#jenis').val(@json($siswa->jenis)).change()
             $('#nik').val(@json($siswa->nik))
             $('#nosis').val(@json($siswa->nosis))
