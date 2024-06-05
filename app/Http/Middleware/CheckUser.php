@@ -17,9 +17,9 @@ class CheckUser
    {
 
       if (!auth()->user()) {
-       
-         // return redirect('login');
+         return redirect()->route("login.form");
+      } else {
+         return $next($request);
       }
-      return $next($request);
    }
 }
