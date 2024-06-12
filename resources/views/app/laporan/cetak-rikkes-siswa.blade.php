@@ -10,7 +10,7 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 
-<body onload="window.print()">
+<body>
     <div class="container mt-4">
         <h3 style="text-align: center"> KEPOLISIAN NEGARA REPOBLIK INDONESIA
             DAERAH JAMBI
@@ -27,6 +27,7 @@
                     <th>Tinggi</th>
                     <th>BB</th>
                     <th>IMT</th>
+                    <th>Ket IMT</th>
                     <th>Nilai</th>
                     <th>Ket</th </tr>
             </thead>
@@ -42,6 +43,60 @@
                         <td>{{ $item?->rikkes_absensi?->first()?->tinggi }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->catatan }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->bb }}</td>
+                        {{-- if (imt < 17.0) {
+                           kategoriInput.text = 'Kurus Tingkat Berat';
+                       } else if (imt >= 17.0 && imt <= 18.4) {
+                           kategoriInput.text = 'Kurus Tingkat Ringan';
+                       } else if (imt ) {
+                           kategoriInput.text = 'Normal';
+                       } else if (imt >= 25.1 && imt <= 27.0) {
+                           kategoriInput.text = 'Gemuk Tingkat Ringan (Over Weight)';
+                       } else if (imt > 27.0) {
+                           kategoriInput.text = 'Gemuk Tingkat Berat (Obesitas)';
+                       } else {
+                           kategoriInput.text = '';
+                       } --}}
+                        <td id="ket_imt">
+
+                            @php
+                                if ($item?->rikkes_absensi?->first()?->imt) {
+                                    $imt = $item?->rikkes_absensi?->first()?->imt;
+                                } else {
+                                    $imt = 0;
+                                }
+
+                            @endphp
+
+
+                            @switch(true)
+                                @case($imt == 0)
+                                @break
+
+                                @case($imt < 17.0)
+                                    Kurus Tingkat Berat
+                                @break
+
+                                @case($imt >= 17.0 && $imt <= 18.4)
+                                    Kurus Tingkat Ringan
+                                @break
+
+                                @case($imt >= 18.5 && $imt <= 24.9)
+                                    Normal
+                                @break
+
+                                @case($imt >= 25.1 && $imt <= 27.0)
+                                    Gemuk Tingkat Ringan (Over Weight)
+                                @break
+
+                                @case($imt > 27.0)
+                                   <span style="color: red"> Gemuk Tingkat Berat (Obesitas) </span>
+                                @break
+
+                                @default
+                            @endswitch
+
+
+                        </td>
                         <td>{{ $item?->rikkes_absensi?->first()?->imt }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->keterangan }}</td>
                     </tr>
@@ -51,5 +106,6 @@
 
     </div>
 </body>
+<script></script>
 
 </html>
