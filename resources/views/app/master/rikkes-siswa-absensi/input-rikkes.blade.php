@@ -84,15 +84,15 @@
 
             function updateKategori(imt) {
                 if (imt < 17.0) {
-                    kategoriInput.value = 'Kurus Tingkat Berat';
+                    kategoriInput.value = 'Berat Badan Kurus Tingkat Berat';
                 } else if (imt >= 17.0 && imt <= 18.4) {
-                    kategoriInput.value = 'Kurus Tingkat Ringan';
+                    kategoriInput.value = 'Berat Badan Kurus Tingkat Ringan';
                 } else if (imt >= 18.5 && imt <= 25.0) {
-                    kategoriInput.value = 'Normal';
+                    kategoriInput.value = 'Berat Badan Normal';
                 } else if (imt >= 25.1 && imt <= 27.0) {
-                    kategoriInput.value = 'Gemuk Tingkat Ringan (Over Weight)';
+                    kategoriInput.value = 'Berat Badan Gemuk Tingkat Ringan (Over Weight)';
                 } else if (imt > 27.0) {
-                    kategoriInput.value = 'Gemuk Tingkat Berat (Obesitas)';
+                    kategoriInput.value = 'Berat Badan Gemuk Tingkat Berat (Obesitas)';
                 } else {
                     kategoriInput.value = '';
                 }

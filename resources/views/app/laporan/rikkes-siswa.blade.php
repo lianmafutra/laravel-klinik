@@ -36,6 +36,7 @@
                       @endforeach
                        
                     </x-select2>
+
                 </div>
                 <div class="card-footer">
                     <div style="gap:8px;" class="d-flex">

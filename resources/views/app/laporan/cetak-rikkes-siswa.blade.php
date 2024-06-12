@@ -10,7 +10,7 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 
-<body>
+<body onload="window.print()">
     <div class="container mt-4">
         <h3 style="text-align: center"> KEPOLISIAN NEGARA REPOBLIK INDONESIA
             DAERAH JAMBI
@@ -43,19 +43,7 @@
                         <td>{{ $item?->rikkes_absensi?->first()?->tinggi }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->catatan }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->bb }}</td>
-                        {{-- if (imt < 17.0) {
-                           kategoriInput.text = 'Kurus Tingkat Berat';
-                       } else if (imt >= 17.0 && imt <= 18.4) {
-                           kategoriInput.text = 'Kurus Tingkat Ringan';
-                       } else if (imt ) {
-                           kategoriInput.text = 'Normal';
-                       } else if (imt >= 25.1 && imt <= 27.0) {
-                           kategoriInput.text = 'Gemuk Tingkat Ringan (Over Weight)';
-                       } else if (imt > 27.0) {
-                           kategoriInput.text = 'Gemuk Tingkat Berat (Obesitas)';
-                       } else {
-                           kategoriInput.text = '';
-                       } --}}
+                     
                         <td id="ket_imt">
 
                             @php
