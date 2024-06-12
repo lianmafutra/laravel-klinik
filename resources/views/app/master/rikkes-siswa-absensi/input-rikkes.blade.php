@@ -56,6 +56,62 @@
     <script src="{{ asset('plugins/toggle-password.js') }}"></script>
     <script>
         $(function() {
+
+            const beratBadanInput = document.getElementById('bb');
+            const tinggiBadanInput = document.getElementById('tinggi');
+            const imtInput = document.getElementById('imt');
+            const kategoriInput = document.getElementById('ket_imt');
+
+            function calculateIMT() {
+                const beratBadan = parseFloat(beratBadanInput.value);
+                const tinggiBadan = parseFloat(tinggiBadanInput.value);
+                if (!isNaN(beratBadan) && !isNaN(tinggiBadan) && tinggiBadan > 0) {
+                    const tinggiBadanMeter = tinggiBadan / 100; // convert to meters
+                    num = tinggiBadanMeter * tinggiBadanMeter;
+                    let numStr = num.toString();
+                    let decimalIndex = numStr.indexOf('.');
+                    if (decimalIndex !== -1) {
+                        numStr = numStr.substring(0, decimalIndex + 3);
+                    }
+                    const imt = beratBadan / (numStr);
+                    imtInput.value = imt.toFixed(2);
+                    updateKategori(imt.toFixed(2));
+                } else {
+                    imtInput.value = '';
+                    kategoriInput.value = '';
+                }
+            }
+
+            function updateKategori(imt) {
+                if (imt < 17.0) {
+                    kategoriInput.value = 'Kurus Tingkat Berat';
+                } else if (imt >= 17.0 && imt <= 18.4) {
+                    kategoriInput.value = 'Kurus Tingkat Ringan';
+                } else if (imt >= 18.5 && imt <= 25.0) {
+                    kategoriInput.value = 'Normal';
+                } else if (imt >= 25.1 && imt <= 27.0) {
+                    kategoriInput.value = 'Gemuk Tingkat Ringan (Over Weight)';
+                } else if (imt > 27.0) {
+                    kategoriInput.value = 'Gemuk Tingkat Berat (Obesitas)';
+                } else {
+                    kategoriInput.value = '';
+                }
+
+            }
+
+            function handleIMTInput() {
+
+                const imt = parseFloat(imtInput.value);
+                if (!isNaN(imt)) {
+                    updateKategori(imt);
+                } else {
+                    kategoriInput.value = '';
+                }
+            }
+            beratBadanInput.addEventListener('input', calculateIMT);
+            tinggiBadanInput.addEventListener('input', calculateIMT);
+            imtInput.addEventListener('input', handleIMTInput);
+            
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
             })
@@ -183,6 +239,8 @@
                 _clearInput()
                 let user = JSON.parse($(this).attr('data-user'));
                 $('#modal_input_rikkes').modal('show');
+                
+               
                 $('#nama').val(user.nama)
                 $('#user_id').val(user.id)
                 $('#nosis').val(user.nosis)
@@ -200,6 +258,7 @@
                         $("#imt").val(response.data.imt);
                         $("#nilai").val(response.data.nilai);
                         $("#keterangan").val(response.data.keterangan);
+                        handleIMTInput()
                     }
                 });
 

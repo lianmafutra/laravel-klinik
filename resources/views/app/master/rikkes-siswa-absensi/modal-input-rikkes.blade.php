@@ -14,19 +14,26 @@
                     <section class="content">
                         <div class="container-fluid">
                             <div class="row">
-                              <x-input label="" id="rikkes_siswa_jadwal_id" placeholder=""  hidden  />  
-                              <x-input label="" id="user_id" placeholder="" hidden  />
-                              <x-input label="" id="rikkes_siswa_absensi_id" placeholder=""  hidden />
-
-                                <div class="col-md-12">                                        
+                                <x-input label="" id="rikkes_siswa_jadwal_id" placeholder="" hidden />
+                                <x-input label="" id="user_id" placeholder="" hidden />
+                                <x-input label="" id="rikkes_siswa_absensi_id" placeholder="" hidden />
+                                <div class="col-md-12">
                                     <x-input label="Nama" id="nama" placeholder="" disabled />
                                     <x-input label="Nosis" id="nosis" placeholder="" disabled />
-                                    <x-input-float label="TENSI" id="tensi" name="tensi" placeholder="" info="" />
-                                    <x-input-float label="TINGGI" id="tinggi" name="tinggi" placeholder=""  info=""/>
-                                    <x-input-float label="BB" id="bb" placeholder="" name="bb" info=""/>
-                                    <x-input-float label="IMT" id="imt" placeholder="" name="imt" info=""/>
-                                    <x-input-float label="NILAI" id="nilai" placeholder="" name="nilai" info=""/>
-                                    <x-textarea  label="Keterangan" id="keterangan" placeholder="" name="keterangan" info=""/>
+                                    <x-input label="TENSI" id="tensi" name="tensi" placeholder="" info=""
+                                        required />
+                                    <x-input-float label="TINGGI (cm)" id="tinggi" name="tinggi" placeholder=""
+                                        info="" required />
+                                    <x-input-float label="BB (Kg)" id="bb" placeholder="" name="bb"
+                                        info="" required />
+                                    <x-input-float label="IMT ( Indeks Massa Tubuh )" id="imt" placeholder=""
+                                        name="imt" info="Info : Otomatis Terisi, BB/(tinggi x tinggi)" required />
+                                    <x-input label="Keterangan IMT" id="ket_imt" placeholder="" name="ket_imt"
+                                        info="" disabled />
+                                    <x-input-float label="NILAI" id="nilai" placeholder="" name="nilai"
+                                        info="" />
+                                    <x-textarea label="Keterangan" id="keterangan" placeholder="" name="keterangan"
+                                        info="" />
                                 </div>
                             </div>
                         </div>
@@ -40,3 +47,6 @@
         </div>
     </div>
 </div>
+<script>
+ 
+</script>
