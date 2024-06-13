@@ -11,9 +11,9 @@ class inputFloat extends Component
    public function __construct(
       public string $id,
       public string $label,
-      public string $name = '',
       public string $info = '',
-  ) {
+      public string $name = '',
+  ){
   }
 
   public function render()

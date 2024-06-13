@@ -46,7 +46,7 @@
                     <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
                     <x-input-number label="NOSIS" id="nosis" />
                     <x-input-number label="Nomor BPJS" id="no_bpjs" />
-                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required
+                    <x-input-float label="Tinggi Badan" id="tinggi_badan" required name="tinggi_badan"
                         info="Gunaka Titik untuk Pemisah Desimal" />
                  
                     <x-input-phone id="no_hp" label="Nomor HP" placeholder="Nomor Telepon Aktif" />

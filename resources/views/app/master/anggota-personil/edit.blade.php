@@ -42,7 +42,7 @@
                     <x-input-number label="NIK (Nomor Induk Kependudukan)" id="nik" />
                     <x-input-number label="NRP (Nomor Register Pokok)" id="nrp" required/>
                     <x-input-number label="Nomor BPJS" id="no_bpjs" />
-                    <x-input-float label="Tinggi Badan" id="tinggi_badan" 
+                    <x-input-float label="Tinggi Badan" id="tinggi_badan" name="tinggi_badan"
                         info="Gunaka Titik untuk Pemisah Desimal" />
                     <x-select2  id="pangkat" label="Pangkat" placeholder="Pilih Pangkat">
                         @foreach ($pangkat as $item)
