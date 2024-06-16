@@ -51,8 +51,8 @@ class PemeriksaanRequest extends FormRequest
          'rujukan_ket' => 'nullable|string',
          'rujukan_tujuan' => 'nullable|string',
          'status_pemeriksaan' => 'required|string',
-         'tinggi_badan' => 'required',
-         'spo2' => 'required',
+         'tinggi_badan' => 'nullable|required',
+         'spo2' => 'nullable',
       ];
 
       return $rules;
