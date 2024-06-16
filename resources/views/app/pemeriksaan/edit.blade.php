@@ -131,14 +131,15 @@
 
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            <x-input label="Berat Badan (Kg)" id="berat_badan" />
-                            <x-input label="Tensi Darah (mmHg)" id="tensi" />
-                            <x-input label="Denyut Nadi" id="denyut_nadi" />
-                            <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
-
-                            <x-input label=" Laju Pernafasan" id="nafas" />
-                            <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
-                        </div>
+                           <x-input-number label="Berat Badan (Kg)" id="berat_badan" />
+                           <x-input-float label="Tinggi (Cm)" id="tinggi_badan" name="tinggi_badan" />
+                           <x-input label="Tensi Darah (mmHg)" id="tensi" />
+                           <x-input label="Denyut Nadi" id="denyut_nadi" />
+                           <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
+                           <x-input label="Pernafasan" id="nafas" />
+                           <x-input label="SPO2" id="spo2" />
+                           <x-textarea id="catatan" label="Catatan Tambahan" placeholder="" />
+                       </div>
                     </div>
                 </div>
             </div>
@@ -452,6 +453,7 @@
             $("#rujukan_no").val(@json($pemeriksaan?->rujukan_no))
             $("#rujukan_ket").val(@json($pemeriksaan?->rujukan_ket))
             $("#rujukan_tujuan").val(@json($pemeriksaan?->rujukan_tujuan))
+            $("#tinggi_badan").val(@json($pemeriksaan?->tinggi_badan))
 
 
 
