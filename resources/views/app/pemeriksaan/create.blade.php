@@ -129,7 +129,7 @@
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <x-input-number label="Berat Badan (Kg)" id="berat_badan" />
-                            <x-input-float label="Tinggi (Cm)" id="tinggi" name="tinggi" />
+                            <x-input-float label="Tinggi (Cm)" id="tinggi_badan" name="tinggi_badan" />
                             <x-input label="Tensi Darah (mmHg)" id="tensi" />
                             <x-input label="Denyut Nadi" id="denyut_nadi" />
                             <x-input label="Suhu Tubuh (Derajat Celcius)" id="suhu" />
