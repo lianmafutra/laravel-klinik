@@ -103,7 +103,7 @@
                             <x-datepicker id="tgl_pemeriksaan" label="Tanggal Pemeriksaan" required />
                             <x-textarea id="keluhan" label="Keluhan Pasien" placeholder="" required />
                             <x-textarea id="diagnosis" label="Diagnosis Pasien" placeholder="" required />
-                            <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder="" required />
+                            <x-textarea id="riwayat_penyakit" label="Riwayat Penyakit" placeholder=""  />
 
                             <x-select2 required id="tindakan_array_id" name="tindakan_array_id[]"
                                 label="Pilih Tindakan Yang Diberikan" placeholder="Pilih Tindakan" multiple>
