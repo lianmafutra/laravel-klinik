@@ -160,6 +160,7 @@
                         $("#alamat").val(response.data.alamat);
                         $("#jenis_kelamin").val(response.data.jenis_kelamin).change();
                         $("#no_hp").val(response.data.no_hp);
+                        tgl_lahir.setDate(response.data.tgl_lahir)
                     }
                 });
             });
