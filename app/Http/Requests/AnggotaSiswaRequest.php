@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\AnggotaSiswa;
 use App\Utils\DateUtils;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -17,7 +18,6 @@ class AnggotaSiswaRequest extends FormRequest
    protected function prepareForValidation(): void
    {
       $merges = [
-         // 'category_multi_id' => json_encode($this->category_multi_id),
          'tgl_lahir' => DateUtils::format($this->tgl_lahir),
         
       ];

@@ -19,8 +19,7 @@ class PasienController extends Controller
    public function index()
    {
       $x['siswa'] =  AnggotaSiswa::get();
-      $x['personil'] =  AnggotaPersonil::get();
-      $x['anggota'] = $x['siswa']->toBase()->merge($x['personil'])->sortBy('nama');
+     
       $data = Pasien::with('personil', 'siswa');
       if (request()->ajax()) {
          return datatables()->of($data)
@@ -36,6 +35,20 @@ class PasienController extends Controller
       }
       return view('app.pasien.index', $x);
    }
+
+
+   public function anggotaList($jenis){
+  
+      if ($jenis == 'personil') {
+         $anggota =  AnggotaPersonil::all();
+      }
+      if ($jenis == 'siswa') {
+         $anggota =  AnggotaSiswa::all();
+      }
+
+     
+      return $this->success('Data Anggota List By Jenis', $anggota);
+   }
    /**
     * Show the form for creating a new resource.
     */
@@ -49,6 +62,8 @@ class PasienController extends Controller
    public function store(PasienRequest $request, Pasien $pasien)
    {
      
+
+   
       try {
          DB::beginTransaction();
          if($request->pasien_id){
@@ -63,20 +78,16 @@ class PasienController extends Controller
          }
          else{
             if ($request->jenis_anggota == 'personil') {
-               $anggota =  AnggotaPersonil::where('kode', $request->select_user)->first();
+               $anggota =  AnggotaPersonil::where('id', $request->select_user)->first();
             }
             if ($request->jenis_anggota == 'siswa') {
-               $anggota =  AnggotaSiswa::where('kode',   $request->select_user )->first();
+               $anggota =  AnggotaSiswa::where('id',   $request->select_user )->first();
             }
-            if ($request->radio == "anggota") {
-               $anggota_id = $anggota->kode;
-            } elseif ($request->radio == "lainnya") {
-               $anggota_id = NULL;
-            }
+           
             $kodeRm = Pasien::generateKodeRm();
             $array = [
                "kode_rm" => $kodeRm,
-               "anggota_kode" =>   $anggota_id,
+            
                "anggota_jenis" => $request->jenis_anggota,
                "nama" => $request->nama,
                "alamat" => $request->alamat,

@@ -19,6 +19,8 @@
                         <a href="{{ route('master-data.siswa.create') }}" id="btn_input_data"
                             class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Input
                             Data</a>
+                            <a href="{{ route('rikkes-siswa-jadwal.create') }}" id="btn_upload_excel" class="btn btn-sm btn-secondary"><i
+                              class="fas fa-upload"></i> Upload Excel</a>
                     </div>
                     <div class="ml-auto p-2 bd-highlight">
                         <x-select2 id="select_angkatan" label="" placeholder="Pilih Angkatan Siswa">
@@ -27,7 +29,6 @@
                             @endforeach
                         </x-select2>
                     </div>
-                 
                 </div>
             </div>
             <div class="card-body">
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+    @include('app.master.anggota-siswa.modal-upload-excel')
 @endsection
 @push('js')
     <script src="{{ asset('template/admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -44,7 +46,6 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4',
         })
-
         let datatable_angkatan = $("#datatable_angkatan").DataTable({
             serverSide: true,
             processing: true,
@@ -72,22 +73,16 @@
                 },
                 {
                     data: "action",
-                  
                     orderable: false,
                     searchable: false,
                 },
             ]
         })
-
-    
-
         $('#select_angkatan').val(1).trigger('change')
-
         $("#select_angkatan").on("select2:select", function(e) {
             var select_val = $(e.currentTarget).val();
             datatable.draw();
-        });
-
+        })
         let datatable = $("#datatable").DataTable({
             serverSide: true,
             processing: true,
@@ -150,10 +145,6 @@
                 },
             ]
         })
-
-     
-
-
         $('#datatable').on('click', '.btn_delete', function(e) {
             e.preventDefault()
             Swal.fire({
@@ -187,5 +178,44 @@
                 }
             })
         })
+        $('#btn_upload_excel').click(function(e) {
+            e.preventDefault();
+            $('#modal_upload_excel').modal('show');
+            _clearInput()
+        });
+
+        $('#form_upload_excel').submit(function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: route('anggota.siswa.importExcel'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        _showLoading()
+                    },
+                    success: (response) => {
+                        if (response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: "Berhasil Import Data Excel Siswa",
+                                showCancelButton: true,
+                                allowEscapeKey: false,
+                                showCancelButton: false,
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                $('#modal_upload_excel').modal('hide');
+                                datatable.ajax.reload();
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        _showError(response)
+                    }
+                })
+            })
     </script>
 @endpush

@@ -16,6 +16,8 @@
                 <a href="{{ route('rikkes-siswa-jadwal.create') }}" id="btn_input_data" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Input
                     Data</a>
+
+                  
             </div>
             <div class="card-body">
                 <x-datatable id="datatable" :th="['No', 'Nama','Angkatan','Tanggal Rikkes', 'Aksi']" style="width: 100%"></x-datatable>

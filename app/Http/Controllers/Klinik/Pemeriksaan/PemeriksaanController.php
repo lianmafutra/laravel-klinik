@@ -54,14 +54,14 @@ class PemeriksaanController extends Controller
       return view('app.pemeriksaan.riwayat-index');
    }
 
-   public function userDetail($kode, $jenis)
+   public function userDetail($id, $jenis)
    {
 
       if ($jenis == 'personil') {
-         $anggota =  AnggotaPersonil::where('kode', $kode)->first();
+         $anggota =  AnggotaPersonil::where('id', $id)->first();
       }
       if ($jenis == 'siswa') {
-         $anggota =  AnggotaSiswa::where('kode', $kode)->first();
+         $anggota =  AnggotaSiswa::where('id', $id)->first();
       }
 
 
@@ -94,6 +94,7 @@ class PemeriksaanController extends Controller
    {
       try {
 
+      
          DB::beginTransaction();
 
          $pemeriksaan =  Pemeriksaan::create(

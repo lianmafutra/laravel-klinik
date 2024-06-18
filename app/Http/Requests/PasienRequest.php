@@ -33,6 +33,7 @@ class PasienRequest extends FormRequest
    {
       $rules =  [
          'nama' => 'required',
+         'select_jenis_anggota' => 'nullable',
          'tgl_lahir' => 'required|date_format:Y-m-d',
          'alamat' => 'required|string',
          // 'tinggi_badan' => 'nullable|numeric',

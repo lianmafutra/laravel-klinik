@@ -18,7 +18,9 @@ class DateUtils
 
     public static function format($date)
     {
+    
       if($date != null){
+     
          return Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
       }
     }

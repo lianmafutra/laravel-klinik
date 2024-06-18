@@ -179,6 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -196,7 +197,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Setting' => App\Helpers\SettingHelper::class,
-       
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
 

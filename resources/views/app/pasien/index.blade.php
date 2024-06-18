@@ -12,17 +12,14 @@
         .select2-results {
             background-color: #a9cffa;
         }
-
         /* Add shadow to the dropdown */
         .select2-container--open .select2-dropdown {
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-
         .select2-results__option[aria-selected=true] {
             background-color: #509aef !important;
             overflow-x: inherit;
         }
-
         /* Ensure the dropdown has a white background */
     </style>
 @endpush
@@ -52,8 +49,6 @@
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
         $(function() {
-
-
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
                 allowClear: true,
@@ -64,54 +59,44 @@
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
-
-
             const edit_tgl_lahir = flatpickr("#edit_tgl_lahir", {
                 allowInput: true,
                 locale: "id",
                 dateFormat: "d/m/Y",
                 defaultDate: ''
             });
-
             $('input[type=radio][name=radio]').change(function() {
                 var selectedValue = $('input[name=radio]:checked').val();
                 if (selectedValue == "anggota") {
                     $("[name=select_user]").css('display', 'block')
                     $("[name=select_user]").attr("required", "required");
                 } else if (selectedValue == "lainnya") {
-
                     $("[name=select_user]").css('display', 'none')
                     $("[name=select_user]").removeAttr("required");
                 }
             });
-
             $('#btn_input_pasien').click(function(e) {
                 e.preventDefault();
                 $('#modal_input_pasien').modal('show');
                 $("[name=select_user]").css('display', 'block')
                 $("[name=select_user]").attr("required", "required");
                 $(".select_jenis_pasien").css('display', 'block')
+
+                $(".select_jenis_anggota").css('display', 'block');
+                $("#select_jenis_anggota").attr("required", "required");
                 _clearInput()
             });
             $('#form_submit_pasien').submit(function(e) {
                 e.preventDefault();
                 var selectedOption = $("#select_user").find('option:selected');
-
                 const formData = new FormData(this);
-
                 var selectedValue = $('input[name=radio]:checked').val();
-
                 if (selectedValue == "anggota") {
                     var jenis_anggota = selectedOption.data('jenis');
                 } else if (selectedValue == "lainnya") {
                     var jenis_anggota = "lainnya";
                 }
-
-
                 formData.append('jenis_anggota', jenis_anggota);
-
-
-
                 $.ajax({
                     type: 'POST',
                     url: route('pasien.store'),
@@ -142,18 +127,52 @@
                     }
                 })
             })
-
-
-
+            // Function to format the options in the dropdown
+            $("#select_jenis_anggota").on("select2:select", function(e) {
+                var select_val = $(e.currentTarget).val();
+                var select = $('#select_user');
+                // Show loading message
+                select.empty().append(new Option('Loading...', '', false, false)).trigger('change');
+                $.ajax({
+                    type: "GET",
+                    url: route('anggota.list.jenis', select_val),
+                    dataType: "json",
+                    success: function(response) {
+                        var newOptions = response.data.map(function(item) {
+                            if (select_val == 'siswa') {
+                                return new Option(item.nama + ' (' + item.nik + ')',
+                                    item
+                                    .id,
+                                    false, false);
+                            } else {
+                                return new Option(item.nama + ' (' + item.nrp + ')',
+                                    item
+                                    .id,
+                                    false, false);
+                            }
+                        });
+                        // Initialize Select2 with placeholder
+                        select.select2({
+                            theme: 'bootstrap4',
+                            placeholder: "select anggota",
+                            allowClear: true
+                        });
+                        // Clear the loading message and add the new options
+                        select.empty().trigger('change');
+                        select.append(new Option('', '', true, true)).trigger(
+                        'change'); // Placeholder option
+                        select.append(newOptions).trigger('change');
+                    }
+                });
+            });
 
 
             $("#select_user").on("select2:select", function(e) {
                 var select_val = $(e.currentTarget).val();
                 var selectedOption = $(this).find('option:selected');
-                var jenis_anggota = selectedOption.data('jenis');
                 $.ajax({
                     type: "GET",
-                    url: route('anggota.detail', [select_val, jenis_anggota]),
+                    url: route('anggota.detail', [select_val, $("#select_jenis_anggota").val()]),
                     dataType: "json",
                     success: function(response) {
                         $("#nama").val(response.data.nama);
@@ -220,14 +239,14 @@
                     },
                 ]
             })
-
-
             $('body').on('click', '.btn_edit', function(e) {
                 $("[name=select_user]").css('display', 'block')
+                $(".select_jenis_anggota").css('display', 'none');
+                $("#select_jenis_anggota").removeAttr("required");
+
                 e.preventDefault()
                 $('#modal_input_pasien').modal('show');
                 _clearInput()
-
                 $.ajax({
                     type: "GET",
                     url: route('pasien.show', $(this).attr('data-id')),
@@ -236,25 +255,19 @@
                         $(".select_jenis_pasien").css('display', 'none')
                         $("[name=select_user]").css('display', 'none')
                         $("[name=select_user]").removeAttr("required");
-
                         $("#select_user").val(response.data.anggota_kode).change();
                         $("#nama").val(response.data.nama);
                         $("#alamat").val(response.data.alamat);
                         $("#jenis_kelamin").val(response.data.jenis_kelamin).change();
-
                         $("#select_user").val(response.data.anggota_kode).change();
+                      
                         $("#no_hp").val(response.data.no_hp);
                         $("#pasien_id").val(response.data.id);
                         $("#pasien_id").css('display', 'none')
                         tgl_lahir.setDate(response.data.tgl_lahir)
-
                     }
                 });
-
-
             })
-
-
             $('body').on('click', '.btn_hapus', function(e) {
                 e.preventDefault()
                 Swal.fire({

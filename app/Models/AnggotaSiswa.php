@@ -34,4 +34,7 @@ class AnggotaSiswa extends Model
        return $this->hasMany(RikkesSiswaAbsensi::class, 'user_id', 'id');
    }
 
+
+
+
 }

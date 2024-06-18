@@ -20,6 +20,7 @@ use App\Http\Controllers\Klinik\Rikkes\RikkesController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaAbsensiController;
 use App\Http\Controllers\Klinik\Rikkes\RikkesSiswaJadwalController;
 use App\Http\Controllers\UserController;
+use App\Models\AnggotaSiswa;
 use App\Models\AnggotaSiswaAngkatan;
 use Illuminate\Support\Facades\Route;
 
@@ -62,8 +63,10 @@ Route::middleware(['auth'])->group(function () {
    
    Route::resource('pemeriksaan-obat', PemeriksaanObatController::class);
   
+   Route::get('anggotaJenis/{jenis}', [PasienController::class, 'anggotaList'])->name('anggota.list.jenis');
    Route::get('anggota/{user_id}/jenis/{jenis}', [PemeriksaanController::class, 'userDetail'])->name('anggota.detail');
  
+   
    Route::resource('master-data/angkatan', AnggotaSiswaAngkatanController::class);
  
    Route::resource('master-data/tindakan', MasterTindakanController::class, [
@@ -74,7 +77,8 @@ Route::middleware(['auth'])->group(function () {
       'as' => 'master-data',
    ])->parameters(['anggota' => 'anggota_personil']);
 
-
+   Route::post('anggota/siswa/importExcel', [AnggotaSiswaController::class, 'importExcel'])->name('anggota.siswa.importExcel');
+   
 
 
    Route::resource('master-data/anggota/personil', AnggotaPersonilController::class, [
