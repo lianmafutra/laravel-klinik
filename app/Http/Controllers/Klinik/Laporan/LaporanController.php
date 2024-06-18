@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Klinik\Laporan;
 
 use App\Http\Controllers\Controller;
 use App\Models\AnggotaSiswa;
+use App\Models\Obat;
 use App\Models\Pasien;
 use App\Models\Pemeriksaan;
+use App\Models\PenyesuaianObat;
 use App\Models\RikkesSiswaAbsensi;
 use App\Models\RikkesSiswaJadwal;
 use Carbon\Carbon;
@@ -66,5 +68,43 @@ class LaporanController extends Controller
    public function obat()
    {
       return view('app.laporan.obat');
+   }
+
+   public function cetakLaporanObat(Request $request)
+   {
+     
+     
+
+      if( request()->get('jenis_laporan') == 'obat_terkini'){
+         $obat = Obat::get();
+         $start_date = '';
+         $end_date = '';
+         $deskripsi = "Laporan Stok Obat Terkini " .Carbon::now()->format('d-m-Y') ;
+      }
+      if( request()->get('jenis_laporan') == 'obat_penyesuaian'){
+      
+        
+     
+         $start_date = urldecode(request()->get('start_date'));
+         $end_date = urldecode(request()->get('end_date'));
+
+
+         $jenis_penyesuaian = request()->get('jenis_penyesuaian');
+
+         $startDate = Carbon::createFromFormat('d/m/Y', urldecode(request()->get('start_date')))->translatedFormat('Y/m/d');
+         $endDate = Carbon::createFromFormat('d/m/Y', urldecode(request()->get('end_date')))->translatedFormat('Y/m/d');
+
+       if(  $jenis_penyesuaian != "semua"){
+         $obat = PenyesuaianObat::whereBetween('tgl_penyesuaian', [$startDate, $endDate])->where('aksi', $jenis_penyesuaian)->get();
+       }else{
+         $obat = PenyesuaianObat::whereBetween('tgl_penyesuaian', [$startDate, $endDate])->get();
+
+       }
+         
+         $deskripsi = "Laporan Penyesuaian Stok Obat";
+         return view('app.laporan.cetak-obat-penyesuaian', compact('deskripsi','obat','start_date', 'end_date'));
+      }
+     
+      return view('app.laporan.cetak-obat', compact('deskripsi','obat','start_date', 'end_date'));
    }
 }

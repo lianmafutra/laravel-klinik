@@ -46,7 +46,7 @@ class PenyesuaianStokObatController extends Controller
          DB::beginTransaction();
 
          $obat = Obat::where('id', $request->select_obat);
-         if ($request->penyesuaian_aksi == "Penambahan") {
+         if ($request->penyesuaian_aksi == "penambahan") {
             $obat->update([
                'stok' => $obat->first()->stok + $request->penyesuaian_jumlah_stok
             ]);
@@ -55,6 +55,8 @@ class PenyesuaianStokObatController extends Controller
                'stok' => $obat->first()->stok - $request->penyesuaian_jumlah_stok
             ]);
          }
+
+
          PenyesuaianObat::create([
             "obat_id" => $request->select_obat,
             "nama" => PenyesuaianObat::generateKode(),

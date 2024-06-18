@@ -226,6 +226,13 @@ class MenuSidebar
                   'icon' => 'far fa-circle',
                   'active' => ['laporan/rikkes/siswa'],
                ],
+               [
+                  'type' => 'menu',
+                  'title' => 'Laporan Obat',
+                  'url' => route('laporan.obat'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['laporan/obat'],
+               ],
                
 
                // [
