@@ -44,6 +44,7 @@ class SiswaImport implements ToModel, WithHeadingRow
          'agama' => $row['AGAMA'],
          'alamat' => $row['ALAMAT'],
          'no_hp' => $row['NO_HP'],
+         'import_at' => Carbon::now(),
       ]);
    }
 }

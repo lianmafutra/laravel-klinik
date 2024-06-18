@@ -14,6 +14,7 @@ use App\Models\Pangkat;
 use App\Utils\ApiResponse;
 use App\Utils\LmUtils;
 use Carbon\Carbon;
+use Illuminate\Support\Carbon as SupportCarbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,6 +37,12 @@ class AnggotaSiswaController extends Controller
     */
    public function index(Request $request)
    {
+
+
+
+
+
+
 
 
       $angkatan = AnggotaSiswaAngkatan::get();
@@ -72,7 +79,7 @@ class AnggotaSiswaController extends Controller
       $pangkat = Pangkat::get();
       $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
 
-      return view('app.master.anggota-siswa.create', compact('jabatan', 'pangkat','angkatan'));
+      return view('app.master.anggota-siswa.create', compact('jabatan', 'pangkat', 'angkatan'));
    }
 
    /**
@@ -85,7 +92,7 @@ class AnggotaSiswaController extends Controller
          DB::beginTransaction();
 
          $anggota = AnggotaSiswa::create($request->safe()->all());
-            
+
 
 
          DB::commit();
@@ -115,7 +122,7 @@ class AnggotaSiswaController extends Controller
       $pangkat = Pangkat::get();
       $angkatan = AnggotaSiswaAngkatan::orderBy('nama', 'DESC')->get();
 
-      return view('app.master.anggota-siswa.edit', compact('siswa', 'jabatan','angkatan', 'pangkat'));
+      return view('app.master.anggota-siswa.edit', compact('siswa', 'jabatan', 'angkatan', 'pangkat'));
    }
 
    /**
@@ -164,31 +171,56 @@ class AnggotaSiswaController extends Controller
    }
 
 
-   public function importExcel(Request $request){
+   public function importExcel(Request $request)
+   {
       $this->validate($request, [
          'file' => 'required|mimes:csv,xls,xlsx'
-     ]);
+      ]);
 
-     $file = $request->file('file');
+      $file = $request->file('file');
 
-     // membuat nama file unik
-     $nama_file = $file->hashName();
+      // membuat nama file unik
+      $nama_file = $file->hashName();
 
-     //temporary file
-     $path = $file->storeAs('public/excel/',$nama_file);
+      //temporary file
+      $path = $file->storeAs('public/excel/', $nama_file);
 
-     // import data
-     $import = Excel::import(new SiswaImport($request->angkatan), storage_path('app/public/excel/'.$nama_file));
+      // import data
+      $import = Excel::import(new SiswaImport($request->angkatan), storage_path('app/public/excel/' . $nama_file));
 
-     //remove from server
-     Storage::delete($path);
+      //remove from server
+      Storage::delete($path);
 
-     if($import) {
+      if ($import) {
          //redirect
          return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
-     } else {
+      } else {
          //redirect
          return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
-     }
+      }
+   }
+
+
+   public function undoImportExcel()
+   {
+      try {
+         DB::beginTransaction();
+         // Hitung waktu sekarang dikurangi 1 jam
+         $waktuSekarang = SupportCarbon::now()->subHour();
+
+         // Lakukan query untuk menghapus record yang sesuai kriteria
+         DB::table('anggota_siswa')
+            ->whereNotNull('import_at') // import_at tidak sama dengan NULL
+            ->where('import_at', '>=', $waktuSekarang) // import_at kurang atau sama dengan 1 jam dari waktu sekarang
+            ->delete();
+
+         DB::commit();
+
+         return $this->success(__('trans.crud.delete'));
+      } catch (\Throwable $th) {
+         DB::rollBack();
+
+         return $this->error(__('trans.crud.error') . $th, 400);
+      }
    }
 }

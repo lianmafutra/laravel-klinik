@@ -18,7 +18,7 @@
                                     <div class="callout callout-info">
                                         <h5>Info</h5>
                                         <p>Pastikan Upload File Excel Sesuai Dengan Template file Berikut ini : </p>
-                                        <a href="">Download Template</a>
+                                        <a href="{{ asset('file/template_siswa.xlsx') }}">Download Template</a>
                                     </div>
                                     <div class="form-group">
                                         <label for="file">File Excel Data Siswa :</label>

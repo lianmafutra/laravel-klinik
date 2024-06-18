@@ -78,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
    ])->parameters(['anggota' => 'anggota_personil']);
 
    Route::post('anggota/siswa/importExcel', [AnggotaSiswaController::class, 'importExcel'])->name('anggota.siswa.importExcel');
+   Route::post('anggota/siswa/importExcel/undo', [AnggotaSiswaController::class, 'undoImportExcel'])->name('anggota.siswa.importExcel.undo');
    
 
 

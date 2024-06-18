@@ -19,8 +19,11 @@
                         <a href="{{ route('master-data.siswa.create') }}" id="btn_input_data"
                             class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Input
                             Data</a>
-                            <a href="{{ route('rikkes-siswa-jadwal.create') }}" id="btn_upload_excel" class="btn btn-sm btn-secondary"><i
-                              class="fas fa-upload"></i> Upload Excel</a>
+                        <a href="{{ route('rikkes-siswa-jadwal.create') }}" id="btn_upload_excel"
+                            class="btn btn-sm btn-secondary"><i class="fas fa-upload"></i> Upload Excel</a>
+
+                        {{-- <a href="#" id="btn_undo" class="btn btn-sm btn-warning"><i class="fas fa-undo-alt"></i> Undo
+                            Last Import</a> --}}
                     </div>
                     <div class="ml-auto p-2 bd-highlight">
                         <x-select2 id="select_angkatan" label="" placeholder="Pilih Angkatan Siswa">
@@ -184,38 +187,69 @@
             _clearInput()
         });
 
-        $('#form_upload_excel').submit(function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                $.ajax({
-                    type: 'POST',
-                    url: route('anggota.siswa.importExcel'),
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    dataType: 'json',
-                    beforeSend: function() {
-                        _showLoading()
-                    },
-                    success: (response) => {
-                        if (response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: "Berhasil Import Data Excel Siswa",
-                                showCancelButton: true,
-                                allowEscapeKey: false,
-                                showCancelButton: false,
-                                allowOutsideClick: false,
-                            }).then((result) => {
-                                $('#modal_upload_excel').modal('hide');
-                                datatable.ajax.reload();
-                            })
+        $('#btn_undo').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah Yakin Ingin Membatalkan Import Data Siswa ?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6 ',
+                confirmButtonText: 'Yes, Batalkan'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: route('anggota.siswa.importExcel.undo'),
+                        beforeSend: function() {
+                            _showLoading()
+                        },
+                        success: (response) => {
+                           datatable.ajax.reload();
+                            _alertSuccess("Berhasil Undo Data Siswa")
+                        },
+                        error: function(response) {
+                            _showError(response)
                         }
-                    },
-                    error: function(response) {
-                        _showError(response)
-                    }
-                })
+                    })
+                }
             })
+        });
+
+        $('#form_upload_excel').submit(function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: route('anggota.siswa.importExcel'),
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                beforeSend: function() {
+                    _showLoading()
+                },
+                success: (response) => {
+                    if (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: "Berhasil Import Data Excel Siswa",
+                            showCancelButton: true,
+                            allowEscapeKey: false,
+                            showCancelButton: false,
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            $('#modal_upload_excel').modal('hide');
+                            datatable.ajax.reload();
+                        })
+                    }
+                },
+                error: function(response) {
+                    _showError(response)
+                }
+            })
+        })
     </script>
 @endpush
