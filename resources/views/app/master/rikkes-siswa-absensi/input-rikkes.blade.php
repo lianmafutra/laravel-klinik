@@ -25,7 +25,6 @@
                             'No',
                             'Nama',
                             'NOSIS',
-                            'PELETON',
                             'Tensi',
                             'Tinggi',
                             'BB',
@@ -179,12 +178,6 @@
                     {
                         data: 'nosis',
                         name: 'nosis',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'peleton_id',
-                        name: 'peleton_id',
                         orderable: true,
                         searchable: true
                     },

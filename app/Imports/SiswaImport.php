@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+
 use App\Models\AnggotaSiswa;
 use App\Models\AnggotaSiswaAngkatan;
 use Illuminate\Support\Carbon;
@@ -31,7 +32,6 @@ class SiswaImport implements ToModel, WithHeadingRow
 
      
       $angkatan = AnggotaSiswaAngkatan::where('id', $this->angkatan)->first()->id;
-
 
       return new Anggotasiswa([
          'nama'     => $row['NAMA'],
