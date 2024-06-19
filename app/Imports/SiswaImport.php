@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\Anggotasiswa;
+use App\Models\AnggotaSiswa;
 use App\Models\AnggotaSiswaAngkatan;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
