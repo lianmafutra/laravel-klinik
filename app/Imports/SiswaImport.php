@@ -31,7 +31,6 @@ class SiswaImport implements ToModel, WithHeadingRow
      
       $angkatan = AnggotaSiswaAngkatan::where('id', $this->angkatan)->first()->id;
 
-
       return new Anggotasiswa([
          'nama'     => $row['NAMA'],
          'angkatan_id'     => $angkatan,

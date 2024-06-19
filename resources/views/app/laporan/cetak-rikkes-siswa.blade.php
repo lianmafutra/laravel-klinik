@@ -22,7 +22,6 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Peleton</th>
                     <th>Tensi</th>
                     <th>Tinggi</th>
                     <th>BB</th>
@@ -38,7 +37,6 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item?->nama }}</td>
-                        <td>{{ $item?->peleton }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->tensi }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->tinggi }}</td>
                         <td>{{ $item?->rikkes_absensi?->first()?->catatan }}</td>
