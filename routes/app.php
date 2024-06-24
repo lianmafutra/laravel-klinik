@@ -13,6 +13,7 @@ use App\Http\Controllers\Klinik\DataMaster\MasterObatController;
 use App\Http\Controllers\Klinik\DataMaster\MasterTindakanController;
 use App\Http\Controllers\Klinik\DataMaster\PenyesuaianStokObatController;
 use App\Http\Controllers\Klinik\Laporan\LaporanController;
+use App\Http\Controllers\Klinik\PanduanController;
 use App\Http\Controllers\Klinik\Pasien\PasienController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanController;
 use App\Http\Controllers\Klinik\Pemeriksaan\PemeriksaanObatController;
@@ -116,6 +117,10 @@ Route::middleware(['auth'])->group(function () {
    Route::get('rikkes-siswa-jadwal/input/absensi/{rikkes_jadwal_id}', [RikkesSiswaAbsensiController::class, 'inputRikkes'])->name('rikkes-siswa-absensi.input');
    Route::post('rikkes-siswa-store', [RikkesSiswaAbsensiController::class, 'store'])->name('rikkes-siswa-absensi.store');
    Route::get('rikkes-siswa-absensi-detail/{absensi_id}', [RikkesSiswaAbsensiController::class, 'getAbsensiDetail'])->name('rikkes-siswa-absensi.detail');
+ 
+
+   Route::get('panduan/buku', [PanduanController::class, 'buku'])->name('panduan.buku');
+   Route::get('panduan/video', [PanduanController::class, 'video'])->name('panduan.video');
  
 });
 

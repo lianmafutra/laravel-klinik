@@ -253,6 +253,33 @@ class MenuSidebar
             'icon' => 'fas fa-angle-right',
             'active' => ['user/profile*'],
          ],
+
+         [
+            'type' => 'tree',
+            'title' => 'Panduan',
+            'url' => '#',
+            'icon' => 'fas fa-angle-right',
+            'active' => ['panduan*'],
+
+            'items' => [
+               [
+                  'type' => 'menu',
+                  'title' => 'Buku Panduan',
+                  'url' => route('panduan.buku'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['panduan/buku*'],
+               ],
+
+               [
+                  'type' => 'menu',
+                  'title' => 'Video Tutorial',
+                  'url' => route('panduan.video'),
+                  'icon' => 'far fa-circle',
+                  'active' => ['panduan/video*'],
+               ],
+
+            ],
+         ],
          // [
          //    'type' => 'header',
          //    'title' => 'Menu App',
