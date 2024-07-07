@@ -15,7 +15,7 @@
 @section('content')
 
 <div class="card-body col-12">
-   <iframe src="http://103.141.238.86/video.mp4" width="100%" height="800" allow="autoplay"></iframe>
+   <iframe src="https://wa.jambikota.go.id/video.mp4" width="100%" height="800" allow="autoplay"></iframe>
   
  </div>
 @endsection
