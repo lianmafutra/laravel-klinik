@@ -46,7 +46,7 @@
            <x-input-number label="Stok Saat ini" id="stok" disabled/>
                <x-select2 required id="penyesuaian_aksi" label="Pilih Aksi" placeholder="Pilih Aksi Penyesuaian">
                    <option value="pengurangan">(-) Pengurangan </option>
-                   <option value="Penambahan">(+) Penambahan</option>
+                   <option value="penambahan">(+) Penambahan</option>
                </x-select2>
                <x-input-number label="Jumlah Stok" id="penyesuaian_jumlah_stok" />
                <x-datepicker id="tgl_penyesuaian" label="Tanggal" required />

@@ -43,6 +43,7 @@ class PenyesuaianStokObatController extends Controller
    {
       try {
 
+
          DB::beginTransaction();
 
          $obat = Obat::where('id', $request->select_obat);

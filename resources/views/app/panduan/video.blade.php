@@ -15,7 +15,7 @@
 @section('content')
 
 <div class="card-body col-12">
-   <iframe src="https://drive.google.com/file/d/1ACDZR3F1U441v9RwnCRYXNtFfzMPEqyK/preview" width="640" height="480" allow="autoplay"></iframe>
+   <iframe src="http://103.141.238.86/video.mp4" width="100%" height="800" allow="autoplay"></iframe>
   
  </div>
 @endsection
